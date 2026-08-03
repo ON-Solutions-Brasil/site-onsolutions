@@ -1,0 +1,33 @@
+# Dependências
+/vendor/
+/node_modules/
+
+# Storage
+/storage/logs/*.log
+/storage/cache/*
+/storage/backups/*
+/storage/uploads/*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Uploads do público
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# Composer
+composer.lock
+
+# Outros
+*.bak
+*.tmp
+*.temp
