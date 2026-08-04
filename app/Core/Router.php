@@ -178,8 +178,22 @@ class Router
     private function handleNotFound(): void
     {
         http_response_code(404);
-        $errorController = new \App\Controllers\ErrorController();
-        $errorController->notFound();
+
+        // Tentar usar o ErrorController, com fallback seguro
+        if (class_exists('\App\Controllers\ErrorController')) {
+            $errorController = new \App\Controllers\ErrorController();
+            $errorController->notFound();
+        } else {
+            // Fallback caso o autoload não encontre a classe
+            $viewPath = (defined('APP_PATH') ? APP_PATH : dirname(__DIR__)) . '/views/errors/404.php';
+            if (file_exists($viewPath)) {
+                require $viewPath;
+            } else {
+                echo '<h1>404 - Página não encontrada</h1>';
+                echo '<p>A página que você procura não existe.</p>';
+                echo '<a href="/">Voltar ao início</a>';
+            }
+        }
     }
 
     /**
