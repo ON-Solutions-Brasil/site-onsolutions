@@ -9,8 +9,8 @@ return [
     'host'     => 'localhost',
     'port'     => 3306,
     'database' => 'onsolutions_db',
-    'username' => 'root',
-    'password' => '',
+    'username' => 'onsolutions_db',
+    'password' => 'AZ&jnrl8bSr6r0~e',
     'charset'  => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
     'options'  => [
