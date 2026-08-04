@@ -5,7 +5,6 @@
         <div class="row align-items-center min-vh-100">
             <div class="col-lg-7">
                 <div class="hero-content">
-                    <span class="hero-badge"><?= __('home.hero_title') ?></span>
                     <h1 class="hero-title"><?= __('home.hero_title') ?></h1>
                     <p class="hero-subtitle"><?= __('home.hero_subtitle') ?></p>
                     <div class="hero-actions">

@@ -62,7 +62,24 @@ if (!isset($_SESSION['_last_regeneration'])) {
 
 // Definir constantes dinâmicas a partir do banco
 define('SITE_NAME', $settings->get('site_name', 'On Solutions'));
-define('BASE_URL', $settings->get('base_url', $appConfig['base_url']));
+
+// Detectar BASE_URL automaticamente se não configurada no banco
+$configuredBaseUrl = $settings->get('base_url', '');
+if (empty($configuredBaseUrl) || $configuredBaseUrl === 'http://localhost/site-onsolutions') {
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $scriptDir = dirname($_SERVER['SCRIPT_NAME'] ?? '/index.php');
+    // Se o script está em /public/index.php, subir um nível
+    if (basename($scriptDir) === 'public') {
+        $scriptDir = dirname($scriptDir);
+    }
+    $basePath = ($scriptDir === '/' || $scriptDir === '\\') ? '' : rtrim($scriptDir, '/\\');
+    $detectedBaseUrl = $protocol . '://' . $host . $basePath;
+} else {
+    $detectedBaseUrl = rtrim($configuredBaseUrl, '/');
+}
+define('BASE_URL', $detectedBaseUrl);
+
 define('DEFAULT_LANG', $settings->get('default_language', $appConfig['default_language']));
 define('ACTIVE_LANGUAGES', json_decode($settings->get('active_languages', '["pt","en","es"]'), true));
 define('APP_VERSION', $appConfig['version']);
