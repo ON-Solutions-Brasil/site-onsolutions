@@ -1,9 +1,15 @@
-<!-- Page Hero - Compacto -->
-<section class="page-hero page-hero--short">
+<!-- Page Hero - Faixa mínima -->
+<section class="page-hero page-hero--minimal">
     <div class="container">
-        <div class="page-hero__badge">Sobre a <?= e(SITE_NAME) ?></div>
-        <h1>Engenharia de Software com Excelência</h1>
-        <p>Desenvolvemos soluções tecnológicas sob medida que transformam operações e geram vantagem competitiva real.</p>
+        <span class="page-hero__tag">Sobre a <?= e(SITE_NAME) ?></span>
+    </div>
+</section>
+
+<!-- Título Principal -->
+<section class="about-headline">
+    <div class="container text-center">
+        <h1 class="about-headline__title">Engenharia de Software com Excelência</h1>
+        <p class="about-headline__subtitle">Desenvolvemos soluções tecnológicas sob medida que transformam operações empresariais e geram vantagem competitiva real.</p>
     </div>
 </section>
 
