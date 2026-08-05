@@ -148,6 +148,11 @@ img { max-width: 100%; height: auto; }
     color: var(--white);
     background: rgba(255,255,255,0.08);
 }
+.navbar .nav-link.active {
+    color: var(--white);
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.15);
+}
 .navbar .btn-primary {
     border-radius: var(--radius-full);
     padding: 0.45rem 1.3rem;

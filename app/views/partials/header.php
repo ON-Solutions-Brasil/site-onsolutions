@@ -16,10 +16,10 @@
             
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item"><a class="nav-link" href="<?= url('/') ?>"><?= __('menu.home') ?></a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= url('quem-somos') ?>"><?= __('menu.about') ?></a></li>
+                    <li class="nav-item"><a class="nav-link <?= ($_SERVER['REQUEST_URI'] === '/' || $_SERVER['REQUEST_URI'] === '') ? 'active' : '' ?>" href="<?= url('/') ?>"><?= __('menu.home') ?></a></li>
+                    <li class="nav-item"><a class="nav-link <?= str_contains($_SERVER['REQUEST_URI'], 'quem-somos') ? 'active' : '' ?>" href="<?= url('quem-somos') ?>"><?= __('menu.about') ?></a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="<?= url('servicos') ?>" role="button" data-bs-toggle="dropdown"><?= __('menu.services') ?></a>
+                        <a class="nav-link dropdown-toggle <?= str_contains($_SERVER['REQUEST_URI'], 'servicos') ? 'active' : '' ?>" href="<?= url('servicos') ?>" role="button" data-bs-toggle="dropdown"><?= __('menu.services') ?></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="<?= url('servicos') ?>"><?= __('menu.all_services') ?></a></li>
                             <li><hr class="dropdown-divider"></li>
@@ -30,9 +30,9 @@
                             <li><a class="dropdown-item" href="<?= url('servicos/consultoria') ?>">Consultoria</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="<?= url('portfolio') ?>"><?= __('menu.portfolio') ?></a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= url('blog') ?>"><?= __('menu.blog') ?></a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= url('contato') ?>"><?= __('menu.contact') ?></a></li>
+                    <li class="nav-item"><a class="nav-link <?= str_contains($_SERVER['REQUEST_URI'], 'portfolio') ? 'active' : '' ?>" href="<?= url('portfolio') ?>"><?= __('menu.portfolio') ?></a></li>
+                    <li class="nav-item"><a class="nav-link <?= str_contains($_SERVER['REQUEST_URI'], 'blog') ? 'active' : '' ?>" href="<?= url('blog') ?>"><?= __('menu.blog') ?></a></li>
+                    <li class="nav-item"><a class="nav-link <?= str_contains($_SERVER['REQUEST_URI'], 'contato') ? 'active' : '' ?>" href="<?= url('contato') ?>"><?= __('menu.contact') ?></a></li>
                     
                     <!-- Seletor de Idioma -->
                     <li class="nav-item dropdown ms-2">
