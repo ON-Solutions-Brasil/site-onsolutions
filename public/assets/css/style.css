@@ -793,24 +793,19 @@ img { max-width: 100%; height: auto; }
 
 /* About Hero */
 .page-hero--about {
-    padding: 10rem 0 5rem;
-    background: linear-gradient(160deg, var(--dark) 0%, #0f2027 30%, #134e4a 70%, var(--primary-dark) 100%);
+    padding: 9rem 0 4rem;
+    background: linear-gradient(180deg, var(--dark) 0%, var(--gray-900) 40%, var(--primary-900) 100%);
     position: relative;
 }
 .page-hero--about::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 60% 30%, rgba(20, 184, 166, 0.08) 0%, transparent 60%);
+    background: radial-gradient(ellipse at 50% 80%, rgba(13, 148, 136, 0.15) 0%, transparent 60%);
     pointer-events: none;
 }
 .page-hero--about::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 180px;
-    background: linear-gradient(to top, var(--white) 0%, rgba(255,255,255,0.6) 50%, transparent 100%);
-    pointer-events: none;
+    display: none;
 }
 .page-hero--about .container { position: relative; z-index: 2; }
 
@@ -1044,7 +1039,7 @@ img { max-width: 100%; height: auto; }
     .chatbot-window { width: calc(100vw - 56px); right: -14px; }
     .page-hero { padding: 7rem 0 3rem; }
     .page-hero h1 { font-size: 2rem; }
-    .page-hero--about { padding: 8rem 0 4rem; }
+    .page-hero--about { padding: 7.5rem 0 3rem; }
     .page-hero--about h1 { font-size: 2rem; }
     .about-title { font-size: 1.7rem; }
     .about-card-visual { display: none; }
