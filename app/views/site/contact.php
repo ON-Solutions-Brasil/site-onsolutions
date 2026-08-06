@@ -1,11 +1,17 @@
-<section class="page-hero">
-    <div class="container"><h1><?= __('contact.title') ?></h1></div>
+<!-- Hero -->
+<section class="page-hero page-hero--about">
+    <div class="container text-center">
+        <span class="about-tag hero-fade-in">Contato</span>
+        <h1 class="hero-fade-in"><?= __('contact.title') ?></h1>
+        <p class="hero-fade-in">Estamos prontos para transformar sua ideia em realidade. Fale com a gente.</p>
+    </div>
 </section>
 
-<section class="section">
+<!-- Formulário de Contato -->
+<section class="section contact-section">
     <div class="container">
         <div class="row g-5">
-            <div class="col-lg-7">
+            <div class="col-lg-7 scroll-reveal">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body p-4">
                         <h3 class="mb-4">Envie sua mensagem</h3>
@@ -44,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-5 scroll-reveal">
                 <div class="contact-info">
                     <h3 class="mb-4">Informações de Contato</h3>
                     <?php if ($email = setting('email')): ?>
@@ -64,3 +70,42 @@
         </div>
     </div>
 </section>
+
+<!-- CTA -->
+<section class="section cta-section">
+    <div class="container text-center scroll-reveal">
+        <h2>Prefere uma conversa rápida?</h2>
+        <p>Chame no WhatsApp. Respondemos em minutos.</p>
+        <?php if ($whatsapp = setting('whatsapp_number')): ?>
+        <a href="https://wa.me/<?= preg_replace('/\D/', '', $whatsapp) ?>" class="btn btn-primary btn-lg mt-3" target="_blank" rel="noopener">
+            <i class="bi bi-whatsapp me-2"></i>Chamar no WhatsApp
+        </a>
+        <?php else: ?>
+        <a href="mailto:<?= e(setting('email', '')) ?>" class="btn btn-primary btn-lg mt-3">Enviar Email</a>
+        <?php endif; ?>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var els = document.querySelectorAll('.scroll-reveal');
+    
+    var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    els.forEach(function(el) {
+        var rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+            el.classList.add('is-visible');
+        } else {
+            io.observe(el);
+        }
+    });
+});
+</script>
