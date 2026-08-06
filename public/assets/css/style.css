@@ -807,32 +807,21 @@ img { max-width: 100%; height: auto; }
 
 /* === CONTACT === */
 .contact-section { background: var(--white); }
-.contact-section .card {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-sm);
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.contact-section .card:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary);
-    box-shadow: 0 12px 32px rgba(13, 148, 136, 0.12);
-}
-
+.contact-box,
 .contact-info {
-    background: var(--white);
+    background: var(--gray-100);
     border: 1px solid var(--gray-200);
     border-radius: var(--radius-xl);
     padding: 2rem;
-    box-shadow: var(--shadow-sm);
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.contact-box:hover,
 .contact-info:hover {
     transform: translateY(-5px);
     border-color: var(--primary);
     box-shadow: 0 12px 32px rgba(13, 148, 136, 0.12);
 }
+.contact-box h3,
 .contact-info h3 { color: var(--dark); }
 .contact-item {
     display: flex;

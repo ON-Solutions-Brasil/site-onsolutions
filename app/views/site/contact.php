@@ -12,42 +12,40 @@
     <div class="container">
         <div class="row g-5">
             <div class="col-lg-7 scroll-reveal">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-body p-4">
-                        <h3 class="mb-4">Envie sua mensagem</h3>
-                        <form method="POST" action="<?= url('contato') ?>">
-                            <?= csrfField() ?>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label"><?= __('contact.form_name') ?> *</label>
-                                    <input type="text" class="form-control" name="name" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label"><?= __('contact.form_email') ?> *</label>
-                                    <input type="email" class="form-control" name="email" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label"><?= __('contact.form_phone') ?></label>
-                                    <input type="tel" class="form-control" name="phone">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label"><?= __('contact.form_company') ?></label>
-                                    <input type="text" class="form-control" name="company">
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label"><?= __('contact.form_subject') ?></label>
-                                    <input type="text" class="form-control" name="subject">
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label"><?= __('contact.form_message') ?> *</label>
-                                    <textarea class="form-control" name="message" rows="5" required></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary btn-lg"><?= __('contact.form_submit') ?></button>
-                                </div>
+                <div class="contact-box">
+                    <h3 class="mb-4">Envie sua mensagem</h3>
+                    <form method="POST" action="<?= url('contato') ?>">
+                        <?= csrfField() ?>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label"><?= __('contact.form_name') ?> *</label>
+                                <input type="text" class="form-control" name="name" required>
                             </div>
-                        </form>
-                    </div>
+                            <div class="col-md-6">
+                                <label class="form-label"><?= __('contact.form_email') ?> *</label>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label"><?= __('contact.form_phone') ?></label>
+                                <input type="tel" class="form-control" name="phone">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label"><?= __('contact.form_company') ?></label>
+                                <input type="text" class="form-control" name="company">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label"><?= __('contact.form_subject') ?></label>
+                                <input type="text" class="form-control" name="subject">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label"><?= __('contact.form_message') ?> *</label>
+                                <textarea class="form-control" name="message" rows="5" required></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-lg"><?= __('contact.form_submit') ?></button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="col-lg-5 scroll-reveal">
