@@ -53,7 +53,7 @@
                     <!-- Ícone de Usuário -->
                     <li class="nav-item dropdown ms-2">
                         <a class="nav-link user-icon-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menu do usuário">
-                            <i class="bi bi-person-circle"></i>
+                            <i class="bi bi-person"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end user-dropdown">
                             <?php if (isset($_SESSION['user_id'])): ?>
