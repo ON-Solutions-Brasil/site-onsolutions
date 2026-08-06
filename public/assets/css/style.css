@@ -536,21 +536,21 @@ img { max-width: 100%; height: auto; }
     content: '';
     position: absolute;
     bottom: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 3px;
     background: linear-gradient(90deg, 
         transparent 0%, 
-        #0d9488 15%, 
-        #14b8a6 30%, 
-        #2dd4bf 45%, 
+        #14b8a6 20%, 
+        #2dd4bf 40%, 
         #5eead4 50%, 
-        #2dd4bf 55%, 
-        #14b8a6 70%, 
-        #0d9488 85%, 
+        #2dd4bf 60%, 
+        #14b8a6 80%, 
         transparent 100%);
-    box-shadow: 0 0 20px rgba(20, 184, 166, 0.6), 0 0 40px rgba(45, 212, 191, 0.3), 0 0 60px rgba(94, 234, 212, 0.15);
+    box-shadow: 0 0 15px rgba(20, 184, 166, 0.6), 0 0 30px rgba(45, 212, 191, 0.3);
     animation: neonPulse 3s ease-in-out infinite;
+    border-radius: 2px;
 }
 @keyframes neonPulse {
     0%, 100% { opacity: 0.8; box-shadow: 0 0 20px rgba(20, 184, 166, 0.6), 0 0 40px rgba(45, 212, 191, 0.3); }
