@@ -19,6 +19,15 @@
         </div>
 
         <div class="row g-4 portfolio-grid">
+            <?php if (empty($items)): ?>
+            <div class="col-12 text-center py-5">
+                <div class="portfolio-empty">
+                    <i class="bi bi-folder2-open" style="font-size: 3rem; color: var(--primary-200);"></i>
+                    <h4 class="mt-3" style="color: var(--gray-700);">Nenhum projeto cadastrado ainda</h4>
+                    <p style="color: var(--gray-500);">Em breve nossos cases de sucesso estarão aqui.</p>
+                </div>
+            </div>
+            <?php else: ?>
             <?php foreach ($items as $item): ?>
             <div class="col-md-6 col-lg-4 portfolio-item scroll-reveal" data-category="<?= e($item['category_slug'] ?? '') ?>">
                 <div class="portfolio-card">
@@ -35,6 +44,7 @@
                 </div>
             </div>
             <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
 </section>
