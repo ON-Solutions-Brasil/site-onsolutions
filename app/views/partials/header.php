@@ -15,7 +15,7 @@
             </button>
             
             <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav ms-auto align-items-center">
+                <ul class="navbar-nav mx-auto align-items-center">
                     <li class="nav-item"><a class="nav-link <?= ($_SERVER['REQUEST_URI'] === '/' || $_SERVER['REQUEST_URI'] === '') ? 'active' : '' ?>" href="<?= url('/') ?>"><?= __('menu.home') ?></a></li>
                     <li class="nav-item"><a class="nav-link <?= str_contains($_SERVER['REQUEST_URI'], 'quem-somos') ? 'active' : '' ?>" href="<?= url('quem-somos') ?>"><?= __('menu.about') ?></a></li>
                     <li class="nav-item dropdown">

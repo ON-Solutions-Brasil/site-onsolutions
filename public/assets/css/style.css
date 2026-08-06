@@ -123,6 +123,9 @@ img { max-width: 100%; height: auto; }
     transition: var(--transition-slow);
     background: transparent;
 }
+.site-header .navbar .container {
+    justify-content: center;
+}
 .site-header .navbar.scrolled {
     background: rgba(15, 23, 41, 0.97);
     backdrop-filter: blur(16px);
