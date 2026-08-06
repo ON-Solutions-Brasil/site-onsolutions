@@ -53,7 +53,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end user-dropdown">
                             <li><a class="dropdown-item" href="<?= url('admin/login') ?>"><i class="bi bi-person me-2"></i>Minha Conta</a></li>
-                            <li><a class="dropdown-item" href="<?= url('admin') ?>"><i class="bi bi-gear me-2"></i>Painel do Admin</a></li>
+                            <li><a class="dropdown-item" href="<?= url('admin/login') ?>"><i class="bi bi-gear me-2"></i>Painel do Admin</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger" href="<?= url('admin/logout') ?>"><i class="bi bi-box-arrow-right me-2"></i>Sair</a></li>
                         </ul>
