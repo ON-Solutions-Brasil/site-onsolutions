@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // === Scroll Animations (Intersection Observer) ===
     const observerOptions = {
         root: null,
-        rootMargin: '0px 0px -60px 0px',
-        threshold: 0.1
+        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.05
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -48,6 +48,17 @@ document.addEventListener('DOMContentLoaded', function() {
     revealElements.forEach((el, index) => {
         el.style.transitionDelay = `${index % 5 * 0.12}s`;
         observer.observe(el);
+    });
+
+    // Elementos dentro do hero já visíveis no load: animar imediatamente
+    const heroReveals = document.querySelectorAll('.page-hero .reveal-up');
+    heroReveals.forEach((el, index) => {
+        setTimeout(() => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+            el.classList.add('revealed');
+            observer.unobserve(el);
+        }, 200 + index * 150);
     });
 
     // === Cookie Banner ===
