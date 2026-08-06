@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('revealed');
                 observer.unobserve(entry.target);
             }
         });
@@ -35,10 +36,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const animateElements = document.querySelectorAll(
         '.service-card, .portfolio-card, .blog-card, .testimonial-card, .process-step, .partner-card, .stat'
     );
-    animateElements.forEach(el => {
+    animateElements.forEach((el, index) => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(24px)';
-        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = `opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1) ${index % 4 * 0.1}s, transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) ${index % 4 * 0.1}s`;
+        observer.observe(el);
+    });
+
+    // Observar elementos com classe reveal-up (About page, etc.)
+    const revealElements = document.querySelectorAll('.reveal-up');
+    revealElements.forEach((el, index) => {
+        el.style.transitionDelay = `${index % 5 * 0.12}s`;
         observer.observe(el);
     });
 
