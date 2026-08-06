@@ -539,11 +539,32 @@ img { max-width: 100%; height: auto; }
     background: var(--white);
     color: var(--primary-dark);
     border: none;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+.cta-section .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(20, 184, 166, 0.2));
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    border-radius: inherit;
 }
 .cta-section .btn:hover {
-    background: var(--gray-100);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    background: var(--white);
+    color: var(--primary);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 32px rgba(13, 148, 136, 0.35), 0 4px 12px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.3px;
+}
+.cta-section .btn:hover::before {
+    opacity: 1;
+}
+.cta-section .btn:active {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 6px 16px rgba(13, 148, 136, 0.25);
 }
 
 /* === FAQ === */
