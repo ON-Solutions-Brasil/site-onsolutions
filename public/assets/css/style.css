@@ -170,11 +170,13 @@ img { max-width: 100%; height: auto; }
 
 /* User Icon Dropdown */
 .user-icon-toggle {
-    font-size: 1.3rem;
+    font-size: 1.15rem;
     color: rgba(255, 255, 255, 0.8);
     padding: 0.4rem 0.6rem;
     border-radius: var(--radius-full);
     transition: var(--transition);
+    display: flex;
+    align-items: center;
 }
 .user-icon-toggle:hover {
     color: var(--white);

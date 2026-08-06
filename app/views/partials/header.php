@@ -46,10 +46,6 @@
                         </ul>
                     </li>
                     
-                    <li class="nav-item ms-3">
-                        <a class="btn btn-primary btn-sm" href="<?= url('contato') ?>"><?= __('menu.get_quote') ?></a>
-                    </li>
-                    
                     <!-- Ícone de Usuário -->
                     <li class="nav-item dropdown ms-2">
                         <a class="nav-link user-icon-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menu do usuário">
@@ -65,6 +61,10 @@
                             <li><a class="dropdown-item" href="<?= url('admin/login') ?>"><i class="bi bi-box-arrow-in-right me-2"></i>Entrar</a></li>
                             <?php endif; ?>
                         </ul>
+                    </li>
+                    
+                    <li class="nav-item ms-3">
+                        <a class="btn btn-primary btn-sm" href="<?= url('contato') ?>"><?= __('menu.get_quote') ?></a>
                     </li>
                 </ul>
             </div>
