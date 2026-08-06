@@ -517,8 +517,8 @@ img { max-width: 100%; height: auto; }
 
 /* === CTA SECTION === */
 .cta-section {
-    background: linear-gradient(135deg, var(--primary-700), var(--primary), var(--primary-light));
-    padding: 6rem 0;
+    background: linear-gradient(160deg, var(--dark) 0%, #0a2e2b 40%, #0c3f3b 70%, var(--primary-900) 100%);
+    padding: 6rem 0 0;
     color: var(--white);
     position: relative;
     overflow: hidden;
@@ -527,11 +527,39 @@ img { max-width: 100%; height: auto; }
     content: '';
     position: absolute;
     inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/svg%3E");
+    background: 
+        radial-gradient(ellipse at 30% 20%, rgba(13, 148, 136, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(20, 184, 166, 0.06) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2314b8a6' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/svg%3E");
+}
+.cta-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        #0d9488 15%, 
+        #14b8a6 30%, 
+        #2dd4bf 45%, 
+        #5eead4 50%, 
+        #2dd4bf 55%, 
+        #14b8a6 70%, 
+        #0d9488 85%, 
+        transparent 100%);
+    box-shadow: 0 0 20px rgba(20, 184, 166, 0.6), 0 0 40px rgba(45, 212, 191, 0.3), 0 0 60px rgba(94, 234, 212, 0.15);
+    animation: neonPulse 3s ease-in-out infinite;
+}
+@keyframes neonPulse {
+    0%, 100% { opacity: 0.8; box-shadow: 0 0 20px rgba(20, 184, 166, 0.6), 0 0 40px rgba(45, 212, 191, 0.3); }
+    50% { opacity: 1; box-shadow: 0 0 30px rgba(20, 184, 166, 0.8), 0 0 60px rgba(45, 212, 191, 0.5), 0 0 80px rgba(94, 234, 212, 0.2); }
 }
 .cta-content { position: relative; z-index: 1; }
 .cta-title { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.5px; }
 .cta-subtitle { font-size: 1.1rem; opacity: 0.9; margin: 1rem 0 2rem; }
+.cta-section .container { position: relative; z-index: 2; padding-bottom: 6rem; }
 .cta-section .btn {
     border-radius: var(--radius-full);
     padding: 0.85rem 2.5rem;
