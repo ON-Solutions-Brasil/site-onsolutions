@@ -1,9 +1,9 @@
 <!-- Hero -->
 <section class="page-hero page-hero--about">
     <div class="container text-center">
-        <span class="about-tag reveal-up">Quem Somos</span>
-        <h1 class="reveal-up">Somos a <?= e(SITE_NAME) ?></h1>
-        <p class="reveal-up">Uma empresa apaixonada por tecnologia, focada em entregar soluções digitais que realmente transformam negócios.</p>
+        <span class="about-tag hero-fade-in">Quem Somos</span>
+        <h1 class="hero-fade-in">Somos a <?= e(SITE_NAME) ?></h1>
+        <p class="hero-fade-in">Uma empresa apaixonada por tecnologia, focada em entregar soluções digitais que realmente transformam negócios.</p>
     </div>
 </section>
 

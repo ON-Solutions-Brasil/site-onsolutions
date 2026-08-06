@@ -66,6 +66,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Fallback: se após 2s ainda houver elementos escondidos, revelar tudo
+    setTimeout(() => {
+        document.querySelectorAll('.reveal-up:not(.revealed)').forEach(el => {
+            el.classList.add('revealed');
+        });
+    }, 2000);
+
     // === Cookie Banner ===
     const cookieBanner = document.getElementById('cookieBanner');
     if (cookieBanner && !localStorage.getItem('cookieConsent')) {
