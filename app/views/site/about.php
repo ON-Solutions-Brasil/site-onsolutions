@@ -21,17 +21,20 @@
             <div class="col-lg-6">
                 <div class="about-card-visual">
                     <div class="about-card-visual__accent about-card-visual__accent--tr">
-                        <i class="bi bi-braces"></i>
+                        <i class="bi bi-diamond-fill"></i>
                     </div>
                     <div class="about-card-visual__main">
-                        <div class="about-card-visual__icon">
-                            <i class="bi bi-code-slash"></i>
+                        <div class="about-card-visual__bg"></div>
+                        <div class="about-card-visual__content">
+                            <div class="about-card-visual__icon">
+                                <i class="bi bi-code-slash"></i>
+                            </div>
+                            <div class="about-card-visual__value">+5 Anos</div>
+                            <div class="about-card-visual__label">de Experiência</div>
                         </div>
-                        <div class="about-card-visual__value">+5 Anos</div>
-                        <div class="about-card-visual__label">de Experiência</div>
                     </div>
                     <div class="about-card-visual__accent about-card-visual__accent--bl">
-                        <i class="bi bi-cpu"></i>
+                        <i class="bi bi-diamond"></i>
                     </div>
                 </div>
             </div>
