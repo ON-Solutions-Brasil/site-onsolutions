@@ -842,7 +842,7 @@ img { max-width: 100%; height: auto; }
 .about-title--center { text-align: center; }
 
 /* About History */
-.about-history { background: var(--white); padding: 7rem 0 8rem; }
+.about-history { background: var(--white); padding: 7rem 0 12rem; }
 .about-history p { color: var(--gray-600); line-height: 1.85; margin-bottom: 1rem; }
 
 /* Card Visual (experiência) */
