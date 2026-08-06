@@ -45,20 +45,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Observar elementos com classe reveal-up (About page, etc.)
     const revealElements = document.querySelectorAll('.reveal-up');
-    revealElements.forEach((el, index) => {
-        el.style.transitionDelay = `${index % 5 * 0.12}s`;
-        observer.observe(el);
-    });
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { root: null, rootMargin: '0px', threshold: 0 });
 
-    // Elementos dentro do hero já visíveis no load: animar imediatamente
-    const heroReveals = document.querySelectorAll('.page-hero .reveal-up');
-    heroReveals.forEach((el, index) => {
-        setTimeout(() => {
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-            el.classList.add('revealed');
-            observer.unobserve(el);
-        }, 200 + index * 150);
+    revealElements.forEach((el, index) => {
+        // Se o elemento já está visível na viewport ao carregar, revelar direto
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+            setTimeout(() => { el.classList.add('revealed'); }, 100 + index * 120);
+        } else {
+            el.style.transitionDelay = `${(index % 4) * 0.1}s`;
+            revealObserver.observe(el);
+        }
     });
 
     // === Cookie Banner ===
