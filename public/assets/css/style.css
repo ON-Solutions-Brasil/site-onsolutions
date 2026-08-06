@@ -167,6 +167,46 @@ img { max-width: 100%; height: auto; }
     font-weight: 600;
 }
 .lang-selector { font-size: 0.85rem; }
+
+/* User Icon Dropdown */
+.user-icon-toggle {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.4rem 0.6rem;
+    border-radius: var(--radius-full);
+    transition: var(--transition);
+}
+.user-icon-toggle:hover {
+    color: var(--white);
+    background: rgba(13, 148, 136, 0.15);
+}
+.user-dropdown {
+    min-width: 200px;
+    border: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-md);
+    padding: 0.5rem;
+    animation: dropdownFadeIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.user-dropdown .dropdown-item {
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+.user-dropdown .dropdown-item:hover {
+    background: var(--primary-50);
+    color: var(--primary);
+}
+.user-dropdown .dropdown-item.text-danger:hover {
+    background: rgba(239, 68, 68, 0.08);
+    color: var(--danger);
+}
+@keyframes dropdownFadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .dropdown-menu {
     border: 1px solid var(--gray-200);
     box-shadow: var(--shadow-lg);
