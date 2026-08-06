@@ -1072,6 +1072,16 @@ img { max-width: 100%; height: auto; }
 .hero-fade-in:nth-child(2) { animation-delay: 0.25s; opacity: 0; }
 .hero-fade-in:nth-child(3) { animation-delay: 0.4s; opacity: 0; }
 
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .reveal-up {
     opacity: 0;
     transform: translateY(30px);
