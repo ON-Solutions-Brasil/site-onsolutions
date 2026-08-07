@@ -26,74 +26,15 @@ $icon = $service['icon'] ?? 'bi-gear';
         <div class="row g-5">
             <!-- Conteúdo -->
             <div class="col-lg-8">
-                <!-- Ícone e Introdução -->
-                <div class="service-detail-intro scroll-reveal">
-                    <div class="service-detail-icon">
-                        <i class="bi <?= e($icon) ?>"></i>
-                    </div>
-                    <div class="service-detail-intro-text">
-                        <h2><?= e($title) ?></h2>
-                        <p><?= e($shortDesc) ?></p>
-                    </div>
-                </div>
-
-                <!-- Conteúdo Rich Text -->
                 <?php if ($content): ?>
                 <div class="content-body service-detail-content scroll-reveal">
                     <?= $content ?>
-                </div>
-                <?php endif; ?>
-
-                <!-- Funcionalidades -->
-                <?php if ($features): ?>
-                <div class="service-detail-features scroll-reveal">
-                    <h3><i class="bi bi-check2-square"></i> Funcionalidades</h3>
-                    <div class="row g-3 mt-2">
-                        <?php foreach ($features as $feature): ?>
-                        <div class="col-md-6">
-                            <div class="feature-item">
-                                <i class="bi bi-check-circle-fill"></i>
-                                <span><?= e($feature) ?></span>
-                            </div>
-                        </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <?php endif; ?>
-
-                <!-- Benefícios -->
-                <?php if ($benefits): ?>
-                <div class="service-detail-benefits scroll-reveal">
-                    <h3><i class="bi bi-star"></i> Benefícios</h3>
-                    <div class="row g-3 mt-2">
-                        <?php foreach ($benefits as $benefit): ?>
-                        <div class="col-md-6">
-                            <div class="benefit-item">
-                                <i class="bi bi-arrow-right-circle-fill"></i>
-                                <span><?= e($benefit) ?></span>
-                            </div>
-                        </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <?php endif; ?>
-
-                <!-- Tecnologias -->
-                <?php if ($techs): ?>
-                <div class="service-detail-techs scroll-reveal">
-                    <h3><i class="bi bi-cpu"></i> Tecnologias Utilizadas</h3>
-                    <div class="tech-tags-grid mt-3">
-                        <?php foreach ($techs as $tech): ?>
-                        <span class="tech-tag"><?= e($tech) ?></span>
-                        <?php endforeach; ?>
-                    </div>
                 </div>
                 <?php endif; ?>
             </div>
 
             <!-- Sidebar -->
             <div class="col-lg-4">
-                <!-- CTA Card -->
                 <div class="service-sidebar-card scroll-reveal">
                     <div class="service-sidebar-card__header">
                         <h4>Solicitar Orçamento</h4>
@@ -116,35 +57,39 @@ $icon = $service['icon'] ?? 'bi-gear';
     </div>
 </section>
 
-<!-- Portfólio Relacionado -->
-<?php if (!empty($related_portfolio)): ?>
-<section class="section service-related-section bg-light">
+<!-- Funcionalidades & Tecnologias (bloco escuro) -->
+<?php if ($features || $techs): ?>
+<section class="section service-features-dark">
     <div class="container">
-        <div class="section-header text-center scroll-reveal">
-            <h2 class="section-title">Projetos Relacionados</h2>
-            <p class="section-subtitle">Veja como aplicamos este serviço em projetos reais</p>
-        </div>
-        <div class="row g-4 mt-4">
-            <?php foreach ($related_portfolio as $item): ?>
-            <div class="col-md-4 scroll-reveal">
-                <div class="portfolio-card">
-                    <?php if (!empty($item['cover_image'])): ?>
-                    <img src="<?= e($item['cover_image']) ?>" alt="<?= e($item['title_pt']) ?>" class="portfolio-img" loading="lazy">
-                    <?php else: ?>
-                    <div class="portfolio-img-placeholder"><i class="bi bi-image"></i></div>
-                    <?php endif; ?>
-                    <div class="portfolio-overlay">
-                        <h4><?= e($item['title_pt']) ?></h4>
-                        <p><?= e($item['client_name'] ?? '') ?></p>
-                        <a href="<?= url('portfolio/' . $item['slug']) ?>" class="btn btn-sm btn-light">Ver Case</a>
+        <?php if ($features): ?>
+        <div class="scroll-reveal">
+            <div class="section-header text-center mb-4">
+                <h2 class="section-title text-white">O que está incluso</h2>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.6);">Funcionalidades e recursos do nosso serviço de <?= e($title) ?></p>
+            </div>
+            <div class="row g-3">
+                <?php foreach ($features as $feature): ?>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-dark-item">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span><?= e($feature) ?></span>
                     </div>
                 </div>
+                <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
         </div>
-        <div class="text-center mt-4">
-            <a href="<?= url('portfolio') ?>" class="btn btn-outline-primary">Ver Todo Portfólio</a>
+        <?php endif; ?>
+
+        <?php if ($techs): ?>
+        <div class="service-techs-row scroll-reveal mt-5">
+            <h3 class="text-white text-center mb-3">Tecnologias Utilizadas</h3>
+            <div class="tech-tags-dark">
+                <?php foreach ($techs as $tech): ?>
+                <span class="tech-tag-dark"><?= e($tech) ?></span>
+                <?php endforeach; ?>
+            </div>
         </div>
+        <?php endif; ?>
     </div>
 </section>
 <?php endif; ?>
