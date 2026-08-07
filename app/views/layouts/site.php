@@ -28,8 +28,8 @@
     <link rel="canonical" href="<?= e(BASE_URL . $_SERVER['REQUEST_URI']) ?>">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="<?= asset('img/favicon.svg') ?>">
-    <link rel="alternate icon" type="image/svg+xml" href="<?= asset('img/favicon.svg') ?>">
+    <link rel="icon" type="image/png" href="<?= asset('img/favicon.png') ?>">
+    <link rel="apple-touch-icon" href="<?= asset('img/favicon.png') ?>">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
