@@ -1366,13 +1366,12 @@ img { max-width: 100%; height: auto; }
 
 /* Sidebar */
 .service-sidebar-card {
-    background: var(--white);
+    background: var(--gray-100);
     border: 1px solid var(--gray-200);
     border-radius: var(--radius-lg);
     overflow: hidden;
     position: sticky;
     top: 100px;
-    box-shadow: var(--shadow-sm);
     transition: var(--transition-slow);
 }
 .service-sidebar-card:hover {
@@ -1380,18 +1379,17 @@ img { max-width: 100%; height: auto; }
     border-color: var(--primary-100);
 }
 .service-sidebar-card__header {
-    background: linear-gradient(135deg, var(--dark), var(--gray-900));
-    padding: 1.8rem;
-    color: var(--white);
+    padding: 1.8rem 1.8rem 0;
 }
 .service-sidebar-card__header h4 {
     font-size: 1.1rem;
     font-weight: 700;
+    color: var(--dark);
     margin-bottom: 0.4rem;
 }
 .service-sidebar-card__header p {
     font-size: 0.85rem;
-    color: var(--gray-400);
+    color: var(--gray-600);
     margin: 0;
     line-height: 1.6;
 }
@@ -1523,10 +1521,10 @@ img { max-width: 100%; height: auto; }
 
 /* ============================================
    ALSO OFFER SECTION (Também Oferecemos)
-   Estilo: cards escuros com borda visível, ícone em destaque, hover glow
+   Fundo branco, cards cinza claro
    ============================================ */
 .also-offer-section {
-    background: #080810;
+    background: var(--white);
     position: relative;
     overflow: hidden;
     padding: 5rem 0;
@@ -1537,7 +1535,7 @@ img { max-width: 100%; height: auto; }
     margin-bottom: 2.5rem;
 }
 .also-offer-section .section-title {
-    color: var(--white);
+    color: var(--dark);
     font-size: 2rem;
     font-weight: 800;
 }
@@ -1547,8 +1545,8 @@ img { max-width: 100%; height: auto; }
     align-items: flex-start;
     gap: 1rem;
     padding: 1.5rem;
-    background: #111118;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
     border-radius: 14px;
     text-decoration: none;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1557,31 +1555,30 @@ img { max-width: 100%; height: auto; }
     z-index: 2;
 }
 .also-offer-card:hover {
-    background: #141420;
+    background: var(--white);
     border-color: var(--primary);
     transform: translateY(-3px);
     box-shadow:
-        0 0 0 1px rgba(13, 148, 136, 0.5),
-        0 0 24px rgba(13, 148, 136, 0.12),
-        0 8px 24px rgba(0, 0, 0, 0.3);
+        0 0 0 1px rgba(13, 148, 136, 0.3),
+        0 8px 24px rgba(13, 148, 136, 0.1);
 }
 .also-offer-card__icon {
     width: 40px;
     height: 40px;
     min-width: 40px;
-    background: rgba(13, 148, 136, 0.12);
+    background: var(--primary-50);
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.1rem;
-    color: var(--primary-400);
+    color: var(--primary);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .also-offer-card:hover .also-offer-card__icon {
     background: var(--primary);
     color: var(--white);
-    box-shadow: 0 4px 16px rgba(13, 148, 136, 0.4);
+    box-shadow: 0 4px 16px rgba(13, 148, 136, 0.35);
 }
 .also-offer-card__content {
     flex: 1;
@@ -1590,25 +1587,22 @@ img { max-width: 100%; height: auto; }
 .also-offer-card__content h4 {
     font-size: 0.9rem;
     font-weight: 700;
-    color: var(--white);
+    color: var(--dark);
     margin-bottom: 0.3rem;
     transition: color 0.3s ease;
 }
 .also-offer-card:hover .also-offer-card__content h4 {
-    color: var(--primary-300);
+    color: var(--primary);
 }
 .also-offer-card__content p {
     font-size: 0.78rem;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--gray-600);
     line-height: 1.5;
     margin: 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-}
-.also-offer-card:hover .also-offer-card__content p {
-    color: rgba(255, 255, 255, 0.55);
 }
 
 /* Responsive - Also Offer */
