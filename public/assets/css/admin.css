@@ -151,16 +151,16 @@ body.admin-body {
 }
 .topbar-user {
     display: flex; align-items: center; gap: 0.6rem;
-    background: none; border: none; cursor: pointer;
+    background: #f1f5f9; border: 1px solid #e2e8f0; cursor: pointer;
     text-decoration: none; color: #334155;
-    padding: 0.4rem 0.8rem;
-    border-radius: 8px;
-    transition: all 0.15s;
+    padding: 0.4rem 1rem 0.4rem 0.8rem;
+    border-radius: 50px;
+    transition: all 0.2s ease;
 }
-.topbar-user:hover { background: #f1f5f9; }
-.user-name { font-size: 0.85rem; font-weight: 500; }
-.user-avatar { font-size: 1.5rem; color: #64748b; }
-.user-avatar img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+.topbar-user:hover { background: var(--admin-primary-50); border-color: var(--admin-primary-100); color: var(--admin-primary); }
+.user-name { font-size: 0.82rem; font-weight: 600; }
+.user-avatar { font-size: 1.4rem; color: var(--admin-primary); }
+.user-avatar img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; border: 2px solid var(--admin-primary-100); }
 
 /* === PAGE HEADER === */
 .page-header { margin-bottom: 1.8rem; }
