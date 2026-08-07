@@ -616,9 +616,18 @@ h1, h2, h3, h4, h5, h6 { color: #0f172a; }
 .admin-content {
     padding: 2rem 2.5rem;
 }
-.d-flex.justify-content-between.align-items-center.mb-4 {
+.d-flex.justify-content-between.align-items-center.mb-4,
+.page-header.d-flex {
     padding-bottom: 1rem;
     border-bottom: 1px solid #f1f5f9;
+}
+/* Botões de ação no header - forçar tamanho compacto */
+.page-header .btn,
+.d-flex.justify-content-between.align-items-center.mb-4 .btn,
+.page-header.d-flex .btn {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.78rem;
+    border-radius: 8px;
 }
 .table-responsive {
     border-radius: 14px;
