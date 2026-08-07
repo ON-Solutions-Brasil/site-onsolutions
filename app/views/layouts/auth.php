@@ -13,7 +13,7 @@
     <div class="auth-container">
         <div class="auth-card">
             <div class="auth-logo">
-                <h1><?= e(SITE_NAME) ?></h1>
+                <img src="<?= asset('img/favicon.png') ?>" alt="<?= e(SITE_NAME) ?>" style="height: 2.2rem; vertical-align: middle; margin-right: 0.5rem;"><h1 style="display: inline; vertical-align: middle;"><?= e(SITE_NAME) ?></h1>
             </div>
             
             <?php $flash = flash(); ?>
