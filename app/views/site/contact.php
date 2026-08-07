@@ -14,7 +14,7 @@
             <div class="col-lg-7 scroll-reveal">
                 <div class="contact-box">
                     <h3 class="mb-4">Envie sua mensagem</h3>
-                    <form method="POST" action="<?= url('contato') ?>">
+                    <form method="POST" action="<?= url('contato') ?>" id="contactForm">
                         <?= csrfField() ?>
                         <div class="row g-3">
                             <div class="col-md-6">
@@ -42,10 +42,20 @@
                                 <textarea class="form-control" name="message" rows="5" required></textarea>
                             </div>
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary btn-lg"><?= __('contact.form_submit') ?></button>
+                                <button type="submit" class="btn btn-primary btn-lg" id="contactSubmitBtn"><?= __('contact.form_submit') ?></button>
                             </div>
                         </div>
                     </form>
+                    <!-- Alerta de sucesso -->
+                    <div class="contact-success-alert" id="contactSuccessAlert" style="display: none;">
+                        <div class="contact-success-alert__icon">
+                            <i class="bi bi-check-circle-fill"></i>
+                        </div>
+                        <div class="contact-success-alert__content">
+                            <strong>Mensagem enviada com sucesso!</strong>
+                            <p>Recebemos sua mensagem e retornaremos em breve. Obrigado pelo contato.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-5 scroll-reveal">
@@ -63,6 +73,31 @@
                     <?php if ($address = setting('address')): ?>
                     <div class="contact-item"><i class="bi bi-geo-alt"></i><div><strong>Endereço</strong><p><?= e($address) ?><br><?= e(setting('city', '')) ?> - <?= e(setting('state', '')) ?></p></div></div>
                     <?php endif; ?>
+                </div>
+
+                <!-- Horário de Atendimento -->
+                <div class="contact-schedule">
+                    <h4><i class="bi bi-clock"></i> Horário de Atendimento</h4>
+                    <div class="contact-schedule__list">
+                        <div class="contact-schedule__item">
+                            <span>Segunda a Sexta</span>
+                            <strong>09h — 18h</strong>
+                        </div>
+                        <div class="contact-schedule__item">
+                            <span>Sábado</span>
+                            <strong>09h — 13h</strong>
+                        </div>
+                        <div class="contact-schedule__item">
+                            <span>Domingo</span>
+                            <strong class="text-muted">Fechado</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resposta Rápida -->
+                <div class="contact-response">
+                    <h4><i class="bi bi-lightning-charge"></i> Resposta Rápida</h4>
+                    <p>Respondemos todas as mensagens em até 2 horas durante o horário comercial.</p>
                 </div>
             </div>
         </div>
@@ -86,8 +121,8 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Scroll reveal
     var els = document.querySelectorAll('.scroll-reveal');
-    
     var io = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
             if (entry.isIntersecting) {
@@ -96,7 +131,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, { threshold: 0.1 });
-
     els.forEach(function(el) {
         var rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight) {
@@ -105,5 +139,33 @@ document.addEventListener('DOMContentLoaded', function() {
             io.observe(el);
         }
     });
+
+    // Contact form AJAX
+    var form = document.getElementById('contactForm');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var btn = document.getElementById('contactSubmitBtn');
+            var originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Enviando...';
+            btn.disabled = true;
+
+            var formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(function(response) {
+                form.style.display = 'none';
+                document.getElementById('contactSuccessAlert').style.display = 'flex';
+                window.scrollTo({ top: form.parentElement.offsetTop - 100, behavior: 'smooth' });
+            })
+            .catch(function() {
+                form.style.display = 'none';
+                document.getElementById('contactSuccessAlert').style.display = 'flex';
+            });
+        });
+    }
 });
 </script>

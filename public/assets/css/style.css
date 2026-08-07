@@ -1254,6 +1254,126 @@ img { max-width: 100%; height: auto; }
 .contact-item strong { display: block; color: var(--dark); font-size: 0.85rem; margin-bottom: 0.2rem; }
 .contact-item p { margin: 0; color: var(--gray-600); font-size: 0.9rem; }
 
+/* Contact success alert */
+.contact-success-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--primary-50);
+    border: 1px solid var(--primary-200);
+    border-radius: var(--radius-lg);
+    margin-top: 1.5rem;
+    animation: fadeInUp 0.5s ease;
+}
+.contact-success-alert__icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    background: var(--primary);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 1.2rem;
+}
+.contact-success-alert__content strong {
+    display: block;
+    color: var(--primary-dark);
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+.contact-success-alert__content p {
+    margin: 0;
+    color: var(--gray-600);
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+/* Contact schedule */
+.contact-schedule {
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.contact-schedule:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-200);
+    box-shadow: 0 8px 24px rgba(13, 148, 136, 0.1);
+}
+.contact-schedule h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.contact-schedule h4 i {
+    color: var(--primary);
+}
+.contact-schedule__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+.contact-schedule__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--gray-200);
+}
+.contact-schedule__item:last-child {
+    border-bottom: none;
+}
+.contact-schedule__item span {
+    font-size: 0.88rem;
+    color: var(--gray-600);
+}
+.contact-schedule__item strong {
+    font-size: 0.88rem;
+    color: var(--dark);
+}
+
+/* Contact response */
+.contact-response {
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.contact-response:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-200);
+    box-shadow: 0 8px 24px rgba(13, 148, 136, 0.1);
+}
+.contact-response h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.contact-response h4 i {
+    color: var(--primary);
+}
+.contact-response p {
+    margin: 0;
+    color: var(--gray-600);
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
 /* === PARTNER SECTION === */
 .partners-section {
     background: var(--white);
