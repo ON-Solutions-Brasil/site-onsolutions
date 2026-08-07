@@ -111,26 +111,6 @@ $icon = $service['icon'] ?? 'bi-gear';
                         <?php endif; ?>
                     </div>
                 </div>
-
-                <!-- Outros Serviços -->
-                <?php if (!empty($other_services)): ?>
-                <div class="service-sidebar-nav scroll-reveal">
-                    <h5>Outros Serviços</h5>
-                    <ul>
-                        <?php foreach ($other_services as $other): 
-                            $otherTitle = $other["title_{$lang}"] ?? $other['title_pt'];
-                        ?>
-                        <li>
-                            <a href="<?= url('servicos/' . $other['slug']) ?>">
-                                <i class="bi <?= e($other['icon'] ?? 'bi-gear') ?>"></i>
-                                <span><?= e($otherTitle) ?></span>
-                                <i class="bi bi-chevron-right"></i>
-                            </a>
-                        </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -164,6 +144,37 @@ $icon = $service['icon'] ?? 'bi-gear';
         </div>
         <div class="text-center mt-4">
             <a href="<?= url('portfolio') ?>" class="btn btn-outline-primary">Ver Todo Portfólio</a>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<!-- Também Oferecemos -->
+<?php if (!empty($other_services)): ?>
+<section class="section also-offer-section">
+    <div class="container">
+        <div class="section-header text-center scroll-reveal">
+            <span class="about-tag about-tag--dark">Conheça mais</span>
+            <h2 class="section-title">Também oferecemos</h2>
+            <p class="section-subtitle">Soluções completas para impulsionar seu negócio</p>
+        </div>
+        <div class="row g-4 mt-4">
+            <?php foreach ($other_services as $other): 
+                $otherTitle = $other["title_{$lang}"] ?? $other['title_pt'];
+                $otherDesc = $other["short_description_{$lang}"] ?? $other['short_description_pt'] ?? '';
+            ?>
+            <div class="col-md-6 col-lg-4 col-xl-3 scroll-reveal">
+                <a href="<?= url('servicos/' . $other['slug']) ?>" class="also-offer-card">
+                    <div class="also-offer-card__icon">
+                        <i class="bi <?= e($other['icon'] ?? 'bi-gear') ?>"></i>
+                    </div>
+                    <div class="also-offer-card__content">
+                        <h4><?= e($otherTitle) ?></h4>
+                        <p><?= e($otherDesc) ?></p>
+                    </div>
+                </a>
+            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
