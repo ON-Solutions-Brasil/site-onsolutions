@@ -199,11 +199,144 @@ body.admin-body {
 .stat-info h3 { font-size: 1.5rem; font-weight: 800; margin: 0; color: #0f172a; }
 .stat-info span { font-size: 0.76rem; color: #64748b; font-weight: 450; }
 
-/* === ACTIVITY FEED === */
-.activity-feed { display: flex; flex-direction: column; gap: 1rem; }
-.activity-item { display: flex; gap: 1rem; align-items: flex-start; }
-.activity-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--admin-primary); margin-top: 7px; flex-shrink: 0; }
-.activity-content p { margin: 0; font-size: 0.87rem; }
+/* === DASHBOARD METRIC CARDS === */
+.dashboard-metric-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+.dashboard-metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: inherit;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+}
+.dashboard-metric-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    border-color: #cbd5e1;
+}
+.dashboard-metric-card:hover::before {
+    transform: scaleX(1);
+}
+.dashboard-metric-card__icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.dashboard-metric-card__info {
+    flex: 1;
+}
+.dashboard-metric-card__label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.dashboard-metric-card__value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+/* === DASHBOARD FINANCE CARDS === */
+.dashboard-finance-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+.dashboard-finance-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+}
+.dashboard-finance-card__icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+.dashboard-finance-card--income .dashboard-finance-card__icon { color: #10b981; }
+.dashboard-finance-card--expense .dashboard-finance-card__icon { color: #ef4444; }
+.dashboard-finance-card__label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+}
+.dashboard-finance-card__value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0.2rem 0 0;
+    letter-spacing: -0.3px;
+}
+.dashboard-finance-card--income .dashboard-finance-card__value { color: #059669; }
+.dashboard-finance-card--expense .dashboard-finance-card__value { color: #dc2626; }
+
+/* === DASHBOARD ACTIVITY === */
+.dashboard-activity-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.dashboard-activity-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+.dashboard-activity-item:last-child { border-bottom: none; }
+.dashboard-activity-item__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--admin-primary);
+    margin-top: 7px;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+}
+.dashboard-activity-item__content p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #334155;
+    line-height: 1.5;
+}
+.dashboard-activity-item__content p strong {
+    color: #0f172a;
+}
+.dashboard-activity-item__content span {
+    font-size: 0.72rem;
+    color: #94a3b8;
+}
 
 /* === TABLES === */
 .table { font-size: 0.88rem; color: #334155; }
