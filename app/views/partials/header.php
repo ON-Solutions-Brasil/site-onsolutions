@@ -6,7 +6,7 @@
                 <?php if ($logo = setting('logo')): ?>
                     <img src="<?= e($logo) ?>" alt="<?= e(SITE_NAME) ?>" height="40">
                 <?php else: ?>
-                    <span class="brand-text"><?= e(SITE_NAME) ?></span>
+                    <img src="<?= asset('img/favicon.png') ?>" alt="<?= e(SITE_NAME) ?>" class="brand-icon"><span class="brand-text"><?= e(SITE_NAME) ?></span>
                 <?php endif; ?>
             </a>
             
