@@ -7,13 +7,12 @@
     </div>
 </section>
 
-<!-- Parceiros -->
+<!-- Parceiros + CTA lado a lado -->
 <section class="section partners-section">
     <div class="container">
-        <?php if (!empty($partners)): ?>
-        <div class="row g-4 justify-content-center">
+        <div class="row g-4 justify-content-center align-items-stretch">
             <?php foreach ($partners as $partner): ?>
-            <div class="col-md-6 col-lg-4 scroll-reveal">
+            <div class="col-md-6 col-lg-5 scroll-reveal">
                 <div class="partner-card">
                     <?php if (!empty($partner['logo'])): ?>
                     <img src="<?= e($partner['logo']) ?>" alt="<?= e($partner['name']) ?>" class="partner-logo" loading="lazy">
@@ -30,37 +29,16 @@
                 </div>
             </div>
             <?php endforeach; ?>
-        </div>
-        <?php else: ?>
-        <div class="text-center">
-            <p class="text-muted">Nenhum parceiro cadastrado no momento.</p>
-        </div>
-        <?php endif; ?>
-    </div>
-</section>
 
-<!-- CTA Parceria -->
-<section class="section partners-cta-section">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="partners-cta-card scroll-reveal">
-                    <div class="partners-cta-card__icon">
-                        <i class="bi bi-handshake"></i>
-                    </div>
-                    <h2>Quer ser nosso parceiro?</h2>
-                    <p>Estamos sempre abertos a novas parcerias estratégicas. Se sua empresa compartilha nossa visão de excelência em tecnologia, entre em contato.</p>
-                    <div class="partners-cta-card__actions">
-                        <a href="<?= url('contato') ?>" class="btn btn-primary btn-lg">
-                            <i class="bi bi-chat-dots me-2"></i>Fale Conosco
-                        </a>
-                        <?php if ($whatsapp = setting('whatsapp_number')): ?>
-                        <a href="https://wa.me/<?= preg_replace('/\D/', '', $whatsapp) ?>?text=<?= urlencode('Olá! Gostaria de saber mais sobre parcerias.') ?>" 
-                           class="btn btn-success btn-lg" target="_blank" rel="noopener">
-                            <i class="bi bi-whatsapp me-2"></i>WhatsApp
-                        </a>
-                        <?php endif; ?>
-                    </div>
+            <!-- Quer ser nosso parceiro? -->
+            <div class="col-md-6 col-lg-5 scroll-reveal">
+                <div class="partner-card partner-card--cta">
+                    <div class="partner-logo-placeholder"><i class="bi bi-handshake"></i></div>
+                    <h4>Quer ser nosso parceiro?</h4>
+                    <p class="partner-desc">Entre em contato e vamos conversar sobre oportunidades de parceria.</p>
+                    <a href="<?= url('contato') ?>" class="btn btn-sm btn-primary">
+                        <i class="bi bi-chat-dots me-1"></i>Fale Conosco
+                    </a>
                 </div>
             </div>
         </div>
