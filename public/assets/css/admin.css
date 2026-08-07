@@ -505,15 +505,17 @@ body.admin-body {
 }
 .dropdown-divider { border-color: #f1f5f9; margin: 0.3rem 0; }
 
-/* Profile button premium */
+/* Botão Meu Perfil - Premium */
 .admin-profile-btn {
     background: var(--admin-primary) !important;
     color: #fff !important;
-    border-radius: 8px !important;
-    padding: 0.65rem 1rem !important;
+    border-radius: 10px !important;
+    padding: 0.65rem 1.2rem !important;
     font-weight: 600 !important;
     font-size: 0.85rem !important;
-    margin: 0.3rem 0.5rem !important;
+    display: flex !important;
+    align-items: center;
+    gap: 0.6rem;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
     box-shadow: 0 2px 8px rgba(13, 148, 136, 0.2);
     letter-spacing: 0.2px;
@@ -526,6 +528,7 @@ body.admin-body {
 }
 .admin-profile-btn i {
     color: #fff !important;
+    font-size: 1rem;
 }
 
 /* === FORMS === */

@@ -48,7 +48,7 @@
                 </span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li>
+                <li class="px-2 pt-1 pb-2">
                     <a class="dropdown-item admin-profile-btn" href="<?= url('admin/profile') ?>">
                         <i class="bi bi-person"></i> Meu Perfil
                     </a>
