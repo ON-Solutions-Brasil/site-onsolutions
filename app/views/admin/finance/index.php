@@ -1,9 +1,12 @@
 <div class="page-header d-flex justify-content-between align-items-center">
-    <div><h1 class="page-title">Financeiro</h1></div>
+    <div>
+        <h1 class="page-title">Financeiro</h1>
+        <p class="page-subtitle">Controle de receitas e despesas</p>
+    </div>
     <div class="d-flex gap-2">
-        <a href="<?= url('admin/finance/income/create') ?>" class="btn btn-success"><i class="bi bi-plus-lg"></i> Receita</a>
-        <a href="<?= url('admin/finance/expense/create') ?>" class="btn btn-danger"><i class="bi bi-plus-lg"></i> Despesa</a>
-        <a href="<?= url('admin/finance/report') ?>" class="btn btn-outline-primary"><i class="bi bi-bar-chart"></i> Relatório</a>
+        <a href="<?= url('admin/finance/income/create') ?>" class="btn btn-sm btn-success"><i class="bi bi-plus-lg me-1"></i>Receita</a>
+        <a href="<?= url('admin/finance/expense/create') ?>" class="btn btn-sm btn-outline-danger"><i class="bi bi-plus-lg me-1"></i>Despesa</a>
+        <a href="<?= url('admin/finance/report') ?>" class="btn btn-sm btn-outline-primary"><i class="bi bi-bar-chart me-1"></i>Relatório</a>
     </div>
 </div>
 
