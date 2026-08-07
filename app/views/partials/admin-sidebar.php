@@ -1,7 +1,7 @@
 <aside class="admin-sidebar" id="adminSidebar">
     <div class="sidebar-header">
         <a href="<?= url('admin/dashboard') ?>" class="sidebar-brand">
-            <span class="brand-icon"><i class="bi bi-hexagon-fill"></i></span>
+            <img src="<?= asset('img/favicon.png') ?>" alt="" style="height: 28px; width: auto;">
             <span class="brand-text"><?= e(SITE_NAME) ?></span>
         </a>
         <button class="sidebar-toggle d-lg-none" id="sidebarClose">
