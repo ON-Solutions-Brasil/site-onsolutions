@@ -7,6 +7,7 @@
     </div>
 </section>
 
+<?php if (!empty($posts)): ?>
 <!-- Categorias como filtros -->
 <?php if (!empty($categories)): ?>
 <section class="blog-categories-bar">
@@ -28,22 +29,6 @@
 <!-- Posts Grid -->
 <section class="section blog-grid-section">
     <div class="container">
-        <?php if (empty($posts)): ?>
-        <div class="text-center py-5 scroll-reveal">
-            <div class="blog-empty-state">
-                <i class="bi bi-journal-richtext"></i>
-                <h3>Nenhum post publicado ainda</h3>
-                <p>Em breve teremos conteúdos incríveis por aqui. Enquanto isso, inscreva-se na nossa newsletter.</p>
-                <form action="<?= url('newsletter/subscribe') ?>" method="POST" class="blog-empty-newsletter">
-                    <?= csrfField() ?>
-                    <div class="input-group">
-                        <input type="email" name="email" class="form-control" placeholder="Seu melhor e-mail" required>
-                        <button class="btn btn-primary"><i class="bi bi-send me-1"></i>Inscrever</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <?php else: ?>
         <div class="row g-4">
             <?php foreach ($posts as $index => $post): ?>
             <div class="<?= $index === 0 ? 'col-12' : 'col-md-6 col-lg-4' ?> scroll-reveal">
@@ -86,25 +71,58 @@
             </ul>
         </nav>
         <?php endif; ?>
-        <?php endif; ?>
     </div>
 </section>
 
-<!-- CTA Newsletter -->
+<?php else: ?>
+<!-- Estado vazio premium -->
+<section class="blog-coming-soon">
+    <div class="container">
+        <div class="blog-coming-soon__wrapper scroll-reveal">
+            <div class="blog-coming-soon__visual">
+                <div class="blog-coming-soon__orbit">
+                    <div class="blog-coming-soon__icon"><i class="bi bi-braces"></i></div>
+                    <div class="blog-coming-soon__dot blog-coming-soon__dot--1"></div>
+                    <div class="blog-coming-soon__dot blog-coming-soon__dot--2"></div>
+                    <div class="blog-coming-soon__dot blog-coming-soon__dot--3"></div>
+                </div>
+            </div>
+            <div class="blog-coming-soon__content">
+                <span class="about-tag about-tag--dark">Em breve</span>
+                <h2>Conteúdo em desenvolvimento</h2>
+                <p>Estamos preparando artigos sobre tecnologia, arquitetura de software, integrações e inovação. Seja o primeiro a receber.</p>
+                <form action="<?= url('newsletter/subscribe') ?>" method="POST" class="blog-coming-soon__form">
+                    <?= csrfField() ?>
+                    <div class="input-group">
+                        <input type="email" name="email" class="form-control" placeholder="Seu melhor e-mail" required>
+                        <button class="btn btn-primary">Notifique-me</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Preview de categorias -->
+        <?php if (!empty($categories)): ?>
+        <div class="blog-coming-soon__categories scroll-reveal">
+            <h4>Categorias que serão abordadas</h4>
+            <div class="blog-coming-soon__tags">
+                <?php foreach ($categories as $cat): ?>
+                <span class="blog-coming-soon__tag"><?= e($cat['name_pt']) ?></span>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endif; ?>
+    </div>
+</section>
+<?php endif; ?>
+
+<!-- CTA -->
 <section class="section cta-section">
     <div class="container">
         <div class="cta-content text-center scroll-reveal">
-            <h2 class="cta-title">Quer receber nossos conteúdos?</h2>
-            <p class="cta-subtitle">Inscreva-se na newsletter e fique por dentro das novidades.</p>
-            <form action="<?= url('newsletter/subscribe') ?>" method="POST" style="max-width: 420px; margin: 0 auto;">
-                <?= csrfField() ?>
-                <div class="input-group input-group-lg">
-                    <input type="email" name="email" class="form-control" placeholder="<?= __('newsletter.placeholder') ?>" required style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: white; border-radius: var(--radius) 0 0 var(--radius);">
-                    <button class="btn btn-primary" style="border-radius: 0 var(--radius) var(--radius) 0;">
-                        <i class="bi bi-send me-1"></i>Assinar
-                    </button>
-                </div>
-            </form>
+            <h2 class="cta-title">Pronto para transformar seu negócio?</h2>
+            <p class="cta-subtitle">Conheça nossos serviços e descubra como podemos ajudar.</p>
+            <a href="<?= url('servicos') ?>" class="btn btn-primary btn-lg">Ver Serviços</a>
         </div>
     </div>
 </section>
