@@ -47,6 +47,12 @@ class ServicesController extends Controller
         $this->data['meta_description'] = $service[$descField] ?? $service['meta_description_pt'] ?? '';
         $this->data['service'] = $service;
 
+        // Outros serviços para a navegação lateral (exclui o serviço atual)
+        $this->data['other_services'] = $this->db->fetchAll(
+            "SELECT id, slug, icon, title_pt, title_en, title_es FROM services WHERE is_active = 1 AND slug != ? ORDER BY order_position ASC",
+            [$slug]
+        );
+
         // Portfólio relacionado
         $this->data['related_portfolio'] = $this->db->fetchAll(
             "SELECT * FROM portfolio_items WHERE is_active = 1 ORDER BY RAND() LIMIT 3"
