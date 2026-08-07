@@ -41,9 +41,9 @@
                 <span class="user-name d-none d-md-inline"><?= e(currentUser()['name'] ?? 'Admin') ?></span>
                 <span class="user-avatar">
                     <?php if ($avatar = currentUser()['avatar'] ?? null): ?>
-                        <img src="<?= e($avatar) ?>" alt="Avatar" width="32" height="32">
+                        <img src="<?= e($avatar) ?>" alt="Avatar">
                     <?php else: ?>
-                        <i class="bi bi-person-circle"></i>
+                        <i class="bi bi-shield-check"></i>
                     <?php endif; ?>
                 </span>
             </button>
