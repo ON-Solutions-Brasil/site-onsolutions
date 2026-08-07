@@ -1,8 +1,8 @@
 <!-- Hero -->
 <section class="page-hero page-hero--about">
     <div class="container text-center">
-        <span class="about-tag hero-fade-in">Fale Conosco</span>
-        <h1 class="hero-fade-in">Vamos conversar?</h1>
+        <span class="about-tag hero-fade-in">Contato</span>
+        <h1 class="hero-fade-in">Envie sua mensagem</h1>
         <p class="hero-fade-in">Estamos prontos para transformar sua ideia em realidade. Fale com a gente.</p>
     </div>
 </section>
