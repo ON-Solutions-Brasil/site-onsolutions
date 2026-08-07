@@ -505,6 +505,29 @@ body.admin-body {
 }
 .dropdown-divider { border-color: #f1f5f9; margin: 0.3rem 0; }
 
+/* Profile button premium */
+.admin-profile-btn {
+    background: var(--admin-primary) !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    padding: 0.65rem 1rem !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    margin: 0.3rem 0.5rem !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 2px 8px rgba(13, 148, 136, 0.2);
+    letter-spacing: 0.2px;
+}
+.admin-profile-btn:hover {
+    background: var(--admin-primary-hover) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35) !important;
+    transform: translateY(-1px);
+}
+.admin-profile-btn i {
+    color: #fff !important;
+}
+
 /* === FORMS === */
 .form-control, .form-select {
     border-radius: 10px;

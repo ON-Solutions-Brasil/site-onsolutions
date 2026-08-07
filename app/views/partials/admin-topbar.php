@@ -48,7 +48,11 @@
                 </span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="<?= url('admin/profile') ?>"><i class="bi bi-person"></i> Meu Perfil</a></li>
+                <li>
+                    <a class="dropdown-item admin-profile-btn" href="<?= url('admin/profile') ?>">
+                        <i class="bi bi-person"></i> Meu Perfil
+                    </a>
+                </li>
                 <li><a class="dropdown-item" href="<?= url('admin/settings') ?>"><i class="bi bi-gear"></i> Configurações</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item text-danger" href="<?= url('admin/logout') ?>"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
