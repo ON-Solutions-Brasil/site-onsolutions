@@ -747,74 +747,7 @@ hr {
 
 /* Settings Page Container */
 .settings-page {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Hero Header */
-.settings-hero {
-    background: linear-gradient(135deg, #0a0e17 0%, #1a2332 50%, #0d2620 100%);
-    border-radius: 16px;
-    padding: 2rem 2.5rem;
-    margin-bottom: 2rem;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(13, 148, 136, 0.15);
-}
-.settings-hero::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(13, 148, 136, 0.08) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-}
-.settings-hero::after {
-    content: '';
-    position: absolute;
-    bottom: -30%;
-    left: -10%;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(20, 184, 166, 0.05) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-}
-.settings-hero__content {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    position: relative;
-    z-index: 1;
-}
-.settings-hero__icon {
-    width: 52px;
-    height: 52px;
-    background: linear-gradient(135deg, var(--admin-primary), var(--admin-primary-light));
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    color: #fff;
-    box-shadow: 0 4px 16px rgba(13, 148, 136, 0.3);
-    flex-shrink: 0;
-}
-.settings-hero__title {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #fff;
-    margin: 0;
-    letter-spacing: -0.5px;
-}
-.settings-hero__subtitle {
-    font-size: 0.84rem;
-    color: #94a3b8;
-    margin: 0.2rem 0 0;
-    font-weight: 400;
+    width: 100%;
 }
 
 /* Layout: Sidebar + Content */
@@ -893,32 +826,32 @@ hr {
     background: #fff;
     border-radius: 16px;
     border: 1px solid #e2e8f0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
     overflow: hidden;
     transition: box-shadow 0.3s ease;
 }
 .settings-card:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 .settings-card__header {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1.5rem 2rem;
+    padding: 1.3rem 1.8rem;
     border-bottom: 1px solid #f1f5f9;
-    background: linear-gradient(180deg, #fafcff 0%, #fff 100%);
+    background: #f8fafc;
 }
 .settings-card__header-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     color: #fff;
     flex-shrink: 0;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
 }
 .settings-card__header-icon.bg-primary { background: linear-gradient(135deg, #0d9488, #14b8a6); }
 .settings-card__header-icon.bg-info { background: linear-gradient(135deg, #0891b2, #06b6d4); }
@@ -928,20 +861,20 @@ hr {
 .settings-card__header-icon.bg-secondary { background: linear-gradient(135deg, #475569, #64748b); }
 
 .settings-card__title {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
     color: #0f172a;
     margin: 0;
-    letter-spacing: -0.3px;
+    letter-spacing: -0.2px;
 }
 .settings-card__desc {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: #64748b;
-    margin: 0.15rem 0 0;
+    margin: 0.1rem 0 0;
     font-weight: 400;
 }
 .settings-card__body {
-    padding: 2rem;
+    padding: 1.8rem;
 }
 .settings-card__footer {
     display: flex;
@@ -1017,21 +950,7 @@ hr {
         padding: 0.5rem 0.8rem;
         font-size: 0.76rem;
     }
-    .settings-hero {
-        padding: 1.5rem;
-    }
     .settings-card__body {
         padding: 1.2rem;
-    }
-}
-@media (max-width: 575px) {
-    .settings-hero__content {
-        flex-direction: column;
-        text-align: center;
-    }
-    .settings-card__header {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.8rem;
     }
 }

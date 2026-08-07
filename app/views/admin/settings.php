@@ -1,15 +1,7 @@
 <div class="settings-page">
-    <!-- Header Premium -->
-    <div class="settings-hero">
-        <div class="settings-hero__content">
-            <div class="settings-hero__icon">
-                <i class="bi bi-sliders2"></i>
-            </div>
-            <div>
-                <h1 class="settings-hero__title">Configurações</h1>
-                <p class="settings-hero__subtitle">Gerencie todas as configurações do sistema</p>
-            </div>
-        </div>
+    <div class="page-header">
+        <h1 class="page-title">Configurações</h1>
+        <p class="page-subtitle">Gerencie todas as configurações do sistema</p>
     </div>
 
     <div class="settings-layout">
