@@ -527,7 +527,8 @@ body.admin-body {
 .btn-outline-primary { color: var(--admin-primary); border-color: var(--admin-primary); border-radius: 10px; font-weight: 500; }
 .btn-outline-primary:hover { background: var(--admin-primary); border-color: var(--admin-primary); color: #fff; }
 .btn-outline-danger { border-radius: 10px; font-weight: 500; }
-.btn-outline-secondary { border-radius: 10px; font-weight: 500; }
+.btn-outline-secondary { border-radius: 10px; font-weight: 500; color: #64748b; border-color: #e2e8f0; }
+.btn-outline-secondary:hover { background: var(--admin-primary); border-color: var(--admin-primary); color: #fff; }
 .btn-sm { border-radius: 8px; padding: 0.4rem 0.85rem; font-size: 0.78rem; font-weight: 600; }
 .btn-lg { border-radius: 12px; padding: 0.75rem 2rem; font-size: 0.95rem; }
 
