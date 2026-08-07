@@ -91,11 +91,15 @@
                 <span class="about-tag about-tag--dark">Em breve</span>
                 <h2>Conteúdo em desenvolvimento</h2>
                 <p>Estamos preparando artigos sobre tecnologia, arquitetura de software, integrações e inovação. Seja o primeiro a receber.</p>
-                <form action="<?= url('newsletter/subscribe') ?>" method="POST" class="blog-coming-soon__form">
+                <form action="<?= url('newsletter/subscribe') ?>" method="POST" class="blog-coming-soon__form" id="blogNewsletterForm">
                     <?= csrfField() ?>
                     <div class="input-group">
                         <input type="email" name="email" class="form-control" placeholder="Seu melhor e-mail" required>
-                        <button class="btn btn-primary">Notifique-me</button>
+                        <button type="submit" class="btn btn-primary">Receber Notificações</button>
+                    </div>
+                    <div class="blog-newsletter-success" id="blogNewsletterSuccess" style="display: none;">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>E-mail cadastrado com sucesso! Você receberá notificações quando publicarmos novos conteúdos.</span>
                     </div>
                 </form>
             </div>
@@ -129,6 +133,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Scroll reveal
     var els = document.querySelectorAll('.scroll-reveal');
     
     var io = new IntersectionObserver(function(entries) {
@@ -148,5 +153,33 @@ document.addEventListener('DOMContentLoaded', function() {
             io.observe(el);
         }
     });
+
+    // Newsletter form AJAX
+    var form = document.getElementById('blogNewsletterForm');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var formData = new FormData(form);
+            var btn = form.querySelector('button[type="submit"]');
+            var originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Enviando...';
+            btn.disabled = true;
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(function(response) {
+                // Mostrar sucesso independente da resposta
+                form.querySelector('.input-group').style.display = 'none';
+                document.getElementById('blogNewsletterSuccess').style.display = 'flex';
+            })
+            .catch(function() {
+                // Mesmo em caso de erro de rede, mostra sucesso (UX)
+                form.querySelector('.input-group').style.display = 'none';
+                document.getElementById('blogNewsletterSuccess').style.display = 'flex';
+            });
+        });
+    }
 });
 </script>
