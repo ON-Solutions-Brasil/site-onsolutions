@@ -2,7 +2,7 @@
 <section class="page-hero page-hero--about">
     <div class="container text-center">
         <span class="about-tag hero-fade-in">Portfólio</span>
-        <h1 class="hero-fade-in"><?= __('portfolio.title') ?></h1>
+        <h1 class="hero-fade-in">Nossos Projetos</h1>
         <p class="hero-fade-in"><?= __('portfolio.meta_description') ?></p>
     </div>
 </section>
