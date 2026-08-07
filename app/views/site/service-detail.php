@@ -154,11 +154,9 @@ $icon = $service['icon'] ?? 'bi-gear';
 <section class="section also-offer-section">
     <div class="container">
         <div class="section-header text-center scroll-reveal">
-            <span class="about-tag about-tag--dark">Conheça mais</span>
             <h2 class="section-title">Também oferecemos</h2>
-            <p class="section-subtitle">Soluções completas para impulsionar seu negócio</p>
         </div>
-        <div class="row g-4 mt-4">
+        <div class="row g-3 mt-2">
             <?php foreach ($other_services as $other): 
                 $otherTitle = $other["title_{$lang}"] ?? $other['title_pt'];
                 $otherDesc = $other["short_description_{$lang}"] ?? $other['short_description_pt'] ?? '';
