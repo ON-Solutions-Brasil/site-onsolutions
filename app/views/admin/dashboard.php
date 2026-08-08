@@ -102,36 +102,47 @@
 <!-- Contatos e Atividades -->
 <div class="row g-3">
     <div class="col-lg-6">
-        <div class="card border-0 shadow-sm">
-            <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
-                <h5 class="mb-0" style="font-size: 1rem; font-weight: 700;">Últimos Contatos</h5>
-                <a href="<?= url('admin/clients') ?>" class="btn btn-sm btn-outline-primary">Ver todos</a>
-            </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-hover mb-0">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th>Data</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if (empty($recent_contacts)): ?>
-                            <tr><td colspan="3" class="text-center text-muted py-4">Nenhum contato recente</td></tr>
-                            <?php else: ?>
-                            <?php foreach ($recent_contacts as $contact): ?>
-                            <tr>
-                                <td><strong><?= e($contact['name']) ?></strong></td>
-                                <td class="text-muted"><?= e($contact['email']) ?></td>
-                                <td><small class="text-muted"><?= formatDateTime($contact['created_at']) ?></small></td>
-                            </tr>
-                            <?php endforeach; ?>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
+        <div class="team-card">
+            <div class="team-card__header">
+                <div class="team-card__header-icon">
+                    <i class="bi bi-envelope-open"></i>
                 </div>
+                <div>
+                    <h3 class="team-card__title">Últimos Contatos</h3>
+                    <p class="team-card__desc">Mensagens recebidas recentemente</p>
+                </div>
+                <a href="<?= url('admin/clients') ?>" class="btn btn-sm btn-outline-primary ms-auto">Ver todos</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0 team-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (empty($recent_contacts)): ?>
+                        <tr><td colspan="3" class="text-center text-muted py-4">Nenhum contato recente</td></tr>
+                        <?php else: ?>
+                        <?php foreach ($recent_contacts as $contact): ?>
+                        <tr>
+                            <td>
+                                <div class="team-member">
+                                    <div class="team-member__avatar">
+                                        <?= strtoupper(substr($contact['name'], 0, 1)) ?>
+                                    </div>
+                                    <span class="team-member__name"><?= e($contact['name']) ?></span>
+                                </div>
+                            </td>
+                            <td><span class="team-member__email" style="font-size: 0.82rem;"><?= e($contact['email']) ?></span></td>
+                            <td><span class="team-date"><?= formatDateTime($contact['created_at']) ?></span></td>
+                        </tr>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
