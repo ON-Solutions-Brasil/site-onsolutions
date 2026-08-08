@@ -1,14 +1,53 @@
-<div class="page-header"><h1 class="page-title"><i class="bi bi-robot"></i> Assistente IA</h1><p class="page-subtitle">Converse com a inteligência artificial para gerar conteúdo, tirar dúvidas e mais.</p></div>
-
-<div class="card border-0 shadow-sm" style="min-height:500px; display:flex; flex-direction:column;">
-    <div class="card-body flex-grow-1" id="aiChat" style="overflow-y:auto; max-height:450px; padding:1.5rem;">
-        <div class="chat-message bot"><p class="bg-light rounded p-3">Olá! Sou o assistente IA da <?= e(SITE_NAME) ?>. Como posso ajudar?</p></div>
+<div class="ai-page">
+    <div class="page-header d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="page-title">Assistente IA</h1>
+            <p class="page-subtitle">Converse com a inteligência artificial para gerar conteúdo, tirar dúvidas e mais.</p>
+        </div>
+        <div class="ai-header-info">
+            <span class="ai-provider-badge">
+                <i class="bi bi-cpu"></i>
+                <?= e(ucfirst(setting('ai_default_provider', 'openai'))) ?>
+            </span>
+        </div>
     </div>
-    <div class="card-footer">
-        <form id="aiChatForm" class="d-flex gap-2">
-            <input type="text" class="form-control" id="aiInput" placeholder="Digite sua pergunta..." autocomplete="off">
-            <button type="submit" class="btn btn-primary"><i class="bi bi-send-fill"></i></button>
-        </form>
+
+    <div class="ai-chat-card">
+        <div class="ai-chat-card__header">
+            <div class="ai-chat-card__header-icon">
+                <i class="bi bi-robot"></i>
+            </div>
+            <div>
+                <h3 class="ai-chat-card__title">Chat com IA</h3>
+                <p class="ai-chat-card__desc">Assistente inteligente da <?= e(SITE_NAME) ?></p>
+            </div>
+            <div class="ai-chat-card__status">
+                <span class="ai-status-dot"></span> Online
+            </div>
+        </div>
+
+        <div class="ai-chat-body" id="aiChat">
+            <div class="ai-msg ai-msg--bot">
+                <div class="ai-msg__avatar">
+                    <i class="bi bi-robot"></i>
+                </div>
+                <div class="ai-msg__bubble">
+                    Olá! Sou o assistente IA da <?= e(SITE_NAME) ?>. Como posso ajudar?
+                </div>
+            </div>
+        </div>
+
+        <div class="ai-chat-footer">
+            <form id="aiChatForm" class="ai-chat-form">
+                <div class="ai-chat-input-wrapper">
+                    <input type="text" class="ai-chat-input" id="aiInput" placeholder="Digite sua pergunta..." autocomplete="off">
+                    <button type="submit" class="ai-chat-send" aria-label="Enviar mensagem">
+                        <i class="bi bi-send-fill"></i>
+                    </button>
+                </div>
+                <p class="ai-chat-hint">Pressione Enter para enviar. A IA pode cometer erros.</p>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -24,7 +63,7 @@ form.addEventListener('submit', function(e) {
 
     addMsg(msg, 'user');
     input.value = '';
-    const loadingId = addMsg('Pensando...', 'bot');
+    const loadingId = addMsg('Pensando...', 'bot', true);
 
     const fd = new FormData();
     fd.append('message', msg);
@@ -39,13 +78,20 @@ form.addEventListener('submit', function(e) {
         .catch(() => { document.getElementById(loadingId)?.remove(); addMsg('Erro de conexão.', 'bot'); });
 });
 
-function addMsg(text, type) {
+function addMsg(text, type, isLoading = false) {
     const id = 'msg-' + Date.now();
     const div = document.createElement('div');
-    div.className = 'chat-message ' + type;
+    div.className = 'ai-msg ai-msg--' + type;
     div.id = id;
-    div.innerHTML = '<p class="' + (type === 'user' ? 'bg-primary text-white ms-auto' : 'bg-light') + ' rounded p-3" style="max-width:80%;display:inline-block;">' + text.replace(/\n/g, '<br>') + '</p>';
-    if (type === 'user') div.style.textAlign = 'right';
+    
+    const avatar = type === 'user' 
+        ? '<div class="ai-msg__avatar ai-msg__avatar--user"><i class="bi bi-person"></i></div>'
+        : '<div class="ai-msg__avatar"><i class="bi bi-robot"></i></div>';
+    
+    const bubbleClass = isLoading ? 'ai-msg__bubble ai-msg__bubble--loading' : 'ai-msg__bubble';
+    const content = text.replace(/\n/g, '<br>');
+    
+    div.innerHTML = avatar + '<div class="' + bubbleClass + '">' + content + '</div>';
     chatEl.appendChild(div);
     chatEl.scrollTop = chatEl.scrollHeight;
     return id;
