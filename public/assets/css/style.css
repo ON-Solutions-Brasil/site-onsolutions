@@ -1740,22 +1740,7 @@ img { max-width: 100%; height: auto; }
     margin: 0 auto;
 }
 .newsletter-premium__badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(13, 148, 136, 0.15);
-    color: #14b8a6;
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 0.45rem 1.1rem;
-    border-radius: 50px;
-    border: 1px solid rgba(13, 148, 136, 0.3);
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-}
-.newsletter-premium__badge i {
-    font-size: 0.85rem;
+    display: none;
 }
 .newsletter-premium__title {
     font-size: 2.2rem;
