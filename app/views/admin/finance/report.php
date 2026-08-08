@@ -41,10 +41,18 @@ $totalBalance = $totalIncome - $totalExpense;
 </div>
 
 <!-- Tabela mensal -->
-<div class="card border-0 shadow-sm">
-    <div class="card-header bg-transparent"><h5 class="mb-0" style="font-size: 1rem;">Demonstrativo Mensal</h5></div>
+<div class="team-card">
+    <div class="team-card__header">
+        <div class="team-card__header-icon">
+            <i class="bi bi-calendar3"></i>
+        </div>
+        <div>
+            <h3 class="team-card__title">Demonstrativo Mensal</h3>
+            <p class="team-card__desc">Receitas, despesas e saldo por mês em <?= $year ?></p>
+        </div>
+    </div>
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 team-table">
             <thead>
                 <tr>
                     <th>Mês</th>
@@ -58,21 +66,21 @@ $totalBalance = $totalIncome - $totalExpense;
                     $row = $monthly_data[$m];
                 ?>
                 <tr>
-                    <td><strong><?= $months[$m] ?></strong></td>
-                    <td class="text-end text-success"><?= formatMoney((float)$row['income']) ?></td>
-                    <td class="text-end text-danger"><?= formatMoney((float)$row['expense']) ?></td>
-                    <td class="text-end <?= $row['balance'] >= 0 ? 'text-success' : 'text-danger' ?>">
-                        <strong><?= formatMoney((float)$row['balance']) ?></strong>
+                    <td><span class="team-member__name"><?= $months[$m] ?></span></td>
+                    <td class="text-end" style="color: #059669; font-weight: 600;"><?= formatMoney((float)$row['income']) ?></td>
+                    <td class="text-end" style="color: #dc2626; font-weight: 600;"><?= formatMoney((float)$row['expense']) ?></td>
+                    <td class="text-end <?= $row['balance'] >= 0 ? '' : '' ?>" style="color: <?= $row['balance'] >= 0 ? '#059669' : '#dc2626' ?>; font-weight: 700;">
+                        <?= formatMoney((float)$row['balance']) ?>
                     </td>
                 </tr>
                 <?php endfor; ?>
             </tbody>
-            <tfoot style="border-top: 2px solid #e2e8f0;">
+            <tfoot style="border-top: 2px solid #e2e8f0; background: #f8fafc;">
                 <tr>
-                    <td><strong>Total</strong></td>
-                    <td class="text-end text-success"><strong><?= formatMoney((float)$totalIncome) ?></strong></td>
-                    <td class="text-end text-danger"><strong><?= formatMoney((float)$totalExpense) ?></strong></td>
-                    <td class="text-end <?= $totalBalance >= 0 ? 'text-success' : 'text-danger' ?>"><strong><?= formatMoney((float)$totalBalance) ?></strong></td>
+                    <td><strong style="font-size: 0.88rem; color: #0f172a;">Total</strong></td>
+                    <td class="text-end" style="color: #059669; font-weight: 800;"><?= formatMoney((float)$totalIncome) ?></td>
+                    <td class="text-end" style="color: #dc2626; font-weight: 800;"><?= formatMoney((float)$totalExpense) ?></td>
+                    <td class="text-end" style="color: <?= $totalBalance >= 0 ? '#059669' : '#dc2626' ?>; font-weight: 800;"><?= formatMoney((float)$totalBalance) ?></td>
                 </tr>
             </tfoot>
         </table>
