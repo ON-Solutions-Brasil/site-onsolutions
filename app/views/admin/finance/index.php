@@ -32,23 +32,79 @@
     </div>
 </div>
 
-<div class="card border-0 shadow-sm">
+<?php if (empty($transactions)): ?>
+<div class="team-empty">
+    <div class="team-empty__icon">
+        <i class="bi bi-cash-stack"></i>
+    </div>
+    <h4>Nenhuma transação registrada</h4>
+    <p>Adicione receitas ou despesas para começar o controle financeiro.</p>
+</div>
+<?php else: ?>
+<div class="team-card">
+    <div class="team-card__header">
+        <div class="team-card__header-icon">
+            <i class="bi bi-cash-stack"></i>
+        </div>
+        <div>
+            <h3 class="team-card__title">Transações</h3>
+            <p class="team-card__desc">Receitas e despesas do período</p>
+        </div>
+    </div>
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
-            <thead><tr><th>Tipo</th><th>Descrição</th><th>Categoria</th><th>Valor</th><th>Vencimento</th><th>Status</th><th width="60"></th></tr></thead>
+        <table class="table table-hover mb-0 team-table">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Valor</th>
+                    <th>Vencimento</th>
+                    <th>Status</th>
+                    <th width="60">Ações</th>
+                </tr>
+            </thead>
             <tbody>
             <?php foreach ($transactions as $t): ?>
             <tr>
-                <td><span class="badge bg-<?= $t['type'] === 'income' ? 'success' : 'danger' ?>"><?= $t['type'] === 'income' ? 'Receita' : 'Despesa' ?></span></td>
-                <td><?= e($t['description']) ?></td>
-                <td><small><?= e($t['category_name'] ?? '-') ?></small></td>
-                <td class="text-<?= $t['type'] === 'income' ? 'success' : 'danger' ?>"><strong><?= formatMoney((float)$t['amount']) ?></strong></td>
-                <td><small><?= $t['due_date'] ? formatDate($t['due_date']) : '-' ?></small></td>
-                <td><span class="badge bg-<?= $t['status'] === 'paid' ? 'success' : ($t['status'] === 'overdue' ? 'danger' : 'warning') ?>"><?= e($t['status']) ?></span></td>
-                <td><form method="POST" action="<?= url('admin/finance/' . $t['id'] . '/delete') ?>" onsubmit="return confirm('Excluir?')"><?= csrfField() ?><button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button></form></td>
+                <td>
+                    <?php if ($t['type'] === 'income'): ?>
+                    <span class="logs-badge logs-badge--success">Receita</span>
+                    <?php else: ?>
+                    <span class="logs-badge logs-badge--danger">Despesa</span>
+                    <?php endif; ?>
+                </td>
+                <td><span class="team-member__name"><?= e($t['description']) ?></span></td>
+                <td><span class="logs-module"><?= e($t['category_name'] ?? '-') ?></span></td>
+                <td>
+                    <strong style="color: <?= $t['type'] === 'income' ? '#059669' : '#dc2626' ?>">
+                        <?= formatMoney((float)$t['amount']) ?>
+                    </strong>
+                </td>
+                <td><span class="team-date"><?= $t['due_date'] ? formatDate($t['due_date']) : '-' ?></span></td>
+                <td>
+                    <?php if ($t['status'] === 'paid'): ?>
+                    <span class="team-status team-status--active"><span class="team-status__dot"></span> Pago</span>
+                    <?php elseif ($t['status'] === 'overdue'): ?>
+                    <span class="team-status team-status--inactive"><span class="team-status__dot"></span> Vencido</span>
+                    <?php else: ?>
+                    <span class="logs-badge logs-badge--warning">Pendente</span>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <div class="team-actions">
+                        <form method="POST" action="<?= url('admin/finance/' . $t['id'] . '/delete') ?>" onsubmit="return confirm('Excluir esta transação?')">
+                            <?= csrfField() ?>
+                            <button class="team-action-btn team-action-btn--delete" title="Excluir">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
             </tr>
             <?php endforeach; ?>
             </tbody>
         </table>
     </div>
 </div>
+<?php endif; ?>
