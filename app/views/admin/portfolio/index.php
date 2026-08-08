@@ -9,7 +9,7 @@
                 <span class="team-stat__value"><?= count($items ?? []) ?></span>
                 <span class="team-stat__label">projetos</span>
             </div>
-            <a href="<?= url('admin/portfolio/create') ?>" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Novo Projeto</a>
+            <a href="<?= url('admin/portfolio/create') ?>" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Novo Portfólio</a>
         </div>
     </div>
 
