@@ -244,21 +244,34 @@
 </section>
 
 <!-- Newsletter -->
-<section class="section newsletter-section bg-light">
+<section class="section newsletter-section">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-6 text-center">
-                <h3><?= __('home.newsletter_title') ?></h3>
-                <p class="text-muted"><?= __('home.newsletter_text') ?></p>
-                <form action="<?= url('newsletter/subscribe') ?>" method="POST" class="newsletter-form mt-3">
-                    <?= csrfField() ?>
-                    <div class="input-group input-group-lg">
-                        <input type="email" class="form-control" name="email" placeholder="<?= __('newsletter.placeholder') ?>" required>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-send"></i> Assinar
-                        </button>
+            <div class="col-lg-7">
+                <div class="newsletter-card">
+                    <div class="newsletter-card__decoration"></div>
+                    <div class="newsletter-card__content">
+                        <div class="newsletter-card__icon">
+                            <i class="bi bi-envelope-paper"></i>
+                        </div>
+                        <h3 class="newsletter-card__title"><?= __('home.newsletter_title') ?></h3>
+                        <p class="newsletter-card__text"><?= __('home.newsletter_text') ?></p>
+                        <form action="<?= url('newsletter/subscribe') ?>" method="POST" class="newsletter-card__form">
+                            <?= csrfField() ?>
+                            <div class="newsletter-card__input-wrapper">
+                                <i class="bi bi-envelope newsletter-card__input-icon"></i>
+                                <input type="email" class="newsletter-card__input" name="email" placeholder="<?= __('newsletter.placeholder') ?>" required>
+                                <button type="submit" class="newsletter-card__btn">
+                                    <i class="bi bi-send-fill"></i>
+                                    <span>Assinar</span>
+                                </button>
+                            </div>
+                        </form>
+                        <p class="newsletter-card__disclaimer">
+                            <i class="bi bi-shield-check"></i> Sem spam. Cancele quando quiser.
+                        </p>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
