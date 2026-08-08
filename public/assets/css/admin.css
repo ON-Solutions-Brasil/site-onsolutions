@@ -112,9 +112,9 @@ body.admin-body {
     border-radius: 8px;
 }
 .sidebar-footer .btn:hover {
-    background: rgba(255,255,255,0.06);
-    color: #e2e8f0;
-    border-color: rgba(255,255,255,0.2);
+    background: var(--admin-primary);
+    color: #fff;
+    border-color: var(--admin-primary);
 }
 
 /* === TOPBAR === */
