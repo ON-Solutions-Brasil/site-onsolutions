@@ -585,6 +585,22 @@ body.admin-body {
     color: #0f172a;
 }
 .form-control::placeholder { color: #94a3b8; }
+.form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%230d9488' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    background-position: right 1rem center;
+    background-size: 14px;
+    padding-right: 2.5rem;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+}
+.form-select option {
+    padding: 0.5rem 1rem;
+    font-size: 0.88rem;
+}
+.form-select:hover {
+    border-color: var(--admin-primary-light);
+}
 .form-label { font-weight: 600; font-size: 0.82rem; color: #374151; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.3px; }
 .form-check-input:checked { background-color: var(--admin-primary); border-color: var(--admin-primary); }
 .form-check-input { background-color: #fff; border-color: #d1d5db; width: 1.1em; height: 1.1em; }
