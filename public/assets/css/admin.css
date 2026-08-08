@@ -1895,3 +1895,74 @@ hr {
         font-size: 0.75rem;
     }
 }
+
+/* ============================================
+   FINANCE PAGE - Premium Summary Cards
+   ============================================ */
+
+.finance-page {
+    width: 100%;
+}
+
+/* Summary Cards */
+.finance-summary-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 1.4rem 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+.finance-summary-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+.finance-summary-card__icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+.finance-summary-card--income .finance-summary-card__icon {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+}
+.finance-summary-card--expense .finance-summary-card__icon {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+}
+.finance-summary-card--pending .finance-summary-card__icon {
+    background: rgba(245, 158, 11, 0.1);
+    color: #d97706;
+}
+.finance-summary-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+.finance-summary-card__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.finance-summary-card__value {
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+}
+.finance-summary-card--income .finance-summary-card__value { color: #059669; }
+.finance-summary-card--expense .finance-summary-card__value { color: #dc2626; }
+.finance-summary-card--pending .finance-summary-card__value { color: #d97706; }
+
+/* Finance Value in Table */
+.finance-value--income { color: #059669; }
+.finance-value--expense { color: #dc2626; }
