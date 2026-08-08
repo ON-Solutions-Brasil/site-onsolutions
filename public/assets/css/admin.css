@@ -1146,8 +1146,8 @@ hr {
     font-size: 0.85rem;
 }
 .version-card__changelog-content {
-    background: #0a0e17;
-    color: #e2e8f0;
+    background: #f8fafc;
+    color: #334155;
     padding: 1rem 1.2rem;
     margin: 0;
     font-size: 0.82rem;
