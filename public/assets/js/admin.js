@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Custom Confirm Modal - interceptar formulários com onsubmit confirm
+    initCustomConfirm();
+
     // File input preview
     document.querySelectorAll('input[type="file"]').forEach(function(input) {
         input.addEventListener('change', function() {
@@ -159,3 +162,76 @@ document.addEventListener('click', function() {
         openSelects[i].classList.remove('is-open');
     }
 });
+
+
+/**
+ * Custom Confirm Modal - On Solutions
+ * Substitui o confirm() nativo por modal estilizado
+ */
+function initCustomConfirm() {
+    // Interceptar formulários com onsubmit="return confirm(...)"
+    var forms = document.querySelectorAll('form[onsubmit]');
+    for (var i = 0; i < forms.length; i++) {
+        (function(form) {
+            var onsubmitAttr = form.getAttribute('onsubmit');
+            if (onsubmitAttr && onsubmitAttr.indexOf('confirm(') !== -1) {
+                // Extrair mensagem do confirm
+                var match = onsubmitAttr.match(/confirm\(['"](.+?)['"]\)/);
+                var message = match ? match[1] : 'Tem certeza que deseja continuar?';
+
+                // Remover onsubmit nativo
+                form.removeAttribute('onsubmit');
+
+                // Adicionar listener customizado
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    osConfirm(message, function() {
+                        form.submit();
+                    });
+                });
+            }
+        })(forms[i]);
+    }
+}
+
+function osConfirm(message, onConfirm) {
+    var overlay = document.getElementById('osConfirmOverlay');
+    var msgEl = document.getElementById('osConfirmMessage');
+    var btnCancel = document.getElementById('osConfirmCancel');
+    var btnOk = document.getElementById('osConfirmOk');
+
+    if (!overlay) return;
+
+    msgEl.textContent = message;
+    overlay.classList.add('is-active');
+
+    // Limpar listeners antigos clonando botões
+    var newCancel = btnCancel.cloneNode(true);
+    var newOk = btnOk.cloneNode(true);
+    btnCancel.parentNode.replaceChild(newCancel, btnCancel);
+    btnOk.parentNode.replaceChild(newOk, btnOk);
+
+    newCancel.addEventListener('click', function() {
+        overlay.classList.remove('is-active');
+    });
+
+    newOk.addEventListener('click', function() {
+        overlay.classList.remove('is-active');
+        if (onConfirm) onConfirm();
+    });
+
+    // Fechar clicando no overlay
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+            overlay.classList.remove('is-active');
+        }
+    });
+
+    // Fechar com ESC
+    document.addEventListener('keydown', function handler(e) {
+        if (e.key === 'Escape') {
+            overlay.classList.remove('is-active');
+            document.removeEventListener('keydown', handler);
+        }
+    });
+}

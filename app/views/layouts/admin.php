@@ -35,6 +35,21 @@
         </div>
     </div>
     
+    <!-- Modal de Confirmação On Solutions -->
+    <div class="os-confirm-overlay" id="osConfirmOverlay">
+        <div class="os-confirm-modal">
+            <div class="os-confirm-icon">
+                <i class="bi bi-exclamation-triangle"></i>
+            </div>
+            <h4 class="os-confirm-title">Confirmar Ação</h4>
+            <p class="os-confirm-message" id="osConfirmMessage">Tem certeza que deseja continuar?</p>
+            <div class="os-confirm-actions">
+                <button class="os-confirm-btn os-confirm-btn--cancel" id="osConfirmCancel">Cancelar</button>
+                <button class="os-confirm-btn os-confirm-btn--confirm" id="osConfirmOk">Confirmar</button>
+            </div>
+        </div>
+    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= asset('js/admin.js') ?>?v=<?= time() ?>"></script>
 </body>
