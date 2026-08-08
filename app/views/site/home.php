@@ -246,32 +246,23 @@
 <!-- Newsletter -->
 <section class="section newsletter-section">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-7">
-                <div class="newsletter-card">
-                    <div class="newsletter-card__decoration"></div>
-                    <div class="newsletter-card__content">
-                        <div class="newsletter-card__icon">
-                            <i class="bi bi-envelope-paper"></i>
-                        </div>
-                        <h3 class="newsletter-card__title"><?= __('home.newsletter_title') ?></h3>
-                        <p class="newsletter-card__text"><?= __('home.newsletter_text') ?></p>
-                        <form action="<?= url('newsletter/subscribe') ?>" method="POST" class="newsletter-card__form">
-                            <?= csrfField() ?>
-                            <div class="newsletter-card__input-wrapper">
-                                <i class="bi bi-envelope newsletter-card__input-icon"></i>
-                                <input type="email" class="newsletter-card__input" name="email" placeholder="<?= __('newsletter.placeholder') ?>" required>
-                                <button type="submit" class="newsletter-card__btn">
-                                    <i class="bi bi-send-fill"></i>
-                                    <span>Assinar</span>
-                                </button>
-                            </div>
-                        </form>
-                        <p class="newsletter-card__disclaimer">
-                            <i class="bi bi-shield-check"></i> Sem spam. Cancele quando quiser.
-                        </p>
+        <div class="newsletter-premium">
+            <div class="newsletter-premium__bg"></div>
+            <div class="newsletter-premium__content">
+                <span class="newsletter-premium__badge"><i class="bi bi-envelope-paper"></i> Newsletter</span>
+                <h2 class="newsletter-premium__title">Fique por dentro</h2>
+                <p class="newsletter-premium__text">Receba novidades sobre tecnologia, inovação e dicas exclusivas diretamente no seu email.</p>
+                <form action="<?= url('newsletter/subscribe') ?>" method="POST" class="newsletter-premium__form">
+                    <?= csrfField() ?>
+                    <div class="newsletter-premium__input-group">
+                        <input type="email" class="newsletter-premium__input" name="email" placeholder="<?= __('newsletter.placeholder') ?>" required>
+                        <button type="submit" class="newsletter-premium__btn">
+                            <span>Assinar agora</span>
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
                     </div>
-                </div>
+                </form>
+                <p class="newsletter-premium__note"><i class="bi bi-shield-check"></i> Sem spam. Cancele quando quiser.</p>
             </div>
         </div>
     </div>
