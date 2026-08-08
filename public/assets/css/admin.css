@@ -1915,3 +1915,110 @@ hr {
 /* Finance value colors kept for general use */
 .finance-value--income { color: #059669; }
 .finance-value--expense { color: #dc2626; }
+
+/* ============================================
+   CUSTOM SELECT - Premium Dropdown
+   ============================================ */
+
+.custom-select-wrapper {
+    position: relative;
+    width: 100%;
+}
+.custom-select {
+    position: relative;
+    user-select: none;
+}
+.custom-select__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 1rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 42px;
+}
+.custom-select__trigger:hover {
+    border-color: var(--admin-primary-light);
+}
+.custom-select.is-open .custom-select__trigger {
+    border-color: var(--admin-primary);
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+}
+.custom-select__value {
+    font-size: 0.88rem;
+    color: #334155;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.custom-select__arrow {
+    font-size: 0.75rem;
+    color: var(--admin-primary);
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+}
+.custom-select.is-open .custom-select__arrow {
+    transform: rotate(180deg);
+}
+
+/* Dropdown Options */
+.custom-select__options {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05);
+    z-index: 999;
+    max-height: 240px;
+    overflow-y: auto;
+    padding: 0.4rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.custom-select.is-open .custom-select__options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.custom-select__options::-webkit-scrollbar {
+    width: 5px;
+}
+.custom-select__options::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+/* Option Item */
+.custom-select__option {
+    padding: 0.6rem 1rem;
+    font-size: 0.86rem;
+    color: #334155;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.custom-select__option:hover {
+    background: var(--admin-primary-50);
+    color: var(--admin-primary);
+}
+.custom-select__option.is-selected {
+    background: var(--admin-primary);
+    color: #fff;
+    font-weight: 600;
+}
+.custom-select__option.is-selected:hover {
+    background: var(--admin-primary-hover);
+    color: #fff;
+}
