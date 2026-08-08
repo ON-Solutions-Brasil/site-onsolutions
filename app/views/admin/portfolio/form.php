@@ -30,14 +30,33 @@
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Categoria</label>
-                        <select class="form-select" name="category_id">
-                            <option value="">-- Selecione --</option>
-                            <?php foreach ($categories as $cat): ?>
-                            <option value="<?= $cat['id'] ?>" <?= (($item['category_id'] ?? '') == $cat['id']) ? 'selected' : '' ?>>
-                                <?= e($cat['name_pt']) ?>
-                            </option>
-                            <?php endforeach; ?>
-                        </select>
+                        <div class="custom-select-wrapper">
+                            <div class="custom-select" id="categoryCustomSelect">
+                                <div class="custom-select__trigger">
+                                    <span class="custom-select__value">
+                                        <?php
+                                        $selectedCatName = '-- Selecione --';
+                                        foreach ($categories as $cat) {
+                                            if (($item['category_id'] ?? '') == $cat['id']) {
+                                                $selectedCatName = $cat['name_pt'];
+                                            }
+                                        }
+                                        echo e($selectedCatName);
+                                        ?>
+                                    </span>
+                                    <i class="bi bi-chevron-down custom-select__arrow"></i>
+                                </div>
+                                <div class="custom-select__options">
+                                    <div class="custom-select__option <?= empty($item['category_id']) ? 'is-selected' : '' ?>" data-value="">-- Selecione --</div>
+                                    <?php foreach ($categories as $cat): ?>
+                                    <div class="custom-select__option <?= (($item['category_id'] ?? '') == $cat['id']) ? 'is-selected' : '' ?>" data-value="<?= $cat['id'] ?>">
+                                        <?= e($cat['name_pt']) ?>
+                                    </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <input type="hidden" name="category_id" value="<?= e($item['category_id'] ?? '') ?>">
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Título (EN)</label>
@@ -129,3 +148,36 @@
         </div>
     </form>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.custom-select').forEach(function(cs) {
+        var trigger = cs.querySelector('.custom-select__trigger');
+        var valueEl = cs.querySelector('.custom-select__value');
+        var hiddenInput = cs.closest('.custom-select-wrapper').querySelector('input[type="hidden"]');
+
+        trigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.querySelectorAll('.custom-select.is-open').forEach(function(s) {
+                if (s !== cs) s.classList.remove('is-open');
+            });
+            cs.classList.toggle('is-open');
+        });
+
+        cs.querySelectorAll('.custom-select__option').forEach(function(opt) {
+            opt.addEventListener('click', function(e) {
+                e.stopPropagation();
+                cs.querySelectorAll('.custom-select__option').forEach(function(o) { o.classList.remove('is-selected'); });
+                opt.classList.add('is-selected');
+                valueEl.textContent = opt.textContent.trim();
+                if (hiddenInput) hiddenInput.value = opt.getAttribute('data-value');
+                cs.classList.remove('is-open');
+            });
+        });
+    });
+
+    document.addEventListener('click', function() {
+        document.querySelectorAll('.custom-select.is-open').forEach(function(s) { s.classList.remove('is-open'); });
+    });
+});
+</script>
