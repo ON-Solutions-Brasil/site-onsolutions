@@ -2097,20 +2097,22 @@ hr {
     transition: all 0.2s ease;
 }
 .os-confirm-btn--cancel {
-    background: #f1f5f9;
-    color: #475569;
+    background: transparent;
+    color: #dc2626;
+    border: 1.5px solid #dc2626;
 }
 .os-confirm-btn--cancel:hover {
-    background: #e2e8f0;
-    color: #0f172a;
+    background: rgba(220, 38, 38, 0.05);
+    color: #b91c1c;
+    border-color: #b91c1c;
 }
 .os-confirm-btn--confirm {
-    background: #dc2626;
+    background: var(--admin-primary);
     color: #fff;
-    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.25);
+    box-shadow: 0 2px 8px rgba(13, 148, 136, 0.25);
 }
 .os-confirm-btn--confirm:hover {
-    background: #b91c1c;
-    box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
+    background: var(--admin-primary-hover);
+    box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
     transform: translateY(-1px);
 }
