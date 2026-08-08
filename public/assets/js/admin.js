@@ -46,98 +46,110 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Custom Select - Inicializar
+    initCustomSelects();
 });
 
 /**
- * Custom Select - Transforma selects nativos em dropdowns estilizados
+ * Custom Select - Transforma selects nativos em dropdowns estilizados On Solutions
  */
-(function() {
-    function initCustomSelects() {
-        document.querySelectorAll('.form-select:not([data-custom-init])').forEach(function(select) {
-            // Marcar como já inicializado
-            select.setAttribute('data-custom-init', 'true');
-            
-            // Esconder o select nativo
-            select.style.display = 'none';
+function initCustomSelects() {
+    var selects = document.querySelectorAll('select.form-select:not([data-custom-init])');
+    
+    for (var i = 0; i < selects.length; i++) {
+        buildCustomSelect(selects[i]);
+    }
+}
 
-            // Criar wrapper
-            const wrapper = document.createElement('div');
-            wrapper.className = 'custom-select-wrapper';
+function buildCustomSelect(select) {
+    select.setAttribute('data-custom-init', 'true');
+    select.style.position = 'absolute';
+    select.style.opacity = '0';
+    select.style.pointerEvents = 'none';
+    select.style.width = '0';
+    select.style.height = '0';
+    select.style.overflow = 'hidden';
 
-            const customSelect = document.createElement('div');
-            customSelect.className = 'custom-select';
+    var parent = select.parentNode;
 
-            // Trigger
-            const trigger = document.createElement('div');
-            trigger.className = 'custom-select__trigger';
+    // Wrapper
+    var wrapper = document.createElement('div');
+    wrapper.className = 'custom-select-wrapper';
 
-            const valueSpan = document.createElement('span');
-            valueSpan.className = 'custom-select__value';
-            valueSpan.textContent = select.options[select.selectedIndex]?.textContent?.trim() || '-- Selecione --';
+    var customSelect = document.createElement('div');
+    customSelect.className = 'custom-select';
 
-            const arrow = document.createElement('i');
-            arrow.className = 'bi bi-chevron-down custom-select__arrow';
+    // Trigger
+    var trigger = document.createElement('div');
+    trigger.className = 'custom-select__trigger';
 
-            trigger.appendChild(valueSpan);
-            trigger.appendChild(arrow);
+    var valueSpan = document.createElement('span');
+    valueSpan.className = 'custom-select__value';
+    var selectedOpt = select.options[select.selectedIndex];
+    valueSpan.textContent = selectedOpt ? selectedOpt.textContent.trim() : '-- Selecione --';
 
-            // Options container
-            const optionsContainer = document.createElement('div');
-            optionsContainer.className = 'custom-select__options';
+    var arrow = document.createElement('i');
+    arrow.className = 'bi bi-chevron-down custom-select__arrow';
 
-            Array.from(select.options).forEach(function(option, index) {
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'custom-select__option';
-                if (index === select.selectedIndex) optionDiv.classList.add('is-selected');
-                optionDiv.dataset.value = option.value;
-                optionDiv.textContent = option.textContent.trim();
+    trigger.appendChild(valueSpan);
+    trigger.appendChild(arrow);
+    customSelect.appendChild(trigger);
 
-                optionDiv.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    optionsContainer.querySelectorAll('.custom-select__option').forEach(o => o.classList.remove('is-selected'));
-                    optionDiv.classList.add('is-selected');
-                    valueSpan.textContent = optionDiv.textContent;
-                    select.value = optionDiv.dataset.value;
-                    select.dispatchEvent(new Event('change', { bubbles: true }));
-                    customSelect.classList.remove('is-open');
-                });
+    // Options
+    var optionsContainer = document.createElement('div');
+    optionsContainer.className = 'custom-select__options';
 
-                optionsContainer.appendChild(optionDiv);
-            });
+    for (var j = 0; j < select.options.length; j++) {
+        var opt = select.options[j];
+        var optDiv = document.createElement('div');
+        optDiv.className = 'custom-select__option';
+        optDiv.setAttribute('data-value', opt.value);
+        optDiv.textContent = opt.textContent.trim();
 
-            // Montar estrutura
-            customSelect.appendChild(trigger);
-            customSelect.appendChild(optionsContainer);
-            wrapper.appendChild(customSelect);
+        if (j === select.selectedIndex) {
+            optDiv.classList.add('is-selected');
+        }
 
-            // Inserir no DOM
-            select.parentNode.insertBefore(wrapper, select.nextSibling);
-
-            // Toggle dropdown
-            trigger.addEventListener('click', function(e) {
+        (function(optionDiv, nativeSelect, valSpan, csEl) {
+            optionDiv.addEventListener('click', function(e) {
                 e.stopPropagation();
-                document.querySelectorAll('.custom-select.is-open').forEach(function(s) {
-                    if (s !== customSelect) s.classList.remove('is-open');
-                });
-                customSelect.classList.toggle('is-open');
+                var allOpts = csEl.querySelectorAll('.custom-select__option');
+                for (var k = 0; k < allOpts.length; k++) {
+                    allOpts[k].classList.remove('is-selected');
+                }
+                optionDiv.classList.add('is-selected');
+                valSpan.textContent = optionDiv.textContent;
+                nativeSelect.value = optionDiv.getAttribute('data-value');
+                nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                csEl.classList.remove('is-open');
             });
-        });
+        })(optDiv, select, valueSpan, customSelect);
+
+        optionsContainer.appendChild(optDiv);
     }
 
-    // Fechar ao clicar fora
-    document.addEventListener('click', function() {
-        document.querySelectorAll('.custom-select.is-open').forEach(function(s) {
-            s.classList.remove('is-open');
-        });
+    customSelect.appendChild(optionsContainer);
+    wrapper.appendChild(customSelect);
+
+    // Inserir após o select
+    parent.insertBefore(wrapper, select.nextSibling);
+
+    // Toggle
+    trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var allOpen = document.querySelectorAll('.custom-select.is-open');
+        for (var m = 0; m < allOpen.length; m++) {
+            if (allOpen[m] !== customSelect) allOpen[m].classList.remove('is-open');
+        }
+        customSelect.classList.toggle('is-open');
     });
+}
 
-    // Inicializar
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initCustomSelects);
-    } else {
-        initCustomSelects();
+// Fechar dropdowns ao clicar fora
+document.addEventListener('click', function() {
+    var openSelects = document.querySelectorAll('.custom-select.is-open');
+    for (var i = 0; i < openSelects.length; i++) {
+        openSelects[i].classList.remove('is-open');
     }
-
-    // Expor para uso dinâmico
-    window.initCustomSelects = initCustomSelects;
-})();
+});
