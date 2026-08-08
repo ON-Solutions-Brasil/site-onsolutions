@@ -1,17 +1,39 @@
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h1 class="page-title">Páginas</h1>
-        <p class="page-subtitle">Gerencie as páginas do site</p>
+<div class="pages-page">
+    <div class="page-header d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="page-title">Páginas</h1>
+            <p class="page-subtitle">Gerencie as páginas do site</p>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <div class="team-stat">
+                <span class="team-stat__value"><?= count($pages ?? []) ?></span>
+                <span class="team-stat__label">páginas</span>
+            </div>
+            <a href="<?= url('admin/pages/create') ?>" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Nova Página</a>
+        </div>
     </div>
-    <a href="<?= url('admin/pages/create') ?>" class="btn btn-primary">
-        <i class="bi bi-plus-lg me-1"></i> Nova Página
-    </a>
-</div>
 
-<div class="card border-0 shadow-sm">
-    <div class="card-body p-0">
+    <?php if (empty($pages)): ?>
+    <div class="team-empty">
+        <div class="team-empty__icon">
+            <i class="bi bi-file-earmark-text"></i>
+        </div>
+        <h4>Nenhuma página cadastrada</h4>
+        <p>Crie a primeira página para exibir no site.</p>
+    </div>
+    <?php else: ?>
+    <div class="team-card">
+        <div class="team-card__header">
+            <div class="team-card__header-icon">
+                <i class="bi bi-file-earmark-text"></i>
+            </div>
+            <div>
+                <h3 class="team-card__title">Páginas do Site</h3>
+                <p class="team-card__desc">Páginas estáticas publicadas e rascunhos</p>
+            </div>
+        </div>
         <div class="table-responsive">
-            <table class="table table-hover mb-0">
+            <table class="table table-hover mb-0 team-table">
                 <thead>
                     <tr>
                         <th>Título</th>
@@ -19,46 +41,56 @@
                         <th>Status</th>
                         <th>Menu</th>
                         <th>Autor</th>
-                        <th>Ações</th>
+                        <th width="120">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (empty($pages)): ?>
-                    <tr>
-                        <td colspan="6" class="text-center text-muted py-4">Nenhuma página cadastrada.</td>
-                    </tr>
-                    <?php else: ?>
-                    <?php foreach ($pages as $page): ?>
-                    <tr>
-                        <td><strong><?= e($page['title_pt']) ?></strong></td>
-                        <td><code>/<?= e($page['slug']) ?></code></td>
-                        <td>
-                            <?php if ($page['status'] === 'published'): ?>
-                            <span class="badge bg-success">Publicada</span>
-                            <?php elseif ($page['status'] === 'draft'): ?>
-                            <span class="badge bg-warning">Rascunho</span>
-                            <?php else: ?>
-                            <span class="badge bg-secondary">Arquivada</span>
-                            <?php endif; ?>
-                        </td>
-                        <td><?= $page['show_in_menu'] ? '<i class="bi bi-check-circle text-success"></i>' : '<i class="bi bi-x-circle text-muted"></i>' ?></td>
-                        <td><?= e($page['author_name'] ?? '-') ?></td>
-                        <td>
-                            <a href="<?= url('admin/pages/' . $page['id'] . '/edit') ?>" class="btn btn-sm btn-outline-primary" title="Editar">
+                <?php foreach ($pages as $page): ?>
+                <tr>
+                    <td>
+                        <div class="team-member">
+                            <div class="team-member__avatar">
+                                <?= strtoupper(substr($page['title_pt'], 0, 1)) ?>
+                            </div>
+                            <span class="team-member__name"><?= e($page['title_pt']) ?></span>
+                        </div>
+                    </td>
+                    <td><code class="logs-ip">/<?= e($page['slug']) ?></code></td>
+                    <td>
+                        <?php if ($page['status'] === 'published'): ?>
+                        <span class="team-status team-status--active"><span class="team-status__dot"></span> Publicada</span>
+                        <?php elseif ($page['status'] === 'draft'): ?>
+                        <span class="logs-badge logs-badge--warning">Rascunho</span>
+                        <?php else: ?>
+                        <span class="logs-badge logs-badge--secondary">Arquivada</span>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <?php if ($page['show_in_menu']): ?>
+                        <span class="team-status team-status--active"><span class="team-status__dot"></span> Sim</span>
+                        <?php else: ?>
+                        <span class="team-date">Não</span>
+                        <?php endif; ?>
+                    </td>
+                    <td><span class="team-date"><?= e($page['author_name'] ?? '-') ?></span></td>
+                    <td>
+                        <div class="team-actions">
+                            <a href="<?= url('admin/pages/' . $page['id'] . '/edit') ?>" class="team-action-btn team-action-btn--edit" title="Editar">
                                 <i class="bi bi-pencil"></i>
                             </a>
                             <form method="POST" action="<?= url('admin/pages/' . $page['id'] . '/delete') ?>" class="d-inline" onsubmit="return confirm('Tem certeza que deseja remover esta página?')">
                                 <?= csrfField() ?>
-                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Remover">
+                                <button class="team-action-btn team-action-btn--delete" title="Remover">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </form>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                    <?php endif; ?>
+                        </div>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
     </div>
+    <?php endif; ?>
 </div>
