@@ -13,8 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Auto-dismiss alerts
     document.querySelectorAll('.alert-dismissible').forEach(function(alert) {
         setTimeout(function() {
-            var bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
-            bsAlert.close();
+            try {
+                var bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                bsAlert.close();
+            } catch(e) {}
         }, 5000);
     });
 
