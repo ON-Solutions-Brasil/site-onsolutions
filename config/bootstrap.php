@@ -61,7 +61,7 @@ if (!isset($_SESSION['_last_regeneration'])) {
 }
 
 // Definir constantes dinâmicas a partir do banco
-define('SITE_NAME', $settings->get('site_name', 'On Solutions'));
+define('SITE_NAME', $settings->get('site_name', 'ON Solutions'));
 
 // Detectar BASE_URL automaticamente se não configurada no banco
 $configuredBaseUrl = $settings->get('base_url', '');

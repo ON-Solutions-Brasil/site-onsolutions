@@ -85,7 +85,7 @@ class EmailService
     {
         $loginUrl = BASE_URL . '/admin/login';
         $body = "
-            <h2>Bem-vindo à {$this->settings->get('site_name', 'On Solutions')}!</h2>
+            <h2>Bem-vindo à {$this->settings->get('site_name', 'ON Solutions')}!</h2>
             <p>Olá, <strong>{$name}</strong>!</p>
             <p>Sua conta foi criada com sucesso. Seguem seus dados de acesso:</p>
             <ul>

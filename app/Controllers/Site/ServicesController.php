@@ -79,7 +79,7 @@ class ServicesController extends Controller
             'crm' => [
                 'content_pt' => '<h2>O que é um CRM?</h2>
 <p>CRM (Customer Relationship Management) é um sistema de gestão do relacionamento com clientes que centraliza todas as interações, histórico de comunicações, negociações e dados dos seus contatos em um único lugar.</p>
-<p>Na On Solutions, desenvolvemos CRMs personalizados que se adaptam perfeitamente ao fluxo de trabalho da sua empresa, eliminando processos manuais e garantindo que nenhuma oportunidade seja perdida.</p>
+<p>Na ON Solutions, desenvolvemos CRMs personalizados que se adaptam perfeitamente ao fluxo de trabalho da sua empresa, eliminando processos manuais e garantindo que nenhuma oportunidade seja perdida.</p>
 
 <h2>Por que investir em um CRM personalizado?</h2>
 <p>Diferente de soluções genéricas, um CRM sob medida é construído para atender exatamente as necessidades do seu negócio. Não há funcionalidades desnecessárias ou limitações de planos — você tem exatamente o que precisa, com total controle sobre os dados.</p>

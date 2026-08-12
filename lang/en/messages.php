@@ -35,7 +35,7 @@ return [
     ],
     'about' => [
         'title'            => 'About Us',
-        'meta_description' => 'Meet On Solutions - specialists in custom software development, integrations and artificial intelligence.',
+        'meta_description' => 'Meet ON Solutions - specialists in custom software development, integrations and artificial intelligence.',
     ],
     'services' => [
         'title'            => 'Services',

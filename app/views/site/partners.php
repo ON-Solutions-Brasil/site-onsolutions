@@ -96,14 +96,14 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center scroll-reveal">
                 <span class="about-tag about-tag--dark">Faça parte</span>
-                <h2 class="about-title about-title--center">Torne-se um parceiro On Solutions</h2>
+                <h2 class="about-title about-title--center">Torne-se um parceiro ON Solutions</h2>
                 <p style="color: var(--gray-600); line-height: 1.85; max-width: 560px; margin: 0 auto 2rem;">Se sua empresa atua com tecnologia, design ou consultoria e busca parcerias de alto nível, queremos conhecer você. Juntos podemos criar soluções que fazem a diferença.</p>
                 <div class="d-flex gap-3 justify-content-center flex-wrap">
                     <a href="<?= url('contato') ?>" class="btn btn-primary btn-lg" style="border-radius: 9999px; padding: 0.8rem 2.2rem; font-weight: 600;">
                         <i class="bi bi-chat-dots me-2"></i>Fale Conosco
                     </a>
                     <?php if ($whatsapp = setting('whatsapp_number')): ?>
-                    <a href="https://wa.me/<?= preg_replace('/\D/', '', $whatsapp) ?>?text=<?= urlencode('Olá! Gostaria de saber mais sobre parcerias com a On Solutions.') ?>" 
+                    <a href="https://wa.me/<?= preg_replace('/\D/', '', $whatsapp) ?>?text=<?= urlencode('Olá! Gostaria de saber mais sobre parcerias com a ON Solutions.') ?>" 
                        class="btn btn-outline-primary btn-lg" target="_blank" rel="noopener" style="border-radius: 9999px; padding: 0.8rem 2.2rem; font-weight: 600;">
                         <i class="bi bi-whatsapp me-2"></i>WhatsApp
                     </a>

@@ -286,7 +286,7 @@ INSERT INTO `users` (`name`, `email`, `password`, `role_id`, `role`, `is_active`
 -- -----------------------------------------------------------
 INSERT INTO `settings` (`setting_key`, `setting_value`, `setting_group`) VALUES
 -- Geral
-('site_name', 'On Solutions', 'general'),
+('site_name', 'ON Solutions', 'general'),
 ('site_description', 'Desenvolvimento de Software Sob Medida, Sistemas Personalizados e Inteligência Artificial', 'general'),
 ('site_keywords', 'software sob medida, desenvolvimento personalizado, integrações, automação, inteligência artificial, consultoria tecnologia', 'general'),
 ('base_url', 'http://localhost/site-onsolutions', 'general'),
@@ -313,7 +313,7 @@ INSERT INTO `settings` (`setting_key`, `setting_value`, `setting_group`) VALUES
 ('smtp_password', '', 'smtp'),
 ('smtp_encryption', 'tls', 'smtp'),
 ('smtp_from_email', '', 'smtp'),
-('smtp_from_name', 'On Solutions', 'smtp'),
+('smtp_from_name', 'ON Solutions', 'smtp'),
 -- Google
 ('google_analytics_id', '', 'google'),
 ('google_tag_manager_id', '', 'google'),
@@ -344,6 +344,6 @@ INSERT INTO `settings` (`setting_key`, `setting_value`, `setting_group`) VALUES
 -- WhatsApp
 ('whatsapp_enabled', '1', 'whatsapp'),
 ('whatsapp_number', '', 'whatsapp'),
-('whatsapp_message', 'Olá! Gostaria de saber mais sobre os serviços da On Solutions.', 'whatsapp');
+('whatsapp_message', 'Olá! Gostaria de saber mais sobre os serviços da ON Solutions.', 'whatsapp');
 
 SET FOREIGN_KEY_CHECKS = 1;

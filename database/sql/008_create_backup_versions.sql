@@ -161,6 +161,6 @@ INSERT INTO `partners` (`name`, `slug`, `description_pt`, `description_en`, `des
 -- Inserir versão inicial
 -- -----------------------------------------------------------
 INSERT INTO `versions` (`version_number`, `title`, `description`, `changelog`) VALUES
-('1.0.0', 'Lançamento Inicial', 'Primeira versão do sistema On Solutions', 'Site institucional completo\nPainel administrativo\nBlog com IA\nCRM\nFinanceiro\nPortfólio\nMultilíngue (PT/EN/ES)');
+('1.0.0', 'Lançamento Inicial', 'Primeira versão do sistema ON Solutions', 'Site institucional completo\nPainel administrativo\nBlog com IA\nCRM\nFinanceiro\nPortfólio\nMultilíngue (PT/EN/ES)');
 
 SET FOREIGN_KEY_CHECKS = 1;

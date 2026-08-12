@@ -35,7 +35,7 @@ return [
     ],
     'about' => [
         'title'            => 'Quiénes Somos',
-        'meta_description' => 'Conozca On Solutions - especialistas en desarrollo de software a medida, integraciones e inteligencia artificial.',
+        'meta_description' => 'Conozca ON Solutions - especialistas en desarrollo de software a medida, integraciones e inteligencia artificial.',
     ],
     'services' => [
         'title'            => 'Servicios',
