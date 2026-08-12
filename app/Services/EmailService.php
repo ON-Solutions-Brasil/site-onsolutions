@@ -73,15 +73,80 @@ class EmailService
     public function sendNewsletterConfirmation(string $email): bool
     {
         $siteName = $this->settings->get('site_name', SITE_NAME);
+        $baseUrl = BASE_URL;
         $body = "
-            <h2>Inscrição confirmada!</h2>
-            <p>Olá!</p>
-            <p>Seu e-mail <strong>{$email}</strong> foi cadastrado com sucesso na nossa newsletter.</p>
-            <p>A partir de agora você receberá novidades sobre tecnologia, inovação e dicas exclusivas diretamente no seu e-mail.</p>
-            <p style='margin-top: 30px; color: #64748b; font-size: 13px;'>Se você não se inscreveu, pode ignorar este e-mail.</p>
+            <div style='text-align:center; margin-bottom:32px;'>
+                <div style='width:64px; height:64px; background:linear-gradient(135deg, #0d9488, #14b8a6); border-radius:16px; display:inline-flex; align-items:center; justify-content:center; margin-bottom:16px;'>
+                    <span style='font-size:28px; color:#ffffff;'>&#10003;</span>
+                </div>
+                <h2 style='color:#1e293b; margin:0 0 8px; font-size:24px; font-weight:700;'>Inscrição Confirmada!</h2>
+                <p style='color:#64748b; margin:0; font-size:15px;'>Bem-vindo(a) à nossa comunidade</p>
+            </div>
+
+            <div style='background:#f0fdfa; border:1px solid #99f6e4; border-radius:8px; padding:20px 24px; margin-bottom:24px;'>
+                <p style='color:#115e59; margin:0; font-size:14px; line-height:1.6;'>
+                    <strong>E-mail cadastrado:</strong><br>
+                    <span style='color:#0d9488; font-size:15px;'>{$email}</span>
+                </p>
+            </div>
+
+            <p style='color:#475569; font-size:15px; line-height:1.7; margin-bottom:20px;'>
+                A partir de agora você receberá em primeira mão:
+            </p>
+
+            <table cellpadding='0' cellspacing='0' style='width:100%; margin-bottom:24px;'>
+                <tr>
+                    <td style='padding:8px 0;'>
+                        <table cellpadding='0' cellspacing='0'>
+                            <tr>
+                                <td style='width:32px; height:32px; background:#f0fdfa; border-radius:8px; text-align:center; vertical-align:middle;'>
+                                    <span style='color:#0d9488; font-size:14px;'>&#9889;</span>
+                                </td>
+                                <td style='padding-left:12px; color:#475569; font-size:14px;'>Novidades sobre tecnologia e inovação</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style='padding:8px 0;'>
+                        <table cellpadding='0' cellspacing='0'>
+                            <tr>
+                                <td style='width:32px; height:32px; background:#f0fdfa; border-radius:8px; text-align:center; vertical-align:middle;'>
+                                    <span style='color:#0d9488; font-size:14px;'>&#128161;</span>
+                                </td>
+                                <td style='padding-left:12px; color:#475569; font-size:14px;'>Dicas exclusivas de desenvolvimento</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style='padding:8px 0;'>
+                        <table cellpadding='0' cellspacing='0'>
+                            <tr>
+                                <td style='width:32px; height:32px; background:#f0fdfa; border-radius:8px; text-align:center; vertical-align:middle;'>
+                                    <span style='color:#0d9488; font-size:14px;'>&#127891;</span>
+                                </td>
+                                <td style='padding-left:12px; color:#475569; font-size:14px;'>Conteúdos sobre automações e inteligência artificial</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <div style='text-align:center; margin:32px 0;'>
+                <a href='{$baseUrl}' style='display:inline-block; background:linear-gradient(135deg, #0d9488, #0f766e); color:#ffffff; padding:14px 32px; text-decoration:none; border-radius:8px; font-weight:600; font-size:14px; box-shadow:0 4px 12px rgba(13,148,136,0.3);'>
+                    Visitar nosso site
+                </a>
+            </div>
+
+            <hr style='border:none; border-top:1px solid #e2e8f0; margin:24px 0;'>
+
+            <p style='color:#94a3b8; font-size:12px; line-height:1.5; text-align:center; margin:0;'>
+                Se você não se inscreveu na nossa newsletter, pode ignorar este e-mail com segurança.
+            </p>
         ";
 
-        return $this->send($email, 'Inscrição na Newsletter - ' . $siteName, $body);
+        return $this->send($email, 'Inscrição Confirmada - ' . $siteName, $body);
     }
 
     /**
@@ -186,6 +251,8 @@ class EmailService
     {
         $siteName = SITE_NAME;
         $year = date('Y');
+        $baseUrl = BASE_URL;
+        $logoUrl = $baseUrl . '/assets/img/favicon.png';
 
         return "
         <!DOCTYPE html>
@@ -195,25 +262,40 @@ class EmailService
             <meta name='viewport' content='width=device-width, initial-scale=1.0'>
             <title>{$subject}</title>
         </head>
-        <body style='margin:0; padding:0; background-color:#f4f7fa; font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;'>
-            <table width='100%' cellpadding='0' cellspacing='0' style='background-color:#f4f7fa; padding:40px 20px;'>
+        <body style='margin:0; padding:0; background-color:#0f172a; font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;'>
+            <table width='100%' cellpadding='0' cellspacing='0' style='background-color:#0f172a; padding:40px 20px;'>
                 <tr>
                     <td align='center'>
-                        <table width='600' cellpadding='0' cellspacing='0' style='background-color:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.08);'>
+                        <!-- Header com gradiente teal -->
+                        <table width='600' cellpadding='0' cellspacing='0' style='background-color:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.3);'>
                             <tr>
-                                <td style='background-color:#1e293b; padding:24px 30px; text-align:center;'>
-                                    <h1 style='color:#ffffff; margin:0; font-size:22px;'>{$siteName}</h1>
+                                <td style='background: linear-gradient(135deg, #115e59 0%, #0d9488 50%, #14b8a6 100%); padding:32px 30px; text-align:center;'>
+                                    <table cellpadding='0' cellspacing='0' style='margin:0 auto;'>
+                                        <tr>
+                                            <td style='vertical-align:middle; padding-right:12px;'>
+                                                <img src='{$logoUrl}' alt='{$siteName}' width='36' height='36' style='border-radius:8px; display:block;'>
+                                            </td>
+                                            <td style='vertical-align:middle;'>
+                                                <span style='color:#ffffff; font-size:24px; font-weight:700; letter-spacing:-0.5px;'>{$siteName}</span>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
+                            <!-- Conteúdo -->
                             <tr>
-                                <td style='padding:30px;'>
+                                <td style='padding:40px 36px 32px; background-color:#ffffff;'>
                                     {$body}
                                 </td>
                             </tr>
+                            <!-- Footer -->
                             <tr>
-                                <td style='background-color:#f8fafc; padding:20px 30px; text-align:center; border-top:1px solid #e2e8f0;'>
-                                    <p style='margin:0; color:#64748b; font-size:13px;'>
+                                <td style='background-color:#1e293b; padding:24px 30px; text-align:center;'>
+                                    <p style='margin:0 0 8px; color:#94a3b8; font-size:12px;'>
                                         &copy; {$year} {$siteName}. Todos os direitos reservados.
+                                    </p>
+                                    <p style='margin:0; color:#64748b; font-size:11px;'>
+                                        Desenvolvimento de Software Sob Medida &bull; Integrações &bull; IA
                                     </p>
                                 </td>
                             </tr>

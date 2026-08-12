@@ -262,7 +262,7 @@
                         </button>
                     </div>
                 </form>
-                <div id="newsletterHomeMsg" style="display:none; margin-top: 1rem; padding: 0.8rem 1.2rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; text-align: center;"></div>
+                <div id="newsletterHomeMsg" style="display:none; margin-top: 1.2rem; padding: 1rem 1.5rem; border-radius: 10px; font-size: 0.9rem; font-weight: 500; text-align: center; backdrop-filter: blur(8px); transition: all 0.3s ease;"></div>
                 <p class="newsletter-premium__note"><i class="bi bi-shield-check"></i> Sem spam. Cancele quando quiser.</p>
             </div>
         </div>
@@ -293,19 +293,20 @@
         .then(function(data) {
             var message = data.message || data.error || 'Inscrição realizada com sucesso!';
             var success = data.success;
-            msgBox.textContent = message;
-            msgBox.style.display = 'block';
-            msgBox.style.background = success ? '#059669' : '#dc2626';
-            msgBox.style.color = '#fff';
-            if (success) form.reset();
+            if (success) {
+                msgBox.innerHTML = '<i class="bi bi-check-circle-fill" style="margin-right:8px; font-size:1.1rem;"></i>' + message;
+                msgBox.style.cssText = 'display:flex; align-items:center; justify-content:center; margin-top:1.2rem; padding:1rem 1.5rem; border-radius:10px; font-size:0.9rem; font-weight:500; text-align:center; background:linear-gradient(135deg, #0d9488, #0f766e); color:#fff; border:1px solid #14b8a6; box-shadow:0 4px 16px rgba(13,148,136,0.3); animation:fadeInUp 0.4s ease;';
+                form.reset();
+            } else {
+                msgBox.innerHTML = '<i class="bi bi-info-circle-fill" style="margin-right:8px; font-size:1.1rem;"></i>' + message;
+                msgBox.style.cssText = 'display:flex; align-items:center; justify-content:center; margin-top:1.2rem; padding:1rem 1.5rem; border-radius:10px; font-size:0.9rem; font-weight:500; text-align:center; background:linear-gradient(135deg, #115e59, #134e4a); color:#99f6e4; border:1px solid #0d9488; box-shadow:0 4px 16px rgba(13,148,136,0.2); animation:fadeInUp 0.4s ease;';
+            }
             btn.disabled = false;
             btn.innerHTML = originalHtml;
         })
         .catch(function() {
-            msgBox.textContent = 'Ocorreu um erro. Tente novamente.';
-            msgBox.style.display = 'block';
-            msgBox.style.background = '#dc2626';
-            msgBox.style.color = '#fff';
+            msgBox.innerHTML = '<i class="bi bi-exclamation-triangle-fill" style="margin-right:8px; font-size:1.1rem;"></i>Ocorreu um erro. Tente novamente.';
+            msgBox.style.cssText = 'display:flex; align-items:center; justify-content:center; margin-top:1.2rem; padding:1rem 1.5rem; border-radius:10px; font-size:0.9rem; font-weight:500; text-align:center; background:rgba(220,38,38,0.1); color:#fca5a5; border:1px solid rgba(220,38,38,0.3); animation:fadeInUp 0.4s ease;';
             btn.disabled = false;
             btn.innerHTML = originalHtml;
         });
