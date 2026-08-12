@@ -252,7 +252,7 @@
                 <span class="newsletter-premium__badge"><i class="bi bi-envelope-paper"></i> Newsletter</span>
                 <h2 class="newsletter-premium__title">Fique por dentro</h2>
                 <p class="newsletter-premium__text">Receba novidades sobre tecnologia, inovação e dicas exclusivas diretamente no seu email.</p>
-                <form action="<?= url('newsletter/subscribe') ?>" method="POST" class="newsletter-premium__form">
+                <form id="newsletterHomeForm" action="<?= url('newsletter/subscribe') ?>" method="POST" class="newsletter-premium__form">
                     <?= csrfField() ?>
                     <div class="newsletter-premium__input-group">
                         <input type="email" class="newsletter-premium__input" name="email" placeholder="<?= __('newsletter.placeholder') ?>" required>
@@ -262,8 +262,53 @@
                         </button>
                     </div>
                 </form>
+                <div id="newsletterHomeMsg" style="display:none; margin-top: 1rem; padding: 0.8rem 1.2rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; text-align: center;"></div>
                 <p class="newsletter-premium__note"><i class="bi bi-shield-check"></i> Sem spam. Cancele quando quiser.</p>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+(function() {
+    var form = document.getElementById('newsletterHomeForm');
+    if (!form) return;
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn = form.querySelector('button[type="submit"]');
+        var originalHtml = btn.innerHTML;
+        var msgBox = document.getElementById('newsletterHomeMsg');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="bi bi-hourglass-split"></i>';
+        msgBox.style.display = 'none';
+
+        var formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            var message = data.message || data.error || 'Inscrição realizada com sucesso!';
+            var success = data.success;
+            msgBox.textContent = message;
+            msgBox.style.display = 'block';
+            msgBox.style.background = success ? '#059669' : '#dc2626';
+            msgBox.style.color = '#fff';
+            if (success) form.reset();
+            btn.disabled = false;
+            btn.innerHTML = originalHtml;
+        })
+        .catch(function() {
+            msgBox.textContent = 'Ocorreu um erro. Tente novamente.';
+            msgBox.style.display = 'block';
+            msgBox.style.background = '#dc2626';
+            msgBox.style.color = '#fff';
+            btn.disabled = false;
+            btn.innerHTML = originalHtml;
+        });
+    });
+})();
+</script>

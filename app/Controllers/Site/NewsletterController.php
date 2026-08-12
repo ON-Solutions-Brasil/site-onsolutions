@@ -62,7 +62,7 @@ class NewsletterController extends Controller
         ]);
 
         // Enviar e-mail de confirmação
-        $this->sendConfirmationEmail($email);
+        $emailSent = $this->sendConfirmationEmail($email);
 
         $message = __('newsletter.subscribed_success');
         if (isAjax()) {
@@ -75,13 +75,14 @@ class NewsletterController extends Controller
     /**
      * Envia e-mail de confirmação de inscrição.
      */
-    private function sendConfirmationEmail(string $email): void
+    private function sendConfirmationEmail(string $email): bool
     {
         try {
             $emailService = new EmailService();
-            $emailService->sendNewsletterConfirmation($email);
+            return $emailService->sendNewsletterConfirmation($email);
         } catch (\Exception $e) {
             appLog("Erro ao enviar confirmação de newsletter para {$email}: " . $e->getMessage(), 'error');
+            return false;
         }
     }
 }
