@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // === Newsletter AJAX ===
-    document.querySelectorAll('.footer-newsletter, .newsletter-form, .newsletter-premium__form, .blog-coming-soon__form').forEach(form => {
+    document.querySelectorAll('form[action*="newsletter/subscribe"]').forEach(form => {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
@@ -141,12 +141,15 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(r => r.json())
             .then(data => {
-                showToast(data.message, data.success ? 'success' : 'danger');
+                const message = data.message || data.error || 'Inscrição realizada com sucesso!';
+                const type = data.success ? 'success' : 'danger';
+                showToast(message, type);
                 if (data.success) this.reset();
                 btn.disabled = false;
                 btn.innerHTML = originalHtml;
             })
-            .catch(() => {
+            .catch((err) => {
+                showToast('Ocorreu um erro. Tente novamente.', 'danger');
                 btn.disabled = false;
                 btn.innerHTML = originalHtml;
             });

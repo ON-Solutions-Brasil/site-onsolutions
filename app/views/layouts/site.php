@@ -79,7 +79,7 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
-    <script src="<?= asset('js/app.js') ?>"></script>
+    <script src="<?= asset('js/app.js') ?>?v=<?= time() ?>"></script>
     
     <?php if (setting('chatbot_enabled') === '1'): ?>
     <script src="<?= asset('js/chatbot.js') ?>"></script>

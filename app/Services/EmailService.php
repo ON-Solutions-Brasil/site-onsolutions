@@ -23,9 +23,21 @@ class EmailService
         $mail = new PHPMailer(true);
 
         try {
+            $smtpHost = $this->settings->get('smtp_host', '');
+            $fromEmail = $this->settings->get('smtp_from_email', '');
+
+            // Se SMTP não configurado, tentar mail() nativo do PHP
+            if (empty($smtpHost) || empty($fromEmail)) {
+                appLog("SMTP não configurado. Tentando envio via mail() nativo para: {$to}", 'warning');
+                $headers = "MIME-Version: 1.0\r\n";
+                $headers .= "Content-type: text/html; charset=UTF-8\r\n";
+                $headers .= "From: " . ($this->settings->get('smtp_from_name', SITE_NAME)) . " <noreply@" . ($_SERVER['HTTP_HOST'] ?? 'localhost') . ">\r\n";
+                return @mail($to, $subject, $this->wrapInTemplate($body, $subject), $headers);
+            }
+
             // Configurações SMTP
             $mail->isSMTP();
-            $mail->Host       = $this->settings->get('smtp_host', '');
+            $mail->Host       = $smtpHost;
             $mail->Port       = (int) $this->settings->get('smtp_port', 587);
             $mail->SMTPAuth   = true;
             $mail->Username   = $this->settings->get('smtp_username', '');
@@ -34,7 +46,6 @@ class EmailService
             $mail->CharSet    = 'UTF-8';
 
             // Remetente
-            $fromEmail = $this->settings->get('smtp_from_email', '');
             $fromName = $this->settings->get('smtp_from_name', SITE_NAME);
             $mail->setFrom($fromEmail, $fromName);
 
@@ -51,7 +62,7 @@ class EmailService
             return true;
 
         } catch (Exception $e) {
-            appLog("Erro ao enviar email: {$mail->ErrorInfo}", 'error');
+            appLog("Erro ao enviar email para {$to}: {$mail->ErrorInfo}", 'error');
             return false;
         }
     }
