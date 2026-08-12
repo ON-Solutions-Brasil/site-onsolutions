@@ -79,7 +79,7 @@ return [
         'placeholder'        => 'Su email',
         'invalid_email'      => 'Por favor, ingrese un email válido.',
         'already_subscribed' => 'Este email ya está suscrito a nuestro newsletter.',
-        'subscribed_success' => '¡Suscripción realizada con éxito!',
+        'subscribed_success' => '¡Suscripción realizada con éxito! Le enviamos un email de confirmación.',
     ],
     'auth' => [
         'login'              => 'Iniciar Sesión',

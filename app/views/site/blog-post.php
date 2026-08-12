@@ -58,7 +58,7 @@
                     <div class="sidebar-widget">
                         <h5>Newsletter</h5>
                         <p class="text-muted" style="font-size:0.9rem;">Receba artigos como este diretamente no seu email.</p>
-                        <form action="<?= url('newsletter/subscribe') ?>" method="POST">
+                        <form action="<?= url('newsletter/subscribe') ?>" method="POST" class="newsletter-form">
                             <?= csrfField() ?>
                             <div class="input-group">
                                 <input type="email" name="email" class="form-control" placeholder="<?= __('newsletter.placeholder') ?>" required>

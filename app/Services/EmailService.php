@@ -57,6 +57,23 @@ class EmailService
     }
 
     /**
+     * Envia email de confirmação de inscrição na newsletter.
+     */
+    public function sendNewsletterConfirmation(string $email): bool
+    {
+        $siteName = $this->settings->get('site_name', SITE_NAME);
+        $body = "
+            <h2>Inscrição confirmada!</h2>
+            <p>Olá!</p>
+            <p>Seu e-mail <strong>{$email}</strong> foi cadastrado com sucesso na nossa newsletter.</p>
+            <p>A partir de agora você receberá novidades sobre tecnologia, inovação e dicas exclusivas diretamente no seu e-mail.</p>
+            <p style='margin-top: 30px; color: #64748b; font-size: 13px;'>Se você não se inscreveu, pode ignorar este e-mail.</p>
+        ";
+
+        return $this->send($email, 'Inscrição na Newsletter - ' . $siteName, $body);
+    }
+
+    /**
      * Envia email de recuperação de senha.
      */
     public function sendPasswordReset(string $email, string $name, string $resetUrl): bool

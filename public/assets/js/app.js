@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // === Newsletter AJAX ===
-    document.querySelectorAll('.footer-newsletter, .newsletter-form').forEach(form => {
+    document.querySelectorAll('.footer-newsletter, .newsletter-form, .newsletter-premium__form, .blog-coming-soon__form').forEach(form => {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);

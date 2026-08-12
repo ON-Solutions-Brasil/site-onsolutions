@@ -3,6 +3,7 @@
 namespace App\Controllers\Site;
 
 use App\Core\Controller;
+use App\Services\EmailService;
 
 class NewsletterController extends Controller
 {
@@ -37,6 +38,9 @@ class NewsletterController extends Controller
                     'status'        => 'active',
                     'subscribed_at' => date('Y-m-d H:i:s'),
                 ], 'id = ?', [$existing['id']]);
+
+                // Enviar e-mail de confirmação ao reativar
+                $this->sendConfirmationEmail($email);
             }
 
             $message = __('newsletter.already_subscribed');
@@ -57,11 +61,27 @@ class NewsletterController extends Controller
             'ip_address' => clientIp(),
         ]);
 
+        // Enviar e-mail de confirmação
+        $this->sendConfirmationEmail($email);
+
         $message = __('newsletter.subscribed_success');
         if (isAjax()) {
             $this->json(['success' => true, 'message' => $message]);
         }
         $this->flash('success', $message);
         $this->back();
+    }
+
+    /**
+     * Envia e-mail de confirmação de inscrição.
+     */
+    private function sendConfirmationEmail(string $email): void
+    {
+        try {
+            $emailService = new EmailService();
+            $emailService->sendNewsletterConfirmation($email);
+        } catch (\Exception $e) {
+            appLog("Erro ao enviar confirmação de newsletter para {$email}: " . $e->getMessage(), 'error');
+        }
     }
 }
