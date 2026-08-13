@@ -25,11 +25,11 @@
             <div class="col-lg-2 col-md-6">
                 <h5 class="footer-title"><?= __('menu.services') ?></h5>
                 <ul class="footer-links">
-                    <li><a href="<?= url('servicos/sistemas-web') ?>">Sistemas Web</a></li>
-                    <li><a href="<?= url('servicos/integracoes-apis') ?>">Integrações</a></li>
-                    <li><a href="<?= url('servicos/automacoes') ?>">Automações</a></li>
-                    <li><a href="<?= url('servicos/inteligencia-artificial') ?>">IA</a></li>
-                    <li><a href="<?= url('servicos/consultoria') ?>">Consultoria</a></li>
+                    <li><a href="<?= url('servicos/sistemas-web') ?>"><?= __('services.web_systems') ?></a></li>
+                    <li><a href="<?= url('servicos/integracoes-apis') ?>"><?= __('services.integrations') ?></a></li>
+                    <li><a href="<?= url('servicos/automacoes') ?>"><?= __('services.automations') ?></a></li>
+                    <li><a href="<?= url('servicos/inteligencia-artificial') ?>"><?= __('services.ai_short') ?></a></li>
+                    <li><a href="<?= url('servicos/consultoria') ?>"><?= __('services.consulting') ?></a></li>
                 </ul>
             </div>
             
@@ -85,7 +85,7 @@
                     <a href="<?= url('politica-de-privacidade') ?>"><?= __('footer.privacy') ?></a>
                     <a href="<?= url('termos-de-uso') ?>"><?= __('footer.terms') ?></a>
                     <a href="<?= url('politica-de-cookies') ?>"><?= __('footer.cookies') ?></a>
-                    <a href="<?= url('lgpd') ?>">LGPD</a>
+                    <a href="<?= url('lgpd') ?>"><?= __('legal.lgpd_title') ?></a>
                 </div>
             </div>
         </div>

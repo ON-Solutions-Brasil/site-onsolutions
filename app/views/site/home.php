@@ -12,9 +12,9 @@
                         <a href="<?= url('portfolio') ?>" class="btn btn-outline-light btn-lg"><?= __('home.hero_secondary') ?></a>
                     </div>
                     <div class="hero-stats mt-5">
-                        <div class="stat"><strong>100+</strong><span>Projetos Entregues</span></div>
-                        <div class="stat"><strong>50+</strong><span>Clientes Ativos</span></div>
-                        <div class="stat"><strong>99%</strong><span>Satisfação</span></div>
+                        <div class="stat"><strong>100+</strong><span><?= __('home.stats_projects') ?></span></div>
+                        <div class="stat"><strong>50+</strong><span><?= __('home.stats_clients') ?></span></div>
+                        <div class="stat"><strong>99%</strong><span><?= __('home.stats_satisfaction') ?></span></div>
                     </div>
                 </div>
             </div>
@@ -23,9 +23,12 @@
                     <div class="code-window">
                         <div class="code-header"><span></span><span></span><span></span></div>
                         <pre><code>&lt;solution&gt;
-  personalizada
-  escalável
-  inteligente
+  <?= __('home.code_custom') ?>
+
+  <?= __('home.code_scalable') ?>
+
+  <?= __('home.code_smart') ?>
+
 &lt;/solution&gt;</code></pre>
                     </div>
                 </div>
@@ -54,7 +57,7 @@
                     <h3 class="service-title"><?= e($title) ?></h3>
                     <p class="service-desc"><?= e($desc) ?></p>
                     <a href="<?= url('servicos/' . $service['slug']) ?>" class="service-link">
-                        Saiba mais <i class="bi bi-arrow-right"></i>
+                        <?= __('home.learn_more') ?> <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             </div>
@@ -70,36 +73,36 @@
 <section class="section process-section bg-light">
     <div class="container">
         <div class="section-header text-center">
-            <h2 class="section-title">Como Trabalhamos</h2>
-            <p class="section-subtitle">Metodologia ágil e focada em resultados</p>
+            <h2 class="section-title"><?= __('home.process_title') ?></h2>
+            <p class="section-subtitle"><?= __('home.process_subtitle') ?></p>
         </div>
         <div class="row g-4 mt-4">
             <div class="col-md-3">
                 <div class="process-step">
                     <div class="step-number">01</div>
-                    <h4>Discovery</h4>
-                    <p>Entendemos seu negócio, processos e objetivos.</p>
+                    <h4><?= __('home.process_step1_title') ?></h4>
+                    <p><?= __('home.process_step1_desc') ?></p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="process-step">
                     <div class="step-number">02</div>
-                    <h4>Planejamento</h4>
-                    <p>Arquitetamos a solução ideal e definimos roadmap.</p>
+                    <h4><?= __('home.process_step2_title') ?></h4>
+                    <p><?= __('home.process_step2_desc') ?></p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="process-step">
                     <div class="step-number">03</div>
-                    <h4>Desenvolvimento</h4>
-                    <p>Construímos com sprints, entregas contínuas e qualidade.</p>
+                    <h4><?= __('home.process_step3_title') ?></h4>
+                    <p><?= __('home.process_step3_desc') ?></p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="process-step">
                     <div class="step-number">04</div>
-                    <h4>Entrega & Suporte</h4>
-                    <p>Deploy, treinamento e suporte contínuo.</p>
+                    <h4><?= __('home.process_step4_title') ?></h4>
+                    <p><?= __('home.process_step4_desc') ?></p>
                 </div>
             </div>
         </div>
@@ -126,14 +129,14 @@
                     <div class="portfolio-overlay">
                         <h4><?= e($item['title_pt']) ?></h4>
                         <p><?= e($item['client_name'] ?? '') ?></p>
-                        <a href="<?= url('portfolio/' . $item['slug']) ?>" class="btn btn-sm btn-light">Ver Case</a>
+                        <a href="<?= url('portfolio/' . $item['slug']) ?>" class="btn btn-sm btn-light"><?= __('home.view_case') ?></a>
                     </div>
                 </div>
             </div>
             <?php endforeach; ?>
         </div>
         <div class="text-center mt-5">
-            <a href="<?= url('portfolio') ?>" class="btn btn-outline-primary btn-lg">Ver Todo Portfólio</a>
+            <a href="<?= url('portfolio') ?>" class="btn btn-outline-primary btn-lg"><?= __('home.view_all_portfolio') ?></a>
         </div>
     </div>
 </section>
@@ -203,7 +206,7 @@
     <div class="container">
         <div class="section-header text-center">
             <h2 class="section-title">Blog</h2>
-            <p class="section-subtitle">Últimas novidades sobre tecnologia e inovação</p>
+            <p class="section-subtitle"><?= __('home.blog_subtitle') ?></p>
         </div>
         <div class="row g-4 mt-4">
             <?php foreach ($recent_posts as $post): ?>
@@ -226,7 +229,7 @@
             <?php endforeach; ?>
         </div>
         <div class="text-center mt-5">
-            <a href="<?= url('blog') ?>" class="btn btn-outline-primary btn-lg">Ver Todos os Posts</a>
+            <a href="<?= url('blog') ?>" class="btn btn-outline-primary btn-lg"><?= __('home.view_all_posts') ?></a>
         </div>
     </div>
 </section>
@@ -250,20 +253,20 @@
             <div class="newsletter-premium__bg"></div>
             <div class="newsletter-premium__content">
                 <span class="newsletter-premium__badge"><i class="bi bi-envelope-paper"></i> Newsletter</span>
-                <h2 class="newsletter-premium__title">Fique por dentro</h2>
-                <p class="newsletter-premium__text">Receba novidades sobre tecnologia, inovação e dicas exclusivas diretamente no seu email.</p>
+                <h2 class="newsletter-premium__title"><?= __('home.newsletter_title') ?></h2>
+                <p class="newsletter-premium__text"><?= __('home.newsletter_text') ?></p>
                 <form id="newsletterHomeForm" action="<?= url('newsletter/subscribe') ?>" method="POST" class="newsletter-premium__form">
                     <?= csrfField() ?>
                     <div class="newsletter-premium__input-group">
                         <input type="email" class="newsletter-premium__input" name="email" placeholder="<?= __('newsletter.placeholder') ?>" required>
                         <button type="submit" class="newsletter-premium__btn">
-                            <span>Assinar agora</span>
+                            <span><?= __('home.newsletter_subscribe') ?></span>
                             <i class="bi bi-arrow-right"></i>
                         </button>
                     </div>
                 </form>
                 <div id="newsletterHomeMsg" style="display:none;"></div>
-                <p class="newsletter-premium__note"><i class="bi bi-shield-check"></i> Sem spam. Cancele quando quiser.</p>
+                <p class="newsletter-premium__note"><i class="bi bi-shield-check"></i> <?= __('home.newsletter_note') ?></p>
             </div>
         </div>
     </div>
@@ -401,17 +404,17 @@
             var message = data.message || data.error || '';
 
             if (success) {
-                msgBox.innerHTML = '<div class="nl-notification nl-notification--success"><div class="nl-notification__inner"><div class="nl-notification__icon"><i class="bi bi-check-circle-fill"></i></div><div class="nl-notification__text"><div class="nl-notification__title">Tudo certo!</div><div class="nl-notification__desc">Enviamos um e-mail de confirmação para sua caixa de entrada.</div></div></div></div>';
+                msgBox.innerHTML = '<div class="nl-notification nl-notification--success"><div class="nl-notification__inner"><div class="nl-notification__icon"><i class="bi bi-check-circle-fill"></i></div><div class="nl-notification__text"><div class="nl-notification__title"><?= __('newsletter.success_title') ?></div><div class="nl-notification__desc"><?= __('newsletter.success_desc') ?></div></div></div></div>';
                 form.reset();
             } else {
-                msgBox.innerHTML = '<div class="nl-notification nl-notification--info"><div class="nl-notification__inner"><div class="nl-notification__icon"><i class="bi bi-envelope-check-fill"></i></div><div class="nl-notification__text"><div class="nl-notification__title">Você já faz parte!</div><div class="nl-notification__desc">' + message + '</div></div></div></div>';
+                msgBox.innerHTML = '<div class="nl-notification nl-notification--info"><div class="nl-notification__inner"><div class="nl-notification__icon"><i class="bi bi-envelope-check-fill"></i></div><div class="nl-notification__text"><div class="nl-notification__title"><?= __('newsletter.already_title') ?></div><div class="nl-notification__desc">' + message + '</div></div></div></div>';
             }
             msgBox.style.display = 'block';
             btn.disabled = false;
             btn.innerHTML = originalHtml;
         })
         .catch(function() {
-            msgBox.innerHTML = '<div class="nl-notification nl-notification--error"><div class="nl-notification__inner"><div class="nl-notification__icon"><i class="bi bi-exclamation-triangle-fill"></i></div><div class="nl-notification__text"><div class="nl-notification__title">Ops!</div><div class="nl-notification__desc">Não foi possível processar. Tente novamente em instantes.</div></div></div></div>';
+            msgBox.innerHTML = '<div class="nl-notification nl-notification--error"><div class="nl-notification__inner"><div class="nl-notification__icon"><i class="bi bi-exclamation-triangle-fill"></i></div><div class="nl-notification__text"><div class="nl-notification__title"><?= __('newsletter.error_title') ?></div><div class="nl-notification__desc"><?= __('newsletter.error_desc') ?></div></div></div></div>';
             msgBox.style.display = 'block';
             btn.disabled = false;
             btn.innerHTML = originalHtml;

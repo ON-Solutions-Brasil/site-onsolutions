@@ -23,11 +23,11 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="<?= url('servicos') ?>"><?= __('menu.all_services') ?></a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="<?= url('servicos/sistemas-web') ?>">Sistemas Web</a></li>
-                            <li><a class="dropdown-item" href="<?= url('servicos/integracoes-apis') ?>">Integrações & APIs</a></li>
-                            <li><a class="dropdown-item" href="<?= url('servicos/automacoes') ?>">Automações</a></li>
-                            <li><a class="dropdown-item" href="<?= url('servicos/inteligencia-artificial') ?>">Inteligência Artificial</a></li>
-                            <li><a class="dropdown-item" href="<?= url('servicos/consultoria') ?>">Consultoria</a></li>
+                            <li><a class="dropdown-item" href="<?= url('servicos/sistemas-web') ?>"><?= __('services.web_systems') ?></a></li>
+                            <li><a class="dropdown-item" href="<?= url('servicos/integracoes-apis') ?>"><?= __('services.integrations') ?></a></li>
+                            <li><a class="dropdown-item" href="<?= url('servicos/automacoes') ?>"><?= __('services.automations') ?></a></li>
+                            <li><a class="dropdown-item" href="<?= url('servicos/inteligencia-artificial') ?>"><?= __('services.ai') ?></a></li>
+                            <li><a class="dropdown-item" href="<?= url('servicos/consultoria') ?>"><?= __('services.consulting') ?></a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link <?= str_contains($_SERVER['REQUEST_URI'], 'portfolio') ? 'active' : '' ?>" href="<?= url('portfolio') ?>"><?= __('menu.portfolio') ?></a></li>
@@ -53,14 +53,14 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end user-dropdown">
                             <?php if (isLoggedIn()): ?>
-                                <li><a class="dropdown-item" href="<?= url('admin/profile') ?>"><i class="bi bi-person me-2"></i>Minha Conta</a></li>
+                                <li><a class="dropdown-item" href="<?= url('admin/profile') ?>"><i class="bi bi-person me-2"></i><?= __('menu.my_account') ?></a></li>
                                 <?php if (hasRole('super_admin') || hasRole('admin')): ?>
-                                <li><a class="dropdown-item" href="<?= url('admin') ?>"><i class="bi bi-gear me-2"></i>Painel do Admin</a></li>
+                                <li><a class="dropdown-item" href="<?= url('admin') ?>"><i class="bi bi-gear me-2"></i><?= __('menu.admin_panel') ?></a></li>
                                 <?php endif; ?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item text-danger" href="<?= url('admin/logout') ?>"><i class="bi bi-box-arrow-right me-2"></i>Sair</a></li>
+                                <li><a class="dropdown-item text-danger" href="<?= url('admin/logout') ?>"><i class="bi bi-box-arrow-right me-2"></i><?= __('menu.logout') ?></a></li>
                             <?php else: ?>
-                                <li><a class="dropdown-item" href="<?= url('admin/login') ?>"><i class="bi bi-box-arrow-in-right me-2"></i>Entrar</a></li>
+                                <li><a class="dropdown-item" href="<?= url('admin/login') ?>"><i class="bi bi-box-arrow-in-right me-2"></i><?= __('menu.login') ?></a></li>
                             <?php endif; ?>
                         </ul>
                     </li>
