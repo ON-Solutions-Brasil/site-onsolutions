@@ -202,6 +202,7 @@ return [
         'privacy' => 'Privacidad',
         'terms'   => 'Términos',
         'cookies' => 'Cookies',
+        'site_description' => 'Desarrollo de Software a Medida, Sistemas Personalizados e Inteligencia Artificial.',
     ],
     'cookies' => [
         'banner_text' => 'Utilizamos cookies para mejorar su experiencia. Al continuar navegando, acepta nuestra política de cookies.',

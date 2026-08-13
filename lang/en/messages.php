@@ -202,6 +202,7 @@ return [
         'privacy' => 'Privacy',
         'terms'   => 'Terms',
         'cookies' => 'Cookies',
+        'site_description' => 'Custom Software Development, Personalized Systems and Artificial Intelligence.',
     ],
     'cookies' => [
         'banner_text' => 'We use cookies to improve your experience. By continuing to browse, you agree to our cookie policy.',

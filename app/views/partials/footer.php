@@ -4,7 +4,7 @@
             <!-- Sobre -->
             <div class="col-lg-4 col-md-6">
                 <h5 class="footer-title"><?= e(SITE_NAME) ?></h5>
-                <p class="footer-description"><?= e(setting('site_description', '')) ?></p>
+                <p class="footer-description"><?= __('footer.site_description') ?></p>
                 <div class="footer-social">
                     <?php if ($fb = setting('social_facebook')): ?>
                     <a href="<?= e($fb) ?>" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>

@@ -4,10 +4,14 @@
  */
 
 /**
- * Retorna a URL base com caminho.
+ * Retorna a URL base com caminho, incluindo prefixo de idioma se necessário.
  */
 function url(string $path = ''): string
 {
+    $lang = defined('CURRENT_LANG') ? CURRENT_LANG : DEFAULT_LANG;
+    if ($lang !== DEFAULT_LANG) {
+        return BASE_URL . '/' . $lang . '/' . ltrim($path, '/');
+    }
     return BASE_URL . '/' . ltrim($path, '/');
 }
 
@@ -25,10 +29,31 @@ function asset(string $path): string
 function langUrl(string $path = '', ?string $lang = null): string
 {
     $lang = $lang ?? (defined('CURRENT_LANG') ? CURRENT_LANG : DEFAULT_LANG);
+    // Remover prefixo de idioma existente da path
+    $path = preg_replace('#^/(en|es|pt)(/|$)#', '/', $path);
+    $path = ltrim($path, '/');
     if ($lang === DEFAULT_LANG) {
-        return url($path);
+        return BASE_URL . '/' . $path;
     }
-    return BASE_URL . '/' . $lang . '/' . ltrim($path, '/');
+    return BASE_URL . '/' . $lang . '/' . $path;
+}
+
+/**
+ * Retorna a URI atual sem o prefixo de idioma (para uso no seletor de idiomas).
+ */
+function currentPathWithoutLang(): string
+{
+    $uri = $_SERVER['REQUEST_URI'] ?? '/';
+    // Remover query string
+    $uri = parse_url($uri, PHP_URL_PATH) ?? '/';
+    // Remover BASE_URL path se houver
+    $basePath = parse_url(BASE_URL, PHP_URL_PATH) ?? '';
+    if (!empty($basePath) && str_starts_with($uri, $basePath)) {
+        $uri = substr($uri, strlen($basePath));
+    }
+    // Remover prefixo de idioma
+    $uri = preg_replace('#^/(en|es|pt)(/|$)#', '/', $uri);
+    return $uri;
 }
 
 /**

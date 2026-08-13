@@ -39,10 +39,11 @@
                         <a class="nav-link dropdown-toggle lang-selector" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-globe2"></i> <?= strtoupper($currentLang) ?>
                         </a>
+                        <?php $currentPath = currentPathWithoutLang(); ?>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item <?= $currentLang === 'pt' ? 'active' : '' ?>" href="<?= url($_SERVER['REQUEST_URI']) ?>">Português</a></li>
-                            <li><a class="dropdown-item <?= $currentLang === 'en' ? 'active' : '' ?>" href="<?= langUrl($_SERVER['REQUEST_URI'], 'en') ?>">English</a></li>
-                            <li><a class="dropdown-item <?= $currentLang === 'es' ? 'active' : '' ?>" href="<?= langUrl($_SERVER['REQUEST_URI'], 'es') ?>">Español</a></li>
+                            <li><a class="dropdown-item <?= $currentLang === 'pt' ? 'active' : '' ?>" href="<?= langUrl($currentPath, 'pt') ?>">Português</a></li>
+                            <li><a class="dropdown-item <?= $currentLang === 'en' ? 'active' : '' ?>" href="<?= langUrl($currentPath, 'en') ?>">English</a></li>
+                            <li><a class="dropdown-item <?= $currentLang === 'es' ? 'active' : '' ?>" href="<?= langUrl($currentPath, 'es') ?>">Español</a></li>
                         </ul>
                     </li>
                     
