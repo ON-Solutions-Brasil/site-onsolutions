@@ -262,12 +262,116 @@
                         </button>
                     </div>
                 </form>
-                <div id="newsletterHomeMsg" style="display:none; margin-top: 1.2rem; padding: 1rem 1.5rem; border-radius: 10px; font-size: 0.9rem; font-weight: 500; text-align: center; backdrop-filter: blur(8px); transition: all 0.3s ease;"></div>
+                <div id="newsletterHomeMsg" style="display:none;"></div>
                 <p class="newsletter-premium__note"><i class="bi bi-shield-check"></i> Sem spam. Cancele quando quiser.</p>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+@keyframes newsletterPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+@keyframes newsletterSlideIn {
+    from { opacity: 0; transform: translateY(12px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes newsletterCheckDraw {
+    from { stroke-dashoffset: 24; }
+    to { stroke-dashoffset: 0; }
+}
+@keyframes newsletterShimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+.nl-notification {
+    margin-top: 1.2rem;
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+    animation: newsletterSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    position: relative;
+    overflow: hidden;
+}
+.nl-notification::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    background-size: 200% 100%;
+    animation: newsletterShimmer 2s ease-in-out;
+    pointer-events: none;
+}
+.nl-notification--success {
+    background: linear-gradient(135deg, #0d9488 0%, #115e59 100%);
+    border: 1px solid rgba(20, 184, 166, 0.5);
+    box-shadow: 0 8px 32px rgba(13, 148, 136, 0.25), 0 0 0 1px rgba(20, 184, 166, 0.1), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.nl-notification--info {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid rgba(13, 148, 136, 0.4);
+    box-shadow: 0 8px 32px rgba(13, 148, 136, 0.15), 0 0 0 1px rgba(20, 184, 166, 0.08);
+}
+.nl-notification--error {
+    background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    box-shadow: 0 8px 32px rgba(239, 68, 68, 0.15);
+}
+.nl-notification__inner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    z-index: 1;
+}
+.nl-notification__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.nl-notification--success .nl-notification__icon {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+}
+.nl-notification--info .nl-notification__icon {
+    background: rgba(13, 148, 136, 0.2);
+}
+.nl-notification--error .nl-notification__icon {
+    background: rgba(239, 68, 68, 0.2);
+}
+.nl-notification__icon i {
+    font-size: 1.2rem;
+}
+.nl-notification--success .nl-notification__icon i { color: #ffffff; }
+.nl-notification--info .nl-notification__icon i { color: #5eead4; }
+.nl-notification--error .nl-notification__icon i { color: #fca5a5; }
+.nl-notification__text {
+    flex: 1;
+}
+.nl-notification__title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+    letter-spacing: -0.2px;
+}
+.nl-notification--success .nl-notification__title { color: #ffffff; }
+.nl-notification--info .nl-notification__title { color: #99f6e4; }
+.nl-notification--error .nl-notification__title { color: #fca5a5; }
+.nl-notification__desc {
+    font-size: 0.8rem;
+    font-weight: 400;
+    opacity: 0.85;
+    line-height: 1.4;
+}
+.nl-notification--success .nl-notification__desc { color: #ccfbf1; }
+.nl-notification--info .nl-notification__desc { color: #94a3b8; }
+.nl-notification--error .nl-notification__desc { color: #fecaca; }
+</style>
 
 <script>
 (function() {
@@ -279,8 +383,10 @@
         var originalHtml = btn.innerHTML;
         var msgBox = document.getElementById('newsletterHomeMsg');
         btn.disabled = true;
-        btn.innerHTML = '<i class="bi bi-hourglass-split"></i>';
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span>';
+
         msgBox.style.display = 'none';
+        msgBox.innerHTML = '';
 
         var formData = new FormData(form);
 
@@ -291,22 +397,22 @@
         })
         .then(function(r) { return r.json(); })
         .then(function(data) {
-            var message = data.message || data.error || 'Inscrição realizada com sucesso!';
             var success = data.success;
+            var message = data.message || data.error || '';
+
             if (success) {
-                msgBox.innerHTML = '<i class="bi bi-check-circle-fill" style="margin-right:8px; font-size:1.1rem;"></i>' + message;
-                msgBox.style.cssText = 'display:flex; align-items:center; justify-content:center; margin-top:1.2rem; padding:1rem 1.5rem; border-radius:10px; font-size:0.9rem; font-weight:500; text-align:center; background:linear-gradient(135deg, #0d9488, #0f766e); color:#fff; border:1px solid #14b8a6; box-shadow:0 4px 16px rgba(13,148,136,0.3); animation:fadeInUp 0.4s ease;';
+                msgBox.innerHTML = '<div class="nl-notification nl-notification--success"><div class="nl-notification__inner"><div class="nl-notification__icon"><i class="bi bi-check-circle-fill"></i></div><div class="nl-notification__text"><div class="nl-notification__title">Tudo certo!</div><div class="nl-notification__desc">Enviamos um e-mail de confirmação para sua caixa de entrada.</div></div></div></div>';
                 form.reset();
             } else {
-                msgBox.innerHTML = '<i class="bi bi-info-circle-fill" style="margin-right:8px; font-size:1.1rem;"></i>' + message;
-                msgBox.style.cssText = 'display:flex; align-items:center; justify-content:center; margin-top:1.2rem; padding:1rem 1.5rem; border-radius:10px; font-size:0.9rem; font-weight:500; text-align:center; background:linear-gradient(135deg, #115e59, #134e4a); color:#99f6e4; border:1px solid #0d9488; box-shadow:0 4px 16px rgba(13,148,136,0.2); animation:fadeInUp 0.4s ease;';
+                msgBox.innerHTML = '<div class="nl-notification nl-notification--info"><div class="nl-notification__inner"><div class="nl-notification__icon"><i class="bi bi-envelope-check-fill"></i></div><div class="nl-notification__text"><div class="nl-notification__title">Você já faz parte!</div><div class="nl-notification__desc">' + message + '</div></div></div></div>';
             }
+            msgBox.style.display = 'block';
             btn.disabled = false;
             btn.innerHTML = originalHtml;
         })
         .catch(function() {
-            msgBox.innerHTML = '<i class="bi bi-exclamation-triangle-fill" style="margin-right:8px; font-size:1.1rem;"></i>Ocorreu um erro. Tente novamente.';
-            msgBox.style.cssText = 'display:flex; align-items:center; justify-content:center; margin-top:1.2rem; padding:1rem 1.5rem; border-radius:10px; font-size:0.9rem; font-weight:500; text-align:center; background:rgba(220,38,38,0.1); color:#fca5a5; border:1px solid rgba(220,38,38,0.3); animation:fadeInUp 0.4s ease;';
+            msgBox.innerHTML = '<div class="nl-notification nl-notification--error"><div class="nl-notification__inner"><div class="nl-notification__icon"><i class="bi bi-exclamation-triangle-fill"></i></div><div class="nl-notification__text"><div class="nl-notification__title">Ops!</div><div class="nl-notification__desc">Não foi possível processar. Tente novamente em instantes.</div></div></div></div>';
+            msgBox.style.display = 'block';
             btn.disabled = false;
             btn.innerHTML = originalHtml;
         });

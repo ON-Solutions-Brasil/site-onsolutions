@@ -126,6 +126,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // === Newsletter AJAX ===
     document.querySelectorAll('form[action*="newsletter/subscribe"]').forEach(form => {
+        // Ignorar formulário da home (tem handler próprio inline)
+        if (form.id === 'newsletterHomeForm') return;
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
