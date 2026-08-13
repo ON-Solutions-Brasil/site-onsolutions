@@ -1,7 +1,7 @@
 <!-- Hero -->
 <section class="page-hero page-hero--about">
     <div class="container text-center">
-        <span class="about-tag hero-fade-in">Serviços</span>
+        <span class="about-tag hero-fade-in"><?= __('services.title') ?></span>
         <h1 class="hero-fade-in"><?= __('services.title') ?></h1>
         <p class="hero-fade-in"><?= __('services.meta_description') ?></p>
     </div>
@@ -23,7 +23,7 @@
                     <h3 class="service-title"><?= e($title) ?></h3>
                     <p class="service-desc"><?= e($desc) ?></p>
                     <a href="<?= url('servicos/' . $service['slug']) ?>" class="service-link">
-                        Saiba mais <i class="bi bi-arrow-right"></i>
+                        <?= __('home.learn_more') ?> <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             </div>
