@@ -9,7 +9,9 @@
                     <p class="hero-subtitle"><?= __('home.hero_subtitle') ?></p>
                     <div class="hero-actions">
                         <a href="<?= url('contato') ?>" class="btn btn-primary btn-lg"><?= __('home.hero_cta') ?></a>
+                        <?php if (!empty($has_portfolio)): ?>
                         <a href="<?= url('portfolio') ?>" class="btn btn-outline-light btn-lg"><?= __('home.hero_secondary') ?></a>
+                        <?php endif; ?>
                     </div>
                     <div class="hero-stats mt-5">
                         <div class="stat"><strong>100+</strong><span><?= __('home.stats_projects') ?></span></div>

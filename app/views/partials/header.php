@@ -30,7 +30,9 @@
                             <li><a class="dropdown-item" href="<?= url('servicos/consultoria') ?>"><?= __('services.consulting') ?></a></li>
                         </ul>
                     </li>
+                    <?php if (!empty($has_portfolio)): ?>
                     <li class="nav-item"><a class="nav-link <?= str_contains($_SERVER['REQUEST_URI'], 'portfolio') ? 'active' : '' ?>" href="<?= url('portfolio') ?>"><?= __('menu.portfolio') ?></a></li>
+                    <?php endif; ?>
                     <li class="nav-item"><a class="nav-link <?= str_contains($_SERVER['REQUEST_URI'], 'blog') ? 'active' : '' ?>" href="<?= url('blog') ?>"><?= __('menu.blog') ?></a></li>
                     <li class="nav-item"><a class="nav-link <?= str_contains($_SERVER['REQUEST_URI'], 'contato') ? 'active' : '' ?>" href="<?= url('contato') ?>"><?= __('menu.contact') ?></a></li>
                     

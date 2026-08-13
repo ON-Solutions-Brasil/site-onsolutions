@@ -38,7 +38,9 @@
                 <h5 class="footer-title"><?= __('footer.links') ?></h5>
                 <ul class="footer-links">
                     <li><a href="<?= url('quem-somos') ?>"><?= __('menu.about') ?></a></li>
+                    <?php if (!empty($has_portfolio)): ?>
                     <li><a href="<?= url('portfolio') ?>"><?= __('menu.portfolio') ?></a></li>
+                    <?php endif; ?>
                     <li><a href="<?= url('blog') ?>"><?= __('menu.blog') ?></a></li>
                     <li><a href="<?= url('parceiros') ?>"><?= __('menu.partners') ?></a></li>
                     <li><a href="<?= url('contato') ?>"><?= __('menu.contact') ?></a></li>

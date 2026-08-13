@@ -23,6 +23,7 @@ abstract class Controller
         $this->data['current_lang'] = defined('CURRENT_LANG') ? CURRENT_LANG : DEFAULT_LANG;
         $this->data['app_version'] = APP_VERSION;
         $this->data['csrf_token'] = $this->generateCsrfToken();
+        $this->data['has_portfolio'] = (int)($this->db->fetch("SELECT COUNT(*) as total FROM portfolio_items WHERE is_active = 1")['total'] ?? 0) > 0;
     }
 
     /**

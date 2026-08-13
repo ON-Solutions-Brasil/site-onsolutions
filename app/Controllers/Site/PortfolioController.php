@@ -11,16 +11,23 @@ class PortfolioController extends Controller
      */
     public function index(): void
     {
-        $this->data['page_title'] = __('portfolio.title') . ' - ' . SITE_NAME;
-        $this->data['meta_description'] = __('portfolio.meta_description');
-
-        $this->data['items'] = $this->db->fetchAll(
+        $items = $this->db->fetchAll(
             "SELECT pi.*, pc.name_pt as category_name, pc.slug as category_slug 
              FROM portfolio_items pi 
              LEFT JOIN portfolio_categories pc ON pi.category_id = pc.id 
              WHERE pi.is_active = 1 
              ORDER BY pi.order_position ASC"
         );
+
+        // Se não há itens, redireciona para a home
+        if (empty($items)) {
+            $this->redirect('/');
+            return;
+        }
+
+        $this->data['page_title'] = __('portfolio.title') . ' - ' . SITE_NAME;
+        $this->data['meta_description'] = __('portfolio.meta_description');
+        $this->data['items'] = $items;
 
         $this->data['categories'] = $this->db->fetchAll(
             "SELECT * FROM portfolio_categories WHERE is_active = 1 ORDER BY order_position ASC"
