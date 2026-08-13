@@ -62,6 +62,12 @@ class ServicesController extends Controller
             if ($translatedContent && empty($service["content_{$lang}"])) {
                 $service["content_{$lang}"] = $translatedContent;
             }
+            // Traduzir features
+            $featuresMethod = $lang === 'en' ? 'getEnglishFeatures' : 'getSpanishFeatures';
+            $translatedFeatures = $translationClass::$featuresMethod($slug);
+            if ($translatedFeatures) {
+                $service['features'] = json_encode($translatedFeatures);
+            }
         }
 
         $this->data['service'] = $service;
