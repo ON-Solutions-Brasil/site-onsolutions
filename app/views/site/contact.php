@@ -1,9 +1,9 @@
 <!-- Hero -->
 <section class="page-hero page-hero--about">
     <div class="container text-center">
-        <span class="about-tag hero-fade-in">Contato</span>
-        <h1 class="hero-fade-in">Envie sua mensagem</h1>
-        <p class="hero-fade-in">Estamos prontos para transformar sua ideia em realidade. Fale com a gente.</p>
+        <span class="about-tag hero-fade-in"><?= __('contact.title') ?></span>
+        <h1 class="hero-fade-in"><?= __('contact.hero_title') ?></h1>
+        <p class="hero-fade-in"><?= __('contact.hero_subtitle') ?></p>
     </div>
 </section>
 
@@ -13,7 +13,7 @@
         <div class="row g-5">
             <div class="col-lg-7 scroll-reveal">
                 <div class="contact-box">
-                    <h3 class="mb-4">Envie sua mensagem</h3>
+                    <h3 class="mb-4"><?= __('contact.form_title') ?></h3>
                     <form method="POST" action="<?= url('contato') ?>" id="contactForm">
                         <?= csrfField() ?>
                         <div class="row g-3">
@@ -52,52 +52,52 @@
                             <i class="bi bi-check-circle-fill"></i>
                         </div>
                         <div class="contact-success-alert__content">
-                            <strong>Mensagem enviada com sucesso!</strong>
-                            <p>Recebemos sua mensagem e retornaremos em breve. Obrigado pelo contato.</p>
+                            <strong><?= __('contact.message_sent') ?></strong>
+                            <p><?= __('contact.message_sent_desc') ?></p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-5 scroll-reveal">
                 <div class="contact-info">
-                    <h3 class="mb-4">Informações de Contato</h3>
+                    <h3 class="mb-4"><?= __('contact.info_title') ?></h3>
                     <?php if ($email = setting('email')): ?>
-                    <div class="contact-item"><i class="bi bi-envelope"></i><div><strong>Email</strong><p><a href="mailto:<?= e($email) ?>"><?= e($email) ?></a></p></div></div>
+                    <div class="contact-item"><i class="bi bi-envelope"></i><div><strong><?= __('contact.info_email') ?></strong><p><a href="mailto:<?= e($email) ?>"><?= e($email) ?></a></p></div></div>
                     <?php endif; ?>
                     <?php if ($phone = setting('phone')): ?>
-                    <div class="contact-item"><i class="bi bi-telephone"></i><div><strong>Telefone</strong><p><?= e($phone) ?></p></div></div>
+                    <div class="contact-item"><i class="bi bi-telephone"></i><div><strong><?= __('contact.info_phone') ?></strong><p><?= e($phone) ?></p></div></div>
                     <?php endif; ?>
                     <?php if ($whatsapp = setting('whatsapp_number')): ?>
-                    <div class="contact-item"><i class="bi bi-whatsapp"></i><div><strong>WhatsApp</strong><p><a href="https://wa.me/<?= preg_replace('/\D/', '', $whatsapp) ?>"><?= e($whatsapp) ?></a></p></div></div>
+                    <div class="contact-item"><i class="bi bi-whatsapp"></i><div><strong><?= __('contact.info_whatsapp') ?></strong><p><a href="https://wa.me/<?= preg_replace('/\D/', '', $whatsapp) ?>"><?= e($whatsapp) ?></a></p></div></div>
                     <?php endif; ?>
                     <?php if ($address = setting('address')): ?>
-                    <div class="contact-item"><i class="bi bi-geo-alt"></i><div><strong>Endereço</strong><p><?= e($address) ?><br><?= e(setting('city', '')) ?> - <?= e(setting('state', '')) ?></p></div></div>
+                    <div class="contact-item"><i class="bi bi-geo-alt"></i><div><strong><?= __('contact.info_address') ?></strong><p><?= e($address) ?><br><?= e(setting('city', '')) ?> - <?= e(setting('state', '')) ?></p></div></div>
                     <?php endif; ?>
                 </div>
 
                 <!-- Horário de Atendimento -->
                 <div class="contact-schedule">
-                    <h4><i class="bi bi-clock"></i> Horário de Atendimento</h4>
+                    <h4><i class="bi bi-clock"></i> <?= __('contact.schedule_title') ?></h4>
                     <div class="contact-schedule__list">
                         <div class="contact-schedule__item">
-                            <span>Segunda a Sexta</span>
+                            <span><?= __('contact.schedule_weekdays') ?></span>
                             <strong>09h — 18h</strong>
                         </div>
                         <div class="contact-schedule__item">
-                            <span>Sábado</span>
+                            <span><?= __('contact.schedule_saturday') ?></span>
                             <strong>09h — 13h</strong>
                         </div>
                         <div class="contact-schedule__item">
-                            <span>Domingo</span>
-                            <strong class="text-muted">Fechado</strong>
+                            <span><?= __('contact.schedule_sunday') ?></span>
+                            <strong class="text-muted"><?= __('contact.schedule_closed') ?></strong>
                         </div>
                     </div>
                 </div>
 
                 <!-- Resposta Rápida -->
                 <div class="contact-response">
-                    <h4><i class="bi bi-lightning-charge"></i> Resposta Rápida</h4>
-                    <p>Respondemos todas as mensagens em até 2 horas durante o horário comercial.</p>
+                    <h4><i class="bi bi-lightning-charge"></i> <?= __('contact.response_title') ?></h4>
+                    <p><?= __('contact.response_text') ?></p>
                 </div>
             </div>
         </div>
@@ -107,14 +107,14 @@
 <!-- CTA -->
 <section class="section cta-section">
     <div class="container text-center scroll-reveal">
-        <h2>Prefere uma conversa rápida?</h2>
-        <p>Chame no WhatsApp. Respondemos em minutos.</p>
+        <h2><?= __('contact.cta_title') ?></h2>
+        <p><?= __('contact.cta_subtitle') ?></p>
         <?php if ($whatsapp = setting('whatsapp_number')): ?>
         <a href="https://wa.me/<?= preg_replace('/\D/', '', $whatsapp) ?>" class="btn btn-primary btn-lg mt-3" target="_blank" rel="noopener">
-            <i class="bi bi-whatsapp me-2"></i>Chamar no WhatsApp
+            <i class="bi bi-whatsapp me-2"></i><?= __('contact.cta_whatsapp') ?>
         </a>
         <?php else: ?>
-        <a href="mailto:<?= e(setting('email', '')) ?>" class="btn btn-primary btn-lg mt-3">Enviar Email</a>
+        <a href="mailto:<?= e(setting('email', '')) ?>" class="btn btn-primary btn-lg mt-3"><?= __('contact.cta_email') ?></a>
         <?php endif; ?>
     </div>
 </section>
@@ -146,17 +146,17 @@ document.addEventListener('DOMContentLoaded', function() {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             var btn = document.getElementById('contactSubmitBtn');
-            var originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Enviando...';
+            btn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i><?= __('contact.form_sending') ?>';
             btn.disabled = true;
 
             var formData = new FormData(form);
 
             fetch(form.action, {
                 method: 'POST',
-                body: formData
+                body: formData,
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
             })
-            .then(function(response) {
+            .then(function() {
                 form.style.display = 'none';
                 document.getElementById('contactSuccessAlert').style.display = 'flex';
                 window.scrollTo({ top: form.parentElement.offsetTop - 100, behavior: 'smooth' });
