@@ -30,12 +30,7 @@
                             <li><a class="dropdown-item" href="<?= url('servicos/consultoria') ?>">Consultoria</a></li>
                         </ul>
                     </li>
-                    <?php
-                    $portfolioCount = \App\Core\Database::getInstance()->fetch("SELECT COUNT(*) as total FROM portfolio_items WHERE is_active = 1")['total'] ?? 0;
-                    if ($portfolioCount > 0):
-                    ?>
                     <li class="nav-item"><a class="nav-link <?= str_contains($_SERVER['REQUEST_URI'], 'portfolio') ? 'active' : '' ?>" href="<?= url('portfolio') ?>"><?= __('menu.portfolio') ?></a></li>
-                    <?php endif; ?>
                     <li class="nav-item"><a class="nav-link <?= str_contains($_SERVER['REQUEST_URI'], 'blog') ? 'active' : '' ?>" href="<?= url('blog') ?>"><?= __('menu.blog') ?></a></li>
                     <li class="nav-item"><a class="nav-link <?= str_contains($_SERVER['REQUEST_URI'], 'contato') ? 'active' : '' ?>" href="<?= url('contato') ?>"><?= __('menu.contact') ?></a></li>
                     

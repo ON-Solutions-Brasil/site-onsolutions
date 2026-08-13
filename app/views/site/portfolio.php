@@ -10,13 +10,15 @@
 <!-- Portfólio -->
 <section class="section portfolio-section">
     <div class="container">
-        <!-- Filtros por categoria -->
+        <!-- Filtros por categoria (só mostra se tiver projetos) -->
+        <?php if (!empty($items)): ?>
         <div class="portfolio-filters text-center mb-5 scroll-reveal">
             <button class="btn btn-outline-primary active" data-filter="all">Todos</button>
             <?php foreach ($categories as $cat): ?>
             <button class="btn btn-outline-primary" data-filter="<?= e($cat['slug']) ?>"><?= e($cat['name_pt']) ?></button>
             <?php endforeach; ?>
         </div>
+        <?php endif; ?>
 
         <div class="row g-4 portfolio-grid">
             <?php if (empty($items)): ?>
