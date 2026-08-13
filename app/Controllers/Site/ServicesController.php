@@ -54,6 +54,16 @@ class ServicesController extends Controller
             }
         }
 
+        // Aplicar traduções de conteúdo para EN/ES via fallback
+        if ($lang !== 'pt') {
+            $translationClass = \App\Services\ServiceContentTranslations::class;
+            $method = $lang === 'en' ? 'getEnglish' : 'getSpanish';
+            $translatedContent = $translationClass::$method($slug);
+            if ($translatedContent && empty($service["content_{$lang}"])) {
+                $service["content_{$lang}"] = $translatedContent;
+            }
+        }
+
         $this->data['service'] = $service;
 
         // Outros serviços (exclui o serviço atual)
