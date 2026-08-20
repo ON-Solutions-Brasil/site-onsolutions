@@ -77,14 +77,18 @@ class QuotesController extends Controller
     public function update(string $id): void
     {
         if (!$this->validateCsrf()) return;
+
+        $discountPercent = (float)str_replace(',', '.', $this->input('discount_percent', '0'));
+
         $data = [
-            'client_id'   => $this->input('client_id') ?: null,
-            'title'       => $this->input('title'),
-            'description' => $this->input('description'),
-            'status'      => $this->input('status', 'draft'),
-            'valid_until' => $this->input('valid_until') ?: null,
-            'notes'       => $this->input('notes'),
-            'terms'       => $this->input('terms'),
+            'client_id'        => $this->input('client_id') ?: null,
+            'title'            => $this->input('title'),
+            'description'      => $this->input('description'),
+            'status'           => $this->input('status', 'draft'),
+            'valid_until'      => $this->input('valid_until') ?: null,
+            'discount_percent' => $discountPercent,
+            'notes'            => $this->input('notes'),
+            'terms'            => $this->input('terms'),
         ];
         $this->db->update('quotes', $data, 'id = ?', [(int)$id]);
         $this->db->delete('quote_items', 'quote_id = ?', [(int)$id]);
@@ -136,7 +140,16 @@ class QuotesController extends Controller
 
     private function recalculateTotal(int $quoteId): void
     {
-        $subtotal = $this->db->fetch("SELECT COALESCE(SUM(total_price),0) as total FROM quote_items WHERE quote_id = ?", [$quoteId])['total'] ?? 0;
-        $this->db->update('quotes', ['subtotal' => $subtotal, 'total' => $subtotal], 'id = ?', [$quoteId]);
+        $subtotal = (float)($this->db->fetch("SELECT COALESCE(SUM(total_price),0) as total FROM quote_items WHERE quote_id = ?", [$quoteId])['total'] ?? 0);
+        $quote = $this->db->fetch("SELECT discount_percent FROM quotes WHERE id = ?", [$quoteId]);
+        $discountPercent = (float)($quote['discount_percent'] ?? 0);
+        $discountValue = $subtotal * ($discountPercent / 100);
+        $total = $subtotal - $discountValue;
+
+        $this->db->update('quotes', [
+            'subtotal'       => $subtotal,
+            'discount_value' => $discountValue,
+            'total'          => $total,
+        ], 'id = ?', [$quoteId]);
     }
 }
