@@ -42,14 +42,14 @@
                         <th>Total</th>
                         <th>Status</th>
                         <th>Validade</th>
-                        <th width="80">Ações</th>
+                        <th width="120">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($quotes as $q): ?>
                 <tr>
                     <td>
-                        <a href="<?= url('admin/quotes/' . $q['id']) ?>" class="team-member__name" style="text-decoration: none;">
+                        <a href="<?= url('admin/quotes/' . $q['id']) ?>" class="team-member__name" style="text-decoration: none; color: var(--admin-primary);">
                             <?= e($q['quote_number']) ?>
                         </a>
                     </td>
@@ -61,18 +61,31 @@
                         <span class="team-status team-status--active"><span class="team-status__dot"></span> Aceito</span>
                         <?php elseif ($q['status'] === 'sent'): ?>
                         <span class="logs-badge logs-badge--info">Enviado</span>
+                        <?php elseif ($q['status'] === 'viewed'): ?>
+                        <span class="logs-badge logs-badge--warning">Visualizado</span>
                         <?php elseif ($q['status'] === 'rejected'): ?>
                         <span class="team-status team-status--inactive"><span class="team-status__dot"></span> Rejeitado</span>
+                        <?php elseif ($q['status'] === 'expired'): ?>
+                        <span class="logs-badge logs-badge--secondary">Expirado</span>
                         <?php else: ?>
-                        <span class="logs-badge logs-badge--secondary"><?= e($q['status']) ?></span>
+                        <span class="logs-badge logs-badge--secondary">Rascunho</span>
                         <?php endif; ?>
                     </td>
                     <td><span class="team-date"><?= $q['valid_until'] ? formatDate($q['valid_until']) : '-' ?></span></td>
                     <td>
                         <div class="team-actions">
+                            <a href="<?= url('admin/quotes/' . $q['id']) ?>" class="team-action-btn team-action-btn--view" title="Ver">
+                                <i class="bi bi-eye"></i>
+                            </a>
                             <a href="<?= url('admin/quotes/' . $q['id'] . '/edit') ?>" class="team-action-btn team-action-btn--edit" title="Editar">
                                 <i class="bi bi-pencil"></i>
                             </a>
+                            <form method="POST" action="<?= url('admin/quotes/' . $q['id'] . '/delete') ?>" style="display:inline;" onsubmit="return confirm('Excluir este orçamento?')">
+                                <?= csrfField() ?>
+                                <button type="submit" class="team-action-btn team-action-btn--delete" title="Excluir">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
                         </div>
                     </td>
                 </tr>

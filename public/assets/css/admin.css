@@ -1887,6 +1887,21 @@ hr {
     border-color: var(--admin-primary);
     box-shadow: 0 2px 8px rgba(13, 148, 136, 0.25);
 }
+.team-action-btn--edit:hover i {
+    color: #fff;
+}
+.team-action-btn--view {
+    color: #6366f1;
+}
+.team-action-btn--view:hover {
+    background: #6366f1;
+    color: #fff;
+    border-color: #6366f1;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+}
+.team-action-btn--view:hover i {
+    color: #fff;
+}
 .team-action-btn--delete {
     color: #dc2626;
 }
@@ -1895,6 +1910,9 @@ hr {
     color: #fff;
     border-color: #dc2626;
     box-shadow: 0 2px 8px rgba(220, 38, 38, 0.25);
+}
+.team-action-btn--delete:hover i {
+    color: #fff;
 }
 
 /* Responsive */
