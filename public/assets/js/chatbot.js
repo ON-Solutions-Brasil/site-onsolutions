@@ -85,10 +85,14 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {
             if (matchedFaq) {
                 addMessageHtml(faqData[matchedFaq].answer, 'bot');
-                showFollowUp();
+                setTimeout(function() {
+                    showFollowUp();
+                }, 800);
             } else {
                 addMessageHtml('Não encontrei uma resposta específica para sua pergunta. 🤔<br><br>Posso ajudar com estes assuntos:', 'bot');
-                showFaqButtons();
+                setTimeout(function() {
+                    showFaqButtons();
+                }, 500);
             }
         }, 500);
     });
@@ -105,7 +109,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Mostrar resposta com delay (simula digitação)
         setTimeout(function() {
             addMessageHtml(faqData[key].answer, 'bot');
-            showFollowUp();
+            
+            // Mostrar follow-up depois da resposta com delay extra
+            setTimeout(function() {
+                showFollowUp();
+            }, 800);
         }, 600);
     }
 
