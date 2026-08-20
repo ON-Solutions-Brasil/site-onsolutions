@@ -3,12 +3,11 @@
 namespace App\Controllers\Site;
 
 use App\Core\Controller;
-use App\Services\AIService;
 
 class ChatbotController extends Controller
 {
     /**
-     * Processa mensagem do chatbot.
+     * Processa mensagem do chatbot (FAQ matching).
      */
     public function message(): void
     {
@@ -19,59 +18,57 @@ class ChatbotController extends Controller
             return;
         }
 
-        $chatbotEnabled = $this->settings->get('chatbot_enabled', '1');
-        if ($chatbotEnabled !== '1') {
-            $this->json(['success' => false, 'message' => 'Chatbot desabilitado.'], 503);
-            return;
-        }
+        // FAQ matching simples via backend (fallback)
+        $response = $this->matchFaq($message);
 
-        try {
-            $aiService = new AIService();
-            $systemPrompt = $this->buildSystemPrompt();
-            $response = $aiService->chat($message, $systemPrompt);
-
-            $this->json([
-                'success' => true,
-                'message' => $response,
-            ]);
-        } catch (\Exception $e) {
-            appLog("Erro no chatbot: " . $e->getMessage(), 'error');
-            $this->json([
-                'success' => true,
-                'message' => __('chatbot.error_response'),
-            ]);
-        }
+        $this->json([
+            'success' => true,
+            'message' => $response,
+        ]);
     }
 
     /**
-     * Monta o prompt do sistema para o chatbot.
+     * Match de FAQ por keywords.
      */
-    private function buildSystemPrompt(): string
+    private function matchFaq(string $message): string
     {
-        $siteName = SITE_NAME;
-        $services = $this->db->fetchAll("SELECT title_pt, short_description_pt FROM services WHERE is_active = 1");
-        $servicesList = '';
-        foreach ($services as $s) {
-            $servicesList .= "- {$s['title_pt']}: {$s['short_description_pt']}\n";
+        $message = mb_strtolower($message);
+
+        $faqs = [
+            [
+                'keywords' => ['serviço', 'servico', 'oferecem', 'fazem', 'trabalham'],
+                'answer' => 'Oferecemos: Sistemas Web, ERP, CRM, Integrações & APIs, Automações, Inteligência Artificial e Consultoria. Posso ajudar com mais alguma dúvida?',
+            ],
+            [
+                'keywords' => ['orçamento', 'orcamento', 'preço', 'preco', 'valor', 'custo', 'quanto'],
+                'answer' => 'Para solicitar um orçamento, preencha o formulário na página de contato ou nos chame no WhatsApp. Retornamos em até 2 horas!',
+            ],
+            [
+                'keywords' => ['prazo', 'demora', 'tempo', 'entrega', 'quando'],
+                'answer' => 'Os prazos variam: sites (1-3 semanas), sistemas simples (4-8 semanas), sistemas complexos (2-4 meses). Trabalhamos com entregas contínuas.',
+            ],
+            [
+                'keywords' => ['tecnologia', 'linguagem', 'stack', 'framework'],
+                'answer' => 'Utilizamos: PHP, Laravel, Node.js, Vue.js, React, MySQL, PostgreSQL, Redis, Docker, AWS e mais. Escolhemos a melhor stack para cada projeto.',
+            ],
+            [
+                'keywords' => ['suporte', 'ajuda', 'manutenção', 'bug', 'problema'],
+                'answer' => 'Sim! Oferecemos suporte contínuo, correção de bugs, manutenção evolutiva e monitoramento. Tempo médio de resposta: 2 horas.',
+            ],
+            [
+                'keywords' => ['contato', 'falar', 'telefone', 'whatsapp', 'email'],
+                'answer' => 'Você pode nos contatar via WhatsApp (resposta rápida), email contato@onsolutions.com.br ou pelo formulário de contato. Atendemos seg-sex 9h-18h.',
+            ],
+        ];
+
+        foreach ($faqs as $faq) {
+            foreach ($faq['keywords'] as $keyword) {
+                if (str_contains($message, $keyword)) {
+                    return $faq['answer'];
+                }
+            }
         }
 
-        $whatsapp = $this->settings->get('whatsapp_number', '');
-        $email = $this->settings->get('email', '');
-
-        return "Você é o assistente virtual da {$siteName}, uma empresa especializada em desenvolvimento de software sob medida.
-        
-Seus serviços incluem:
-{$servicesList}
-
-Informações de contato:
-- WhatsApp: {$whatsapp}
-- Email: {$email}
-
-Regras:
-- Seja educado, profissional e objetivo
-- Responda em português brasileiro
-- Se o cliente quiser falar com um humano, direcione para o WhatsApp
-- Não invente informações sobre preços ou prazos
-- Foque em entender a necessidade do cliente e direcionar para contato";
+        return 'Não encontrei uma resposta específica para sua pergunta. Você pode nos contatar pelo WhatsApp ou formulário de contato para falar com nossa equipe!';
     }
 }
