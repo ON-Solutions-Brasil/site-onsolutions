@@ -30,6 +30,7 @@ class QuotesController extends Controller
 
         $data = [
             'quote_number' => $this->input('quote_number'),
+            'public_token' => bin2hex(random_bytes(32)),
             'client_id'    => $this->input('client_id') ?: null,
             'user_id'      => $_SESSION['user_id'],
             'title'        => $this->input('title'),

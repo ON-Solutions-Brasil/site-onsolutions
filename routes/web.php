@@ -33,6 +33,9 @@ $router->post('/newsletter/subscribe', 'Site\NewsletterController@subscribe');
 // Chatbot
 $router->post('/chatbot/message', 'Site\ChatbotController@message');
 
+// Orçamento público
+$router->get('/orcamento/{token}', 'Site\QuoteController@show');
+
 // Busca
 $router->get('/busca', 'Site\SearchController@index');
 
