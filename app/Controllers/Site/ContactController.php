@@ -18,6 +18,18 @@ class ContactController extends Controller
     }
 
     /**
+     * Contato — Tema 2026 (Fase C, pré-visualização em paralelo).
+     * O envio continua usando a MESMA action POST /contato (send()), sem alterações.
+     */
+    public function index2026(): void
+    {
+        $this->data['page_title'] = __('contact.title') . ' - ' . SITE_NAME;
+        $this->data['meta_description'] = __('contact.meta_description');
+        $this->data['body_class'] = 'contact2026-page';
+        $this->view('site/contact-2026', $this->data, 'site-2026');
+    }
+
+    /**
      * Processa envio do formulário de contato.
      */
     public function send(): void

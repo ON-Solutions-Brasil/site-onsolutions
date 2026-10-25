@@ -1,0 +1,1040 @@
+<!DOCTYPE html><html lang="pt"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#0B1220"><title>Preview Fase B — ON Solutions</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"><style>/* =====================================================================
+   ON Solutions — Tema 2026 (Fase A)
+   Design system portado da referência docs/referencia/home-ref.html
+   ESCOPADO sob body.theme-2026 para não conflitar com style.css / Bootstrap.
+   ===================================================================== */
+
+body.theme-2026 {
+  --ink: #0B1220;
+  --navy: #0F172A;
+  --bg: #F5F8FB;
+  --line: #E2E8F0;
+  --text: #0F172A;
+  --soft: #52627A;
+  --mint: #5EEAD4;
+  --mintw: #E8FAF6;
+  --teal: #0D9488;
+  --tealD: #0F766E;
+  --tealX: #115E59;
+  --wa: #25D366;
+  --waD: #1EBE5B;
+  --danger: #B42318;
+  --font: "Poppins", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  margin: 0;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body.theme-2026 *,
+body.theme-2026 *::before,
+body.theme-2026 *::after { box-sizing: border-box; }
+
+body.theme-2026 h1,
+body.theme-2026 h2,
+body.theme-2026 h3,
+body.theme-2026 h4,
+body.theme-2026 p,
+body.theme-2026 ul,
+body.theme-2026 ol { margin: 0; }
+
+body.theme-2026 ul,
+body.theme-2026 ol { padding: 0; list-style: none; }
+
+body.theme-2026 a { color: inherit; }
+body.theme-2026 img { display: block; max-width: 100%; }
+body.theme-2026 button { font-family: inherit; }
+body.theme-2026 [hidden] { display: none !important; }
+
+body.theme-2026 .w { width: min(1120px, 100% - 40px); margin-inline: auto; }
+
+body.theme-2026 :focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+body.theme-2026 .top :focus-visible,
+body.theme-2026 .hero :focus-visible,
+body.theme-2026 .dark :focus-visible,
+body.theme-2026 .fixbar :focus-visible,
+body.theme-2026 .mnav :focus-visible,
+body.theme-2026 .foot :focus-visible { outline-color: var(--mint); }
+
+body.theme-2026 .skip {
+  position: absolute; left: -9999px; top: 8px; z-index: 100;
+  background: var(--mint); color: #0B1220; padding: 10px 16px;
+  border-radius: 10px; font-weight: 600; text-decoration: none;
+}
+body.theme-2026 .skip:focus { left: 12px; }
+
+/* ---------- Topbar ---------- */
+body.theme-2026 .top {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(11,18,32,.92);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  transition: transform .3s ease;
+}
+body.theme-2026 .top.hide { transform: translateY(-100%); }
+body.theme-2026 .top-in {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px; gap: 12px;
+}
+body.theme-2026 .brand {
+  display: flex; align-items: center; gap: 10px; color: #fff;
+  font-weight: 600; font-size: 15px; letter-spacing: -.02em;
+  white-space: nowrap; text-decoration: none;
+}
+body.theme-2026 .brand img { width: 32px; height: 32px; }
+@media (max-width: 400px) { body.theme-2026 .brand .br { display: none; } }
+@media (max-width: 340px) { body.theme-2026 .brand > span { display: none; } }
+
+body.theme-2026 .top-r { display: flex; align-items: center; gap: 6px; }
+body.theme-2026 .top-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--wa); color: #06240F; font-weight: 700; font-size: 14px;
+  padding: 10px 16px; border-radius: 999px; text-decoration: none; white-space: nowrap;
+}
+body.theme-2026 .top-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+body.theme-2026 .burger {
+  width: 44px; height: 44px; border: 0; background: transparent;
+  cursor: pointer; border-radius: 10px; position: relative;
+}
+body.theme-2026 .burger span {
+  position: absolute; left: 11px; right: 11px; height: 2px;
+  background: #fff; border-radius: 2px;
+  transition: transform .2s, opacity .2s, top .2s;
+}
+body.theme-2026 .burger span:nth-child(1) { top: 15px; }
+body.theme-2026 .burger span:nth-child(2) { top: 21px; }
+body.theme-2026 .burger span:nth-child(3) { top: 27px; }
+body.theme-2026 .burger.on span:nth-child(1) { top: 21px; transform: rotate(45deg); }
+body.theme-2026 .burger.on span:nth-child(2) { opacity: 0; }
+body.theme-2026 .burger.on span:nth-child(3) { top: 21px; transform: rotate(-45deg); }
+
+body.theme-2026 .nav { display: none; }
+
+/* Mobile nav */
+body.theme-2026 .mnav {
+  background: #0B1220; border-top: 1px solid rgba(255,255,255,.08);
+  padding: 6px 16px 24px; max-height: calc(100vh - 60px); overflow-y: auto;
+}
+body.theme-2026 .mnav a.l {
+  display: block; padding: 15px 4px; color: #E2E8F0; font-weight: 500;
+  border-bottom: 1px solid rgba(255,255,255,.08); text-decoration: none;
+}
+body.theme-2026 .mnav details { border-bottom: 1px solid rgba(255,255,255,.08); }
+body.theme-2026 .mnav summary { padding: 15px 4px; color: #fff; font-weight: 600; cursor: pointer; }
+body.theme-2026 .mnav summary::after { color: var(--mint); }
+body.theme-2026 .mnav .g { color: var(--mint); font-size: 13px; font-weight: 600; margin: 14px 4px 4px; }
+body.theme-2026 .mnav .si { display: block; padding: 9px 4px; text-decoration: none; }
+body.theme-2026 .mnav .si b { display: block; color: #fff; font-size: 15px; font-weight: 500; }
+body.theme-2026 .mnav .si span { display: block; color: #94A3B8; font-size: 13px; line-height: 1.4; }
+body.theme-2026 .mnav .si.all { color: var(--mint); font-weight: 600; margin-top: 8px; padding-bottom: 14px; }
+
+/* Desktop mega-menu */
+/* Sem position:relative aqui — o .mega deve se ancorar na .top (largura total),
+   e não neste .dd estreito, para o painel cobrir todo o header (como na referência). */
+body.theme-2026 .dd { align-self: stretch; display: flex; align-items: center; }
+body.theme-2026 .dd-btn {
+  background: transparent; border: 0; color: #CBD5E1; font: 500 15px var(--font);
+  cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 8px 0; white-space: nowrap;
+}
+body.theme-2026 .dd-btn:hover,
+body.theme-2026 .dd.open .dd-btn,
+body.theme-2026 .dd-btn.is-active { color: var(--mint); }
+body.theme-2026 .dd-btn svg {
+  width: 12px; height: 12px; stroke: currentColor; fill: none;
+  stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; transition: transform .15s;
+}
+body.theme-2026 .dd.open .dd-btn svg { transform: rotate(180deg); }
+/* Visibilidade controlada pelo atributo [hidden] (fonte única para acessibilidade).
+   Quando visível, o .mega é posicionado em bloco; [hidden] o remove via a regra global. */
+body.theme-2026 .mega {
+  display: block; position: absolute; left: 0; right: 0; top: 100%;
+  background: #fff; color: var(--text); border-bottom: 1px solid var(--line);
+  box-shadow: 0 36px 60px -34px rgba(15,23,42,.5);
+}
+body.theme-2026 .mega-in { padding: 28px 0 22px; }
+body.theme-2026 .mega-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+body.theme-2026 .mt {
+  margin: 0 0 10px; font: 600 14px var(--font); color: var(--tealD);
+  display: flex; align-items: center; gap: 8px;
+}
+body.theme-2026 .mt::before { content: ""; width: 18px; height: 3px; border-radius: 2px; background: var(--mint); }
+body.theme-2026 .mi {
+  display: block; padding: 10px 12px; margin: 0 -12px; border-radius: 10px;
+  text-decoration: none; color: var(--text);
+}
+body.theme-2026 .mi:hover,
+body.theme-2026 .mi:focus-visible { background: var(--mintw); }
+body.theme-2026 .mi b { display: block; font-size: 15px; font-weight: 600; line-height: 1.3; }
+body.theme-2026 .mi span { display: block; font-size: 13px; color: var(--soft); line-height: 1.4; margin-top: 2px; }
+body.theme-2026 .mega-foot { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
+body.theme-2026 .mega-foot a { font-weight: 600; color: var(--tealD); text-decoration: none; }
+body.theme-2026 .mega-foot a:hover { text-decoration: underline; }
+body.theme-2026 .mega :focus-visible { outline-color: var(--teal); }
+
+@media (min-width: 1101px) {
+  body.theme-2026 .top-in { height: 68px; }
+  body.theme-2026 .burger { display: none; }
+  body.theme-2026 .mnav { display: none !important; }
+  body.theme-2026 .nav { display: flex; align-items: center; align-self: stretch; gap: 28px; }
+  body.theme-2026 .nav > a { color: #CBD5E1; font-weight: 500; font-size: 15px; text-decoration: none; white-space: nowrap; }
+  body.theme-2026 .nav > a:hover { color: var(--mint); }
+}
+
+/* ---------- CTA WhatsApp ---------- */
+body.theme-2026 .cta {
+  position: relative; display: flex; align-items: center; justify-content: center; gap: 12px;
+  width: 100%; min-height: 62px; padding: 16px 22px; border-radius: 18px;
+  background: var(--wa); color: #06240F; font-family: inherit; font-weight: 700;
+  font-size: 17px; line-height: 1.2; text-decoration: none; text-align: center;
+  box-shadow: 0 14px 34px -10px rgba(37,211,102,.65), inset 0 -3px 0 rgba(0,0,0,.12);
+  overflow: hidden; transition: transform .15s, background .15s; -webkit-tap-highlight-color: transparent;
+}
+body.theme-2026 .cta:hover { background: var(--waD); }
+body.theme-2026 .cta:active { transform: translateY(1px) scale(.99); }
+body.theme-2026 .cta svg { width: 26px; height: 26px; flex: none; fill: currentColor; }
+body.theme-2026 .cta .arr { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+body.theme-2026 .cta::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%);
+  transform: translateX(-120%); animation: t26-shine 3.4s ease-in-out infinite; pointer-events: none;
+}
+@keyframes t26-shine { 0%,55% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+
+body.theme-2026 .fixbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(11,18,32,.94); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255,255,255,.10); animation: t26-up .5s .5s both;
+}
+@keyframes t26-up { from { transform: translateY(110%); } to { transform: none; } }
+body.theme-2026 .fixbar .cta {
+  min-height: 58px; max-width: 520px; margin-inline: auto;
+  box-shadow: 0 10px 26px -10px rgba(37,211,102,.6), inset 0 -3px 0 rgba(0,0,0,.12);
+}
+@media (max-width: 430px) { body.theme-2026 .cta .arr { display: none; } body.theme-2026 .cta { padding: 16px 16px; gap: 10px; } }
+@media (max-width: 380px) { body.theme-2026 .cta, body.theme-2026 .fixbar .cta { font-size: 16px; gap: 10px; padding: 14px 14px; } }
+@media (max-width: 340px) { body.theme-2026 .cta, body.theme-2026 .fixbar .cta { font-size: 14.5px; gap: 8px; padding: 14px 10px; } body.theme-2026 .cta svg { width: 22px; height: 22px; } }
+@media (min-width: 860px) {
+  body.theme-2026 .fixbar { left: auto; right: 24px; bottom: 24px; padding: 0; background: none; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  body.theme-2026 .fixbar .cta { width: auto; min-height: 0; padding: 16px 22px; border-radius: 999px; font-size: 16px; }
+  body.theme-2026 .fixbar .cta .arr { display: none; }
+}
+
+/* ---------- Hero ---------- */
+body.theme-2026 .hero {
+  background:
+    radial-gradient(90% 70% at 100% 0%, rgba(94,234,212,.22), transparent 60%),
+    radial-gradient(80% 60% at 0% 100%, rgba(13,148,136,.32), transparent 62%),
+    linear-gradient(165deg, #0B1220 0%, #0F2D3A 62%, #134E4A 100%);
+  color: #fff; padding: 40px 0 64px;
+}
+body.theme-2026 .hero-grid { display: grid; gap: 40px; }
+body.theme-2026 .hero-grid > *,
+body.theme-2026 .calc > *,
+body.theme-2026 .proof-grid > * { min-width: 0; }
+
+body.theme-2026 .badge {
+  display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600;
+  color: var(--mint); background: rgba(94,234,212,.10); border: 1px solid rgba(94,234,212,.30);
+  padding: 7px 14px; border-radius: 999px;
+}
+body.theme-2026 .badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); animation: t26-ping 2s infinite; }
+@keyframes t26-ping { 0% { box-shadow: 0 0 0 0 rgba(94,234,212,.6); } 70%,100% { box-shadow: 0 0 0 10px rgba(94,234,212,0); } }
+
+body.theme-2026 .h { font-size: clamp(29px, 8.2vw, 52px); line-height: 1.08; font-weight: 800; letter-spacing: -.04em; margin-top: 22px; }
+body.theme-2026 .h mark { background: none; color: var(--mint); }
+body.theme-2026 .sub { margin-top: 22px; font-size: clamp(16.5px, 4.4vw, 19.5px); line-height: 1.6; color: #CBD7E4; max-width: 600px; }
+
+body.theme-2026 .trust { display: flex; flex-wrap: wrap; gap: 12px 20px; margin-top: 30px; font-size: 13.5px; color: #B7C6D8; }
+body.theme-2026 .trust span { display: inline-flex; align-items: center; gap: 7px; }
+body.theme-2026 .trust span::before,
+body.theme-2026 .chk::before {
+  content: ""; flex: none; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--mint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B1220' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/10px no-repeat;
+}
+
+/* ---------- Painel antes/depois ---------- */
+body.theme-2026 .panel { background: #fff; color: var(--text); border-radius: 28px; padding: 20px; box-shadow: 0 24px 60px -28px rgba(0,0,0,.6); }
+body.theme-2026 .seg { display: grid; grid-template-columns: 1fr 1fr; background: var(--bg); border-radius: 999px; padding: 4px; gap: 4px; }
+body.theme-2026 .seg button { font: 600 14px var(--font); border: 0; background: transparent; color: var(--soft); padding: 12px 8px; border-radius: 999px; cursor: pointer; min-height: 50px; }
+body.theme-2026 .seg button[aria-pressed=true] { background: var(--navy); color: #fff; }
+body.theme-2026 .plist { margin-top: 18px; display: grid; gap: 12px; }
+body.theme-2026 .plist li { display: flex; gap: 12px; align-items: center; padding: 17px 18px; border-radius: 14px; background: var(--bg); font-size: 15px; line-height: 1.5; }
+body.theme-2026 .plist li span { min-width: 0; overflow-wrap: anywhere; }
+body.theme-2026 .plist.bad li::before { content: ""; flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--danger); }
+body.theme-2026 .plist.ok li { background: var(--mintw); }
+body.theme-2026 .plist.ok li::before {
+  content: ""; flex: none; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--tealD) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/12px no-repeat;
+}
+body.theme-2026 .plist b { color: var(--danger); font-weight: 600; }
+
+/* ---------- Seções ---------- */
+body.theme-2026 .sec { padding: 76px 0; }
+body.theme-2026 .sec-w { background: #fff; }
+body.theme-2026 .dark { background: #0B1220; color: #fff; }
+body.theme-2026 .dark.grad { background: linear-gradient(135deg, #0B1220 0%, #0F2D3A 58%, #134E4A 100%); }
+body.theme-2026 .eyebrow { font-size: 13px; font-weight: 700; color: var(--tealD); letter-spacing: .02em; }
+body.theme-2026 .dark .eyebrow { color: var(--mint); }
+body.theme-2026 .t2 { font-size: clamp(25px, 6.6vw, 38px); line-height: 1.14; font-weight: 800; letter-spacing: -.035em; margin-top: 14px; }
+body.theme-2026 .lead2 { margin-top: 18px; color: var(--soft); font-size: 16.5px; line-height: 1.65; max-width: 600px; }
+body.theme-2026 .dark .lead2 { color: #B7C6D8; }
+body.theme-2026 .after-link { margin-top: 32px; }
+body.theme-2026 .link { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--tealD); text-decoration: none; font-size: 16px; min-height: 44px; }
+body.theme-2026 .link:hover { text-decoration: underline; }
+body.theme-2026 .link svg,
+body.theme-2026 .go svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+body.theme-2026 .dark .link { color: var(--mint); }
+
+/* ---------- Stats / manifesto ---------- */
+body.theme-2026 .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 34px; }
+body.theme-2026 .stat { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 22px; }
+body.theme-2026 .stat b { display: block; font-size: 34px; font-weight: 800; letter-spacing: -.04em; line-height: 1; color: var(--mint); }
+body.theme-2026 .stat span { display: block; margin-top: 6px; font-size: 13px; color: #B7C6D8; }
+body.theme-2026 .stat.wide { grid-column: 1/-1; }
+body.theme-2026 .stat.wide b { font-size: 26px; }
+body.theme-2026 .manifesto { margin-top: 34px; border-left: 4px solid var(--mint); padding-left: 22px; font-size: clamp(19px, 5vw, 26px); line-height: 1.35; font-weight: 600; letter-spacing: -.02em; }
+body.theme-2026 .manifesto span { display: block; margin-top: 14px; font-size: 15.5px; line-height: 1.65; font-weight: 400; color: #B7C6D8; letter-spacing: 0; }
+
+/* ---------- Checklist de dores ---------- */
+body.theme-2026 .pains { display: grid; gap: 16px; margin-top: 36px; }
+body.theme-2026 .pain {
+  display: flex; align-items: center; gap: 14px; width: 100%; min-height: 80px;
+  padding: 18px 20px; border-radius: 18px; background: #fff; border: 1.5px solid var(--line);
+  font-weight: 600; font-size: 16.5px; line-height: 1.4; letter-spacing: -.01em; color: inherit;
+  text-align: left; cursor: pointer; transition: border-color .15s, background .15s, transform .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+body.theme-2026 .sec-w .pain { background: var(--bg); }
+body.theme-2026 .pain:hover { border-color: #9DDBB8; }
+body.theme-2026 .pain:active { transform: scale(.99); }
+body.theme-2026 .pain .qt { flex: 1; }
+body.theme-2026 .pain .ck { flex: none; width: 30px; height: 30px; border-radius: 50%; border: 2px solid #C5D0DD; display: grid; place-items: center; transition: background .15s, border-color .15s; }
+body.theme-2026 .pain .ck svg { width: 16px; height: 16px; fill: none; stroke: #fff; stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+body.theme-2026 .pain[aria-pressed=true] { border-color: var(--wa); background: #F0FFF6; }
+body.theme-2026 .pain[aria-pressed=true] .ck { background: var(--wa); border-color: var(--wa); }
+body.theme-2026 .pain[aria-pressed=true] .ck svg { opacity: 1; }
+body.theme-2026 .pains-hint { margin-top: 22px; font-size: 14px; color: var(--soft); text-align: center; min-height: 21px; }
+
+/* ---------- Tabs / carrossel de problemas ---------- */
+body.theme-2026 .tabs { display: grid; grid-template-columns: 1fr 1fr; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 4px; gap: 4px; margin-top: 32px; }
+body.theme-2026 .tabs button { font: 600 14px var(--font); border: 0; background: transparent; color: var(--soft); padding: 12px 8px; border-radius: 999px; cursor: pointer; min-height: 46px; }
+body.theme-2026 .tabs button[aria-pressed=true] { background: var(--navy); color: #fff; }
+body.theme-2026 .mq-m { margin-top: 28px; }
+body.theme-2026 .mq-track { display: grid; gap: 18px; }
+body.theme-2026 .pk { display: flex; flex-direction: column; gap: 12px; padding: 28px 24px 22px; background: #fff; border: 1.5px solid var(--line); border-radius: 20px; text-decoration: none; color: inherit; transition: border-color .15s, transform .15s; }
+body.theme-2026 a.pk:hover { border-color: var(--teal); transform: translateY(-2px); }
+body.theme-2026 .pk .q { font: 700 20px/1.25 var(--font); letter-spacing: -.02em; }
+body.theme-2026 .pk .a { color: var(--soft); font-size: 15.5px; line-height: 1.6; }
+body.theme-2026 .pk .f { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 13.5px; color: var(--soft); font-weight: 500; }
+body.theme-2026 .go { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--tealD); font-size: 14.5px; }
+body.theme-2026 .mq-m.is-looping { overflow: hidden; margin-inline: -20px; padding: 2px 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+body.theme-2026 .mq-m.is-looping .mq-track { display: flex; width: max-content; gap: 0; animation: t26-mq var(--dur, 30s) linear infinite; will-change: transform; }
+body.theme-2026 .mq-m.is-looping .pk { flex: 0 0 80vw; max-width: 340px; margin-right: 16px; }
+body.theme-2026 .mq-m.is-looping.is-paused .mq-track { animation-play-state: paused; }
+@keyframes t26-mq { to { transform: translateX(-50%); } }
+
+/* ---------- Carrossel de clientes ---------- */
+body.theme-2026 .marq { margin-top: 36px; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+body.theme-2026 .marq::-webkit-scrollbar { display: none; }
+body.theme-2026 .marq.is-looping { overflow: hidden; }
+body.theme-2026 .track { display: flex; width: max-content; }
+body.theme-2026 .marq.is-looping .track { animation: t26-mq var(--dur, 50s) linear infinite; will-change: transform; }
+body.theme-2026 .marq.is-looping:hover .track,
+body.theme-2026 .marq.is-looping.is-paused .track { animation-play-state: paused; }
+body.theme-2026 .cs { flex: none; width: 290px; margin-right: 18px; border: 1px solid rgba(248,250,252,.2); border-radius: 20px; padding: 22px; background: rgba(255,255,255,.04); display: flex; flex-direction: column; gap: 14px; }
+body.theme-2026 .cs .lp { height: 80px; border-radius: 12px; background: #fff; display: flex; align-items: center; justify-content: center; padding: 10px 16px; }
+body.theme-2026 .cs .lp img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+body.theme-2026 .cs .lp .wm { font-weight: 700; font-size: 23px; letter-spacing: -.03em; color: #0F172A; }
+body.theme-2026 .cs h3 { font-size: 18px; font-weight: 700; color: #fff; margin-top: 4px; }
+body.theme-2026 .cs .tg { align-self: flex-start; font-size: 12.5px; font-weight: 500; line-height: 1.3; color: var(--mint); background: rgba(94,234,212,.12); border: 1px solid rgba(94,234,212,.3); padding: 4px 11px; border-radius: 999px; }
+body.theme-2026 .cs p { color: rgba(248,250,252,.76); font-size: 14.5px; line-height: 1.65; }
+
+/* ---------- Calculadora ---------- */
+body.theme-2026 .calc { display: grid; gap: 36px; }
+body.theme-2026 .calc-card { background: #fff; border: 1px solid var(--line); border-radius: 28px; padding: 26px; display: grid; gap: 22px; box-shadow: 0 20px 50px -30px rgba(15,23,42,.3); }
+body.theme-2026 .calc-card label { display: grid; gap: 10px; font-weight: 600; font-size: 14px; }
+body.theme-2026 .calc-card input { font: 600 18px var(--font); color: var(--text); background: var(--bg); border: 2px solid var(--line); border-radius: 12px; padding: 14px 16px; width: 100%; min-height: 52px; }
+body.theme-2026 .calc-card input:focus { outline: none; border-color: var(--teal); }
+body.theme-2026 .calc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+body.theme-2026 .calc-out { background: var(--mintw); border-radius: 16px; padding: 22px; }
+body.theme-2026 .calc-out b { display: block; font-size: 27px; font-weight: 800; letter-spacing: -.03em; color: var(--tealX); line-height: 1.15; }
+body.theme-2026 .calc-out p { margin-top: 8px; font-size: 14.5px; }
+body.theme-2026 .calc-hint { font-size: 13.5px; color: var(--soft); }
+
+/* ---------- Como funciona (timeline) ---------- */
+body.theme-2026 .tracks { display: grid; gap: 22px; margin-top: 36px; }
+body.theme-2026 .tr { background: #fff; border: 1px solid var(--line); border-radius: 28px; padding: 30px 24px; }
+body.theme-2026 .tr.alt { background: var(--mintw); border-color: transparent; }
+body.theme-2026 .tr h3 { font-size: 18px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 26px; }
+body.theme-2026 .tl .s { display: grid; grid-template-columns: 36px 1fr; column-gap: 14px; position: relative; padding-bottom: 30px; }
+body.theme-2026 .tl .s:last-child { padding-bottom: 0; }
+body.theme-2026 .tl .n { width: 36px; height: 36px; border-radius: 50%; background: var(--tealD); color: #fff; font-weight: 700; font-size: 14px; display: grid; place-items: center; grid-row: 1/span 2; }
+body.theme-2026 .tr.alt .n { background: var(--navy); }
+body.theme-2026 .tl .s::after { content: ""; position: absolute; left: 17px; top: 44px; bottom: 4px; width: 2px; background: rgba(15,23,42,.14); }
+body.theme-2026 .tl .s:last-child::after { display: none; }
+body.theme-2026 .tl b { font-size: 16px; align-self: center; }
+body.theme-2026 .tl p { color: var(--soft); font-size: 14.5px; grid-column: 2; margin-top: 6px; line-height: 1.6; }
+
+/* ---------- FAQ ---------- */
+body.theme-2026 .faq { display: grid; gap: 14px; margin-top: 34px; }
+body.theme-2026 details { background: #fff; border: 1px solid var(--line); border-radius: 16px; }
+body.theme-2026 .sec-w details { background: var(--bg); }
+body.theme-2026 summary { cursor: pointer; list-style: none; padding: 22px; font-weight: 600; font-size: 16.5px; display: flex; justify-content: space-between; gap: 12px; align-items: center; min-height: 58px; -webkit-tap-highlight-color: transparent; }
+body.theme-2026 summary::-webkit-details-marker { display: none; }
+body.theme-2026 summary::after { content: "+"; font-size: 26px; line-height: 1; color: var(--tealD); flex: none; }
+body.theme-2026 details[open] summary::after { content: "\2013"; }
+body.theme-2026 details p { padding: 0 22px 22px; color: var(--soft); font-size: 15.5px; line-height: 1.7; }
+
+/* ---------- CTA final ---------- */
+body.theme-2026 .final { background: radial-gradient(90% 80% at 50% 0%, rgba(94,234,212,.18), transparent 60%), #0B1220; color: #fff; text-align: center; padding: 84px 0 92px; }
+body.theme-2026 .final .t2 { margin-top: 0; }
+body.theme-2026 .final p.l3 { color: #C0CEDC; margin: 20px auto 0; max-width: 540px; font-size: 16.5px; line-height: 1.65; }
+body.theme-2026 .final p.nt { margin-top: 18px; font-size: 13.5px; color: #93A7BD; }
+
+/* ---------- Footer ---------- */
+body.theme-2026 .foot { background: #070D18; color: #8FA2B8; padding: 48px 0 calc(34px + 84px); font-size: 14px; }
+body.theme-2026 .foot a { color: #B7C6D8; text-decoration: none; }
+body.theme-2026 .foot a:hover { color: #fff; text-decoration: underline; }
+body.theme-2026 .foot-top { display: grid; gap: 30px; }
+body.theme-2026 .foot-top > * { min-width: 0; }
+body.theme-2026 .foot .lg { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 600; font-size: 16px; margin-bottom: 10px; }
+body.theme-2026 .foot .lg img { width: 34px; height: 34px; }
+body.theme-2026 .foot-links { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+body.theme-2026 .fs { margin-top: 36px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,.10); }
+body.theme-2026 .fs-t { color: #fff; font-weight: 600; margin-bottom: 12px; }
+body.theme-2026 .fs-g { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 20px; }
+
+/* ---------- Responsivo ---------- */
+@media (min-width: 640px) {
+  body.theme-2026 .pains { grid-template-columns: 1fr 1fr; gap: 20px; }
+}
+@media (min-width: 860px) {
+  body.theme-2026 .w { width: min(1120px, 100% - 64px); }
+  body.theme-2026 .hero { padding: 96px 0 120px; }
+  body.theme-2026 .hero-grid { grid-template-columns: 1.1fr .9fr; align-items: center; gap: 80px; }
+  body.theme-2026 .sec { padding: 120px 0; }
+  body.theme-2026 .lead2 { font-size: 17.5px; }
+  body.theme-2026 .stats { grid-template-columns: repeat(3, 1fr); }
+  body.theme-2026 .stat.wide { grid-column: auto; }
+  body.theme-2026 .mq-track { grid-template-columns: repeat(2, 1fr); }
+  body.theme-2026 .calc { grid-template-columns: 1fr 1fr; align-items: center; gap: 80px; }
+  body.theme-2026 .tracks { grid-template-columns: 1fr 1fr; gap: 20px; }
+  body.theme-2026 .tr { padding: 36px 34px; }
+  body.theme-2026 .final { padding: 112px 0 120px; }
+  body.theme-2026 .foot { padding-bottom: 40px; }
+  body.theme-2026 .foot-top { grid-template-columns: 1.2fr 1.4fr auto; align-items: start; }
+  body.theme-2026 .fs-g { grid-template-columns: repeat(4, 1fr); }
+  body.theme-2026 .faq { max-width: 860px; }
+  body.theme-2026 .proof-grid { display: grid; grid-template-columns: auto 1fr; gap: 80px; align-items: center; }
+  body.theme-2026 .proof-grid .stats { margin-top: 0; grid-template-columns: repeat(3, auto); }
+  body.theme-2026 .proof-grid .manifesto { margin-top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.theme-2026 * { animation: none !important; transition: none !important; }
+  body.theme-2026 html { scroll-behavior: auto; }
+}
+
+/* =====================================================================
+   Fases B/C — páginas de serviços, blog e artigo
+   Portado das regras .sv / .post / .art / .svc-box da referência.
+   Escopado em body.theme-2026.
+   ===================================================================== */
+
+/* Breadcrumb / hero compacto de páginas internas */
+body.theme-2026 .hero.compact { padding: 32px 0 52px; }
+body.theme-2026 .hero.compact .h { font-size: clamp(28px, 7.4vw, 44px); margin-top: 14px; }
+body.theme-2026 .crumb { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; font-size: 13px; color: #A9BAC9; margin-bottom: 20px; }
+body.theme-2026 .crumb a { color: #CBD5E1; text-decoration: none; }
+body.theme-2026 .crumb a:hover { color: var(--mint); }
+body.theme-2026 .crumb i { font-style: normal; opacity: .5; }
+
+/* Grupos de seções */
+body.theme-2026 .grp + .grp { margin-top: 72px; }
+
+/* Grid de serviços (índice) */
+body.theme-2026 .sv-grid { display: grid; gap: 18px; margin-top: 34px; }
+body.theme-2026 .sv {
+  display: flex; flex-direction: column; gap: 10px; padding: 28px 26px;
+  background: #fff; border: 1.5px solid var(--line); border-radius: 22px;
+  text-decoration: none; color: inherit; transition: border-color .15s, transform .15s;
+}
+body.theme-2026 .sec-w .sv { background: var(--bg); }
+body.theme-2026 .sv:hover { border-color: var(--teal); transform: translateY(-2px); }
+body.theme-2026 .sv b { font: 700 19px/1.25 var(--font); letter-spacing: -.02em; }
+body.theme-2026 .sv span.d { color: var(--soft); font-size: 15px; }
+body.theme-2026 .sv .go { margin-top: 16px; }
+
+/* Caixa escura de CTA de serviço */
+body.theme-2026 .svc-box {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  margin-top: 52px; padding: 26px; border-radius: 20px;
+  background: linear-gradient(135deg, #0F2D3A, #134E4A); color: #fff; text-decoration: none;
+}
+body.theme-2026 .svc-box small { display: block; color: var(--mint); font-size: 13px; font-weight: 600; }
+body.theme-2026 .svc-box b { display: block; font-size: 19px; font-weight: 700; letter-spacing: -.02em; margin-top: 2px; }
+body.theme-2026 .svc-box .go { color: var(--mint); flex: none; }
+
+/* Grid de posts do blog */
+body.theme-2026 .bl-grid { display: grid; gap: 24px; margin-top: 36px; }
+body.theme-2026 .post {
+  display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line);
+  border-radius: 20px; overflow: hidden; text-decoration: none; color: inherit;
+  transition: border-color .15s, transform .15s, box-shadow .15s;
+}
+body.theme-2026 .post:hover { border-color: var(--teal); transform: translateY(-3px); box-shadow: 0 22px 40px -28px rgba(15,23,42,.45); }
+body.theme-2026 .post .cv { aspect-ratio: 1200/630; background: #0F172A; overflow: hidden; }
+body.theme-2026 .post .cv img { width: 100%; height: 100%; object-fit: cover; }
+body.theme-2026 .post .pb { padding: 22px 24px 26px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+body.theme-2026 .post .ct { align-self: flex-start; font-size: 12.5px; font-weight: 600; color: var(--tealX); background: var(--mintw); padding: 4px 11px; border-radius: 999px; }
+body.theme-2026 .post h2, body.theme-2026 .post h3 { font-size: 19px; font-weight: 700; line-height: 1.3; letter-spacing: -.02em; }
+body.theme-2026 .post:hover h2, body.theme-2026 .post:hover h3 { color: var(--tealD); }
+body.theme-2026 .post .ml { margin-top: auto; font-size: 13.5px; color: var(--soft); }
+
+/* Artigo (post individual) */
+body.theme-2026 .art { max-width: 760px; margin: 0 auto; }
+body.theme-2026 .art-cover { display: block; width: 100%; height: auto; aspect-ratio: 1200/630; object-fit: cover; border-radius: 22px; margin-bottom: 44px; background: #0F172A; }
+body.theme-2026 .art h2 { font-size: 23px; font-weight: 700; letter-spacing: -.025em; margin: 52px 0 16px; }
+body.theme-2026 .art p { font-size: 16.5px; line-height: 1.85; color: #1E293B; margin: 0 0 22px; }
+body.theme-2026 .art ul, body.theme-2026 .art ol { margin: 0 0 28px; padding-left: 24px; font-size: 16.5px; line-height: 1.8; color: #1E293B; }
+body.theme-2026 .art ul { list-style: disc; }
+body.theme-2026 .art ol { list-style: decimal; }
+body.theme-2026 .art li { margin-bottom: 14px; padding-left: 4px; }
+body.theme-2026 .art li::marker { color: var(--teal); font-weight: 700; }
+body.theme-2026 .art a { color: var(--tealD); }
+body.theme-2026 .art-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 20px; color: #A9BAC9; font-size: 14px; }
+body.theme-2026 .art-meta .ct { color: #0B1220; background: var(--mint); font-weight: 600; padding: 3px 12px; border-radius: 999px; font-size: 12.5px; }
+
+/* Funcionalidades e tecnologias (detalhe do serviço) */
+body.theme-2026 .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+body.theme-2026 .chip { font-size: 13.5px; font-weight: 500; color: var(--tealX); background: var(--mintw); border: 1px solid rgba(13,148,136,.2); padding: 7px 14px; border-radius: 999px; }
+body.theme-2026 .feats { display: grid; gap: 12px; margin-top: 22px; }
+body.theme-2026 .feat { display: flex; align-items: flex-start; gap: 12px; font-size: 15.5px; line-height: 1.5; }
+body.theme-2026 .feat::before { content: ""; flex: none; width: 20px; height: 20px; margin-top: 1px; border-radius: 50%; background: var(--tealD) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/12px no-repeat; }
+
+/* Paginação */
+body.theme-2026 .pager { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 44px; }
+body.theme-2026 .pager a, body.theme-2026 .pager span {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 44px; height: 44px;
+  padding: 0 12px; border-radius: 12px; border: 1.5px solid var(--line); background: #fff;
+  color: var(--text); text-decoration: none; font-weight: 600; font-size: 15px;
+}
+body.theme-2026 .pager a:hover { border-color: var(--teal); }
+body.theme-2026 .pager .current { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+/* Filtros de categoria (blog) */
+body.theme-2026 .cat-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+body.theme-2026 .cat-pill { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; color: var(--text); text-decoration: none; font-size: 14px; font-weight: 500; }
+body.theme-2026 .cat-pill:hover { border-color: var(--teal); }
+body.theme-2026 .cat-pill.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+body.theme-2026 .cat-pill span { font-size: 12px; opacity: .7; }
+
+/* Estado vazio */
+body.theme-2026 .empty { text-align: center; padding: 40px 0; color: var(--soft); }
+
+@media (min-width: 640px) {
+  body.theme-2026 .sv-grid { grid-template-columns: repeat(2, 1fr); }
+  body.theme-2026 .bl-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 960px) {
+  body.theme-2026 .sv-grid { grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  body.theme-2026 .bl-grid { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+}
+</style></head><body class="theme-2026"><div style="position:sticky;top:0;z-index:999;background:#115E59;color:#fff;font:600 13px Poppins,sans-serif;padding:8px 16px;text-align:center">PREVIEW FASE B — Serviços (índice) + Blog (índice). As páginas de detalhe compartilham o mesmo tema.</div><header class="top">
+  <div class="w top-in">
+    <a class="brand" href="#/" aria-label="ON Solutions">
+              <img src="#" alt="ON Solutions">
+            <span>ON Solutions</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#/quem-somos">Quem Somos</a>
+      <span class="dd">
+        <button type="button" class="dd-btn" aria-expanded="false" aria-haspopup="true">
+          Serviços          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="mega" role="menu" hidden>
+          <div class="w mega-in">
+            <div class="mega-cols">
+                            <a class="mi" role="menuitem" href="#/servicos/sistemas-web"><b>Sistemas Web</b></a>
+                            <a class="mi" role="menuitem" href="#/servicos/erp-personalizado"><b>ERP Personalizado</b></a>
+                            <a class="mi" role="menuitem" href="#/servicos/crm"><b>CRM</b></a>
+                            <a class="mi" role="menuitem" href="#/servicos/integracoes-apis"><b>Integrações &amp; APIs</b></a>
+                            <a class="mi" role="menuitem" href="#/servicos/automacoes"><b>Automações</b></a>
+                            <a class="mi" role="menuitem" href="#/servicos/dashboards-bi"><b>Dashboards &amp; BI</b></a>
+                            <a class="mi" role="menuitem" href="#/servicos/aplicativos-mobile"><b>Aplicativos Mobile</b></a>
+                            <a class="mi" role="menuitem" href="#/servicos/saas"><b>SaaS</b></a>
+                            <a class="mi" role="menuitem" href="#/servicos/inteligencia-artificial"><b>Inteligência Artificial</b></a>
+                            <a class="mi" role="menuitem" href="#/servicos/chatbots"><b>Chatbots</b></a>
+                            <a class="mi" role="menuitem" href="#/servicos/machine-learning"><b>Machine Learning</b></a>
+                            <a class="mi" role="menuitem" href="#/servicos/consultoria"><b>Consultoria</b></a>
+                            <a class="mi" role="menuitem" href="#/servicos/performance"><b>Performance</b></a>
+                            <a class="mi" role="menuitem" href="#/servicos/infraestrutura"><b>Infraestrutura</b></a>
+                          </div>
+            <div class="mega-foot">
+              <a href="#/servicos">Todos os Serviços &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </span>
+      <a href="#/blog">Blog</a>
+      <a href="#/contato">Contato</a>
+    </nav>
+
+    <div class="top-r">
+      <a class="top-btn" data-wa-main data-pos="topo"
+         href="https://wa.me/5511972243329?text=Ol%C3%A1%2C%20vim%20do%20site."
+         data-wa-mode="whatsapp"
+         data-wa-endpoint="https://wa.me/5511972243329"
+         target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 00-8.47 15l-1.3 4.73 4.85-1.27A9.9 9.9 0 1012.04 2zm0 1.8a8.1 8.1 0 11-4.13 15.07l-.3-.18-2.88.75.77-2.8-.19-.3A8.1 8.1 0 0112.04 3.8zm4.67 11.44c-.26-.13-1.5-.74-1.73-.82-.23-.09-.4-.13-.57.13-.17.26-.65.82-.8.99-.14.17-.29.19-.55.06-.26-.13-1.08-.4-2.06-1.27-.76-.68-1.28-1.52-1.43-1.78-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.46.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.06-.13-.57-1.38-.78-1.88-.2-.49-.41-.42-.57-.43h-.49c-.17 0-.44.06-.67.32-.23.26-.88.86-.88 2.1 0 1.24.9 2.43 1.03 2.6.13.17 1.77 2.7 4.3 3.79.6.26 1.07.41 1.44.52.6.19 1.15.16 1.58.1.48-.07 1.5-.61 1.71-1.2.21-.59.21-1.1.15-1.2-.06-.11-.23-.17-.49-.3z"/></svg>
+        Falar no WhatsApp      </a>
+      <button type="button" class="burger" aria-expanded="false" aria-controls="mnav" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Nav mobile -->
+  <nav class="mnav" id="mnav" hidden aria-label="Navegação principal">
+    <a class="l" href="#/quem-somos">Quem Somos</a>
+    <details>
+      <summary>Serviços</summary>
+            <a class="si" href="#/servicos/sistemas-web"><b>Sistemas Web</b></a>
+            <a class="si" href="#/servicos/erp-personalizado"><b>ERP Personalizado</b></a>
+            <a class="si" href="#/servicos/crm"><b>CRM</b></a>
+            <a class="si" href="#/servicos/integracoes-apis"><b>Integrações &amp; APIs</b></a>
+            <a class="si" href="#/servicos/automacoes"><b>Automações</b></a>
+            <a class="si" href="#/servicos/dashboards-bi"><b>Dashboards &amp; BI</b></a>
+            <a class="si" href="#/servicos/aplicativos-mobile"><b>Aplicativos Mobile</b></a>
+            <a class="si" href="#/servicos/saas"><b>SaaS</b></a>
+            <a class="si" href="#/servicos/inteligencia-artificial"><b>Inteligência Artificial</b></a>
+            <a class="si" href="#/servicos/chatbots"><b>Chatbots</b></a>
+            <a class="si" href="#/servicos/machine-learning"><b>Machine Learning</b></a>
+            <a class="si" href="#/servicos/consultoria"><b>Consultoria</b></a>
+            <a class="si" href="#/servicos/performance"><b>Performance</b></a>
+            <a class="si" href="#/servicos/infraestrutura"><b>Infraestrutura</b></a>
+            <a class="si all" href="#/servicos">Todos os Serviços &rarr;</a>
+    </details>
+    <a class="l" href="#/blog">Blog</a>
+    <a class="l" href="#/contato">Contato</a>
+    <div class="g">Idioma</div>
+        <a class="si" href="#pt"><b>Português</b></a>
+    <a class="si" href="#en"><b>English</b></a>
+    <a class="si" href="#es"><b>Español</b></a>
+  </nav>
+</header>
+<main id="conteudo" class="view" data-service=""><section class="hero compact">
+  <div class="w">
+    <nav class="crumb" aria-label="breadcrumb">
+      <a href="#/">Home</a><i>/</i><span>Serviços</span>
+    </nav>
+    <span class="badge"><i></i>Serviços</span>
+    <h1 class="h">Tecnologia sob medida para cada etapa do seu negócio</h1>
+    <p class="sub">Sistemas web, ERP, CRM, integrações, APIs, automações, IA, chatbots e consultoria tecnológica.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="w">
+    <div class="sv-grid">
+            <a class="sv" href="#/servicos/sistemas-web">
+        <b>Sistemas Web</b>
+        <span class="d">Plataformas web completas e escaláveis para sua empresa.</span>
+        <span class="go">Saiba mais <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></span>
+      </a>
+            <a class="sv" href="#/servicos/erp-personalizado">
+        <b>ERP Personalizado</b>
+        <span class="d">Gestão integrada de toda a operação em um só lugar.</span>
+        <span class="go">Saiba mais <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></span>
+      </a>
+            <a class="sv" href="#/servicos/crm">
+        <b>CRM</b>
+        <span class="d">Funil de vendas e relacionamento com clientes.</span>
+        <span class="go">Saiba mais <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></span>
+      </a>
+            <a class="sv" href="#/servicos/automacoes">
+        <b>Automações</b>
+        <span class="d">Elimine tarefas repetitivas e ganhe velocidade.</span>
+        <span class="go">Saiba mais <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></span>
+      </a>
+            <a class="sv" href="#/servicos/dashboards-bi">
+        <b>Dashboards &amp; BI</b>
+        <span class="d">Decisões baseadas em dados em tempo real.</span>
+        <span class="go">Saiba mais <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></span>
+      </a>
+            <a class="sv" href="#/servicos/inteligencia-artificial">
+        <b>Inteligência Artificial</b>
+        <span class="d">Chatbots, previsões e automação com IA.</span>
+        <span class="go">Saiba mais <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></span>
+      </a>
+          </div>
+  </div>
+</section>
+
+<section class="sec sec-w">
+  <div class="w">
+    <a class="svc-box" data-wa-main data-pos="servicos" href="https://wa.me/5511972243329?text=Ol%C3%A1%2C%20vim%20do%20site."
+       data-wa-mode="whatsapp" data-wa-endpoint="https://wa.me/5511972243329">
+      <span>
+        <small>Falar no WhatsApp</small>
+        <b>Vamos conversar sobre o seu projeto</b>
+      </span>
+      <span class="go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></span>
+    </a>
+  </div>
+</section>
+<div style="height:2px;background:linear-gradient(90deg,transparent,#5EEAD4,transparent);margin:0 0"></div><section class="hero compact">
+  <div class="w">
+    <nav class="crumb" aria-label="breadcrumb">
+      <a href="#/">Home</a><i>/</i><span>Blog</span>
+    </nav>
+    <span class="badge"><i></i>Blog</span>
+    <h1 class="h">Insights sobre tecnologia e negócios</h1>
+    <p class="sub">Artigos sobre desenvolvimento, integrações, IA e como escalar seu negócio com tecnologia.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="w">
+        <div class="cat-bar">
+      <a class="cat-pill active" href="#/blog">Todos</a>
+                      <a class="cat-pill" href="#/blog/categoria/gestao">Gestão <span>3</span></a>
+                              <a class="cat-pill" href="#/blog/categoria/vendas">Vendas <span>2</span></a>
+                  </div>
+    
+    <div class="bl-grid">
+            <a class="post" href="#/blog/quanto-custa-erp">
+        <div class="cv">
+                  </div>
+        <div class="pb">
+          <span class="ct">Gestão</span>          <h2>Quanto custa um ERP sob medida?</h2>
+          <p class="ml">O que pesa no preço de um ERP e como planejar o investimento.</p>
+          <span class="ml"><i class="bi bi-calendar3"></i> 18/10/2026</span>
+        </div>
+      </a>
+            <a class="post" href="#/blog/crm-ou-planilha">
+        <div class="cv">
+                  </div>
+        <div class="pb">
+          <span class="ct">Vendas</span>          <h2>CRM ou planilha: quando trocar?</h2>
+          <p class="ml">Sinais de que sua operação já passou do ponto da planilha.</p>
+          <span class="ml"><i class="bi bi-calendar3"></i> 10/10/2026</span>
+        </div>
+      </a>
+            <a class="post" href="#/blog/automatizar-processos">
+        <div class="cv">
+                  </div>
+        <div class="pb">
+          <span class="ct">Operação</span>          <h2>Como automatizar processos repetitivos</h2>
+          <p class="ml">Por onde começar a automação na sua empresa.</p>
+          <span class="ml"><i class="bi bi-calendar3"></i> 30/09/2026</span>
+        </div>
+      </a>
+          </div>
+
+      </div>
+</section>
+</main><footer class="foot">
+  <div class="w foot-top">
+    <div>
+      <div class="lg">
+                  <img src="#" alt="ON Solutions">
+                <span>ON Solutions</span>
+      </div>
+      <p>Desenvolvimento de Software Sob Medida, Sistemas Personalizados e Inteligência Artificial.</p>
+    </div>
+
+    <div>
+      <div class="foot-links">
+        <a href="#/quem-somos">Quem Somos</a>
+        <a href="#/servicos">Todos os Serviços</a>
+        <a href="#/blog">Blog</a>
+        <a href="#/contato">Contato</a>
+        <a href="#/politica-de-privacidade">Privacidade</a>
+        <a href="#/lgpd">LGPD</a>
+      </div>
+      <div class="fs">
+        <div class="fs-t">Serviços</div>
+        <div class="fs-g">
+                    <a href="#/servicos/erp-personalizado">ERP Personalizado</a>
+                    <a href="#/servicos/sistemas-web">Sistemas Web</a>
+                    <a href="#/servicos/crm">CRM</a>
+                    <a href="#/servicos/automacoes">Automações</a>
+                    <a href="#/servicos/inteligencia-artificial">Inteligência Artificial</a>
+                    <a href="#/servicos/consultoria">Consultoria</a>
+                  </div>
+      </div>
+    </div>
+
+    <div>
+            <div><a href="mailto:contato@onsolutionsbrasil.com.br">contato@onsolutionsbrasil.com.br</a></div>
+                  <div><a href="https://wa.me/5511972243329?text=Ol%C3%A1%2C%20vim%20do%20site." target="_blank" rel="noopener">WhatsApp +55 11 97224-3329</a></div>
+            <div class="foot-links" style="margin-top:14px">
+        <a href="#" target="_blank" rel="noopener">Instagram</a>        <a href="#" target="_blank" rel="noopener">LinkedIn</a>        <a href="#" target="_blank" rel="noopener">Facebook</a>      </div>
+    </div>
+  </div>
+
+  <div class="w" style="margin-top:28px;font-size:13px;color:#64748B">
+    &copy; 2026 ON Solutions. Todos os direitos reservados.  </div>
+</footer>
+
+<!-- Barra fixa de WhatsApp (recebe mensagem dinâmica via JS) -->
+<div class="fixbar">
+  <a class="cta" data-wa-main data-pos="fixo"
+     href="https://wa.me/5511972243329?text=Ol%C3%A1%2C%20vim%20do%20site."
+     data-wa-mode="whatsapp"
+     data-wa-endpoint="https://wa.me/5511972243329"
+     target="_blank" rel="noopener" data-wa="Olá, vim do site.">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 00-8.47 15l-1.3 4.73 4.85-1.27A9.9 9.9 0 1012.04 2zm0 1.8a8.1 8.1 0 11-4.13 15.07l-.3-.18-2.88.75.77-2.8-.19-.3A8.1 8.1 0 0112.04 3.8zm4.67 11.44c-.26-.13-1.5-.74-1.73-.82-.23-.09-.4-.13-.57.13-.17.26-.65.82-.8.99-.14.17-.29.19-.55.06-.26-.13-1.08-.4-2.06-1.27-.76-.68-1.28-1.52-1.43-1.78-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.46.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.06-.13-.57-1.38-.78-1.88-.2-.49-.41-.42-.57-.43h-.49c-.17 0-.44.06-.67.32-.23.26-.88.86-.88 2.1 0 1.24.9 2.43 1.03 2.6.13.17 1.77 2.7 4.3 3.79.6.26 1.07.41 1.44.52.6.19 1.15.16 1.58.1.48-.07 1.5-.61 1.71-1.2.21-.59.21-1.1.15-1.2-.06-.11-.23-.17-.49-.3z"/></svg>
+    <span>Pedir orçamento no WhatsApp</span>
+    <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+  </a>
+</div>
+<script>/* =====================================================================
+   ON Solutions — Tema 2026 (Fase A)
+   Interações da home: menu, checklist de dores, calculadora de ROI,
+   montagem dinâmica da mensagem do WhatsApp, carrosséis, topbar.
+   Portado de docs/referencia/home-ref.html (sem o roteador SPA por hash).
+   O número/mensagem base do WhatsApp vêm do servidor (setting()).
+   ===================================================================== */
+(function () {
+  "use strict";
+
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return [].slice.call((r || document).querySelectorAll(s)); }
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  // Mensagem base vem do atributo data-wa do botão fixo (preenchido via setting()).
+  var fixCta = $("[data-wa-main][data-pos=fixo]");
+  var BASE_MSG = (fixCta && fixCta.getAttribute("data-wa")) || "";
+
+  // Monta o href de um botão conforme o modo explícito definido no servidor:
+  //  - mode="whatsapp": endpoint wa.me + ?text=<mensagem>
+  //  - mode="contact" : endpoint /contato + ?msg=<mensagem> (sem número configurado;
+  //                     o visitante não perde o que preencheu — vai como parâmetro)
+  // Sem endpoint/modo conhecido, mantém o href original (nunca gera link inválido).
+  function buildHref(a, text) {
+    var mode = a.getAttribute("data-wa-mode");
+    var endpoint = a.getAttribute("data-wa-endpoint");
+    if (!endpoint || !mode) return a.getAttribute("href");
+    var param = (mode === "whatsapp") ? "text" : "msg";
+    return endpoint + "?" + param + "=" + encodeURIComponent(text);
+  }
+
+  // ---------- mensagem dinâmica (base + desafios marcados + calculadora) ----------
+  var view = $("main.view") || document;
+  function refresh() {
+    var m = BASE_MSG;
+    var ps = $$(".pain[aria-pressed=true]", view).map(function (p) {
+      return (p.getAttribute("data-q") || "").replace(/[.!?]+$/, "");
+    });
+    if (ps.length) {
+      m += (ps.length > 1 ? " " + (view._lblMany || "Meus maiores desafios hoje:") : " " + (view._lblOne || "Meu maior desafio hoje:")) + " " + ps.join("; ") + ".";
+    }
+    if (view._calc) m += " " + view._calc;
+
+    $$("[data-wa-main]").forEach(function (a) {
+      a.setAttribute("data-wa", m);
+      var href = buildHref(a, m);
+      if (href) a.href = href;
+    });
+  }
+
+  // GA/dataLayer no clique do WhatsApp (preserva comportamento da referência)
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest("[data-wa-main]") : null;
+    if (!a) return;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "whatsapp_click", position: a.getAttribute("data-pos") || "fixo" });
+  }, true);
+
+  // ---------- menu desktop (mega) ----------
+  var dd = $(".dd"), ddb = dd && $(".dd-btn"), ddMega = dd && $(".mega", dd), tmr;
+  var canHover = window.matchMedia("(hover: hover) and (min-width: 1101px)");
+  function ddOpen() {
+    clearTimeout(tmr);
+    dd.classList.add("open");
+    ddb.setAttribute("aria-expanded", "true");
+    if (ddMega) { ddMega.hidden = false; ddMega.setAttribute("aria-hidden", "false"); }
+  }
+  function ddClose() {
+    dd.classList.remove("open");
+    ddb.setAttribute("aria-expanded", "false");
+    if (ddMega) { ddMega.hidden = true; ddMega.setAttribute("aria-hidden", "true"); }
+  }
+  if (dd) {
+    ddb.addEventListener("click", function (e) { e.stopPropagation(); dd.classList.contains("open") ? ddClose() : ddOpen(); });
+    dd.addEventListener("mouseenter", function () { if (canHover.matches) ddOpen(); });
+    dd.addEventListener("mouseleave", function () { if (canHover.matches) tmr = setTimeout(ddClose, 140); });
+    document.addEventListener("click", function (e) { if (!dd.contains(e.target)) ddClose(); });
+    $$(".mega a", dd).forEach(function (a) { a.addEventListener("click", ddClose); });
+  }
+
+  // ---------- menu mobile ----------
+  var bg = $(".burger"), mn = $("#mnav");
+  function mClose() { mn.hidden = true; bg.setAttribute("aria-expanded", "false"); bg.classList.remove("on"); }
+  if (bg && mn) {
+    bg.addEventListener("click", function () {
+      var o = mn.hidden; mn.hidden = !o;
+      bg.setAttribute("aria-expanded", String(o)); bg.classList.toggle("on", o);
+    });
+    $$("a", mn).forEach(function (a) { a.addEventListener("click", mClose); });
+    window.addEventListener("resize", function () { if (window.innerWidth > 1100) mClose(); });
+  }
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { if (dd) ddClose(); if (bg && mn) mClose(); } });
+
+  // ---------- topbar: esconde ao rolar para baixo ----------
+  var topBar = $(".top");
+  if (topBar) {
+    var lastY = window.scrollY, acc = 0, ticking = false;
+    var menuOpen = function () { return (bg && mn && !mn.hidden) || (dd && dd.classList.contains("open")); };
+    var onScroll = function () {
+      var y = window.scrollY, d = y - lastY;
+      lastY = y; ticking = false;
+      if (y < 80 || menuOpen()) { topBar.classList.remove("hide"); acc = 0; return; }
+      if ((d > 0 && acc < 0) || (d < 0 && acc > 0)) acc = 0;
+      acc += d;
+      if (acc > 24) topBar.classList.add("hide");
+      else if (acc < -24) topBar.classList.remove("hide");
+    };
+    window.addEventListener("scroll", function () { if (!ticking) { ticking = true; window.requestAnimationFrame(onScroll); } }, { passive: true });
+    topBar.addEventListener("focusin", function () { topBar.classList.remove("hide"); });
+  }
+
+  // ---------- toggle Hoje / Com estratégia (painel antes/depois) ----------
+  $$("[data-toggle]").forEach(function (box) {
+    var bs = $$("[data-t]", box), ps = $$("[data-p]", box);
+    bs.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-t");
+        bs.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        ps.forEach(function (p) { p.hidden = p.getAttribute("data-p") !== k; });
+      });
+    });
+  });
+
+  // ---------- abas (o que resolvemos) ----------
+  $$("[data-tabs]").forEach(function (box) {
+    var bs = $$("[data-tab]", box), ps = $$("[data-pane]", box);
+    bs.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-tab");
+        bs.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        ps.forEach(function (p) { p.hidden = p.getAttribute("data-pane") !== k; });
+        setTimeout(function () { window.dispatchEvent(new Event("resize")); }, 0);
+      });
+    });
+  });
+
+  // ---------- checklist de desafios ----------
+  var hintEl = $("[data-hint]", view);
+  if (hintEl) {
+    view._lblOne = hintEl.getAttribute("data-label-one") || view._lblOne;
+    view._lblMany = hintEl.getAttribute("data-label-many") || view._lblMany;
+  }
+  document.addEventListener("click", function (e) {
+    var p = e.target.closest ? e.target.closest(".pain") : null;
+    if (!p) return;
+    p.setAttribute("aria-pressed", String(p.getAttribute("aria-pressed") !== "true"));
+    var n = $$(".pain[aria-pressed=true]", view).length, h = $("[data-hint]", view);
+    if (h) {
+      if (n === 0) h.textContent = "";
+      else if (n === 1) h.textContent = h.getAttribute("data-hint-one") || "";
+      else h.textContent = (h.getAttribute("data-hint-many") || "").replace(/:n/g, n);
+    }
+    refresh();
+  });
+
+  // ---------- calculadora de ROI ----------
+  var cal = $("[data-calc]");
+  if (cal) {
+    var t = $("[data-c=ticket]", cal), m = $("[data-c=margem]", cal), iv = $("[data-c=invest]", cal),
+        out = $("[data-c=out]", cal), tx = $("[data-c=txt]", cal);
+    var L = {
+      salesOne: cal.getAttribute("data-l-sale-one") || "venda a mais por mês",
+      salesMany: cal.getAttribute("data-l-sale-many") || "vendas a mais por mês",
+      fill: cal.getAttribute("data-l-fill") || "Preencha os três campos para ver o resultado.",
+      txt: cal.getAttribute("data-l-txt") || "Cada venda deixa cerca de :lucro de lucro. Para cobrir :inv por mês, você precisa de :n a mais do que vende hoje.",
+      msg: cal.getAttribute("data-l-msg") || "Fiz a conta na calculadora: produto de :ticket, margem de :margem% e investimento de :inv por mês (cerca de :n vendas a mais para empatar)."
+    };
+    var brl = function (v) { return "R$ " + Math.round(v).toLocaleString("pt-BR"); };
+    var calc = function (user) {
+      var a = parseFloat(t.value), mm = parseFloat(m.value), inv = parseFloat(iv.value);
+      if (!(a > 0) || !(mm > 0) || !(inv >= 0)) {
+        out.textContent = "\u2014"; tx.textContent = L.fill; view._calc = ""; refresh(); return;
+      }
+      var lucro = a * (mm / 100), n = Math.ceil(inv / lucro);
+      out.textContent = n + " " + (n === 1 ? L.salesOne : L.salesMany);
+      tx.textContent = L.txt.replace(/:lucro/g, brl(lucro)).replace(/:inv/g, brl(inv)).replace(/:n/g, n);
+      if (user) {
+        view._calc = L.msg.replace(/:ticket/g, brl(a)).replace(/:margem/g, mm).replace(/:inv/g, brl(inv)).replace(/:n/g, n);
+      }
+      refresh();
+    };
+    [t, m, iv].forEach(function (el) { el.addEventListener("input", function () { calc(true); }); });
+    calc(false);
+  }
+
+  // ---------- carrossel infinito de problemas (celular) ----------
+  var mqS = window.matchMedia("(max-width: 640px)");
+  var loops = $$(".mq-m");
+  function loopSpeed(el) {
+    var tr = $(".mq-track", el), half = tr.scrollWidth / 2;
+    if (half > 0) el.style.setProperty("--dur", Math.max(20, half / 35) + "s");
+  }
+  function loopsOn() {
+    loops.forEach(function (el) {
+      if (el.classList.contains("is-looping")) return;
+      var tr = $(".mq-track", el);
+      [].slice.call(tr.children).forEach(function (c) {
+        var k = c.cloneNode(true); k.setAttribute("data-clone", ""); k.setAttribute("aria-hidden", "true"); k.setAttribute("tabindex", "-1"); tr.appendChild(k);
+      });
+      el.classList.add("is-looping"); loopSpeed(el);
+    });
+  }
+  function loopsOff() {
+    loops.forEach(function (el) {
+      $$("[data-clone]", el).forEach(function (c) { c.remove(); });
+      el.classList.remove("is-looping", "is-paused"); el.style.removeProperty("--dur");
+    });
+  }
+  function loopsSync() { if (mqS.matches && !reduce.matches) loopsOn(); else loopsOff(); }
+  loops.forEach(function (el) {
+    el.addEventListener("touchstart", function () { el.classList.add("is-paused"); }, { passive: true });
+    el.addEventListener("touchend", function () { setTimeout(function () { el.classList.remove("is-paused"); }, 1500); }, { passive: true });
+  });
+  loopsSync();
+  (mqS.addEventListener ? mqS.addEventListener("change", loopsSync) : mqS.addListener(loopsSync));
+  window.addEventListener("resize", function () { loops.forEach(function (el) { if (el.classList.contains("is-looping")) loopSpeed(el); }); });
+
+  // ---------- carrossel infinito de clientes ----------
+  $$("[data-marquee]").forEach(function (mq) {
+    var tr = $("[data-track]", mq);
+    if (!tr || !tr.children.length) return;
+    if (reduce.matches) return;
+    [].slice.call(tr.children).forEach(function (c) { var k = c.cloneNode(true); k.setAttribute("aria-hidden", "true"); tr.appendChild(k); });
+    function sp() { var h = tr.scrollWidth / 2; if (h > 0) mq.style.setProperty("--dur", Math.max(30, h / 40) + "s"); }
+    sp(); window.addEventListener("resize", sp); mq.classList.add("is-looping");
+    var tt;
+    mq.addEventListener("touchstart", function () { clearTimeout(tt); mq.classList.add("is-paused"); }, { passive: true });
+    mq.addEventListener("touchend", function () { tt = setTimeout(function () { mq.classList.remove("is-paused"); }, 1500); }, { passive: true });
+  });
+
+  // ---------- FAQ fechado no celular ----------
+  if (mqS.matches) $$(".faq details[open]").forEach(function (d) { d.removeAttribute("open"); });
+
+  refresh();
+})();
+</script></body></html>

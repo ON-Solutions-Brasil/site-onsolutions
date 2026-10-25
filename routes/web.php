@@ -6,6 +6,21 @@
 // Homepage
 $router->get('/', 'Site\HomeController@index');
 
+// Pré-visualização do Tema 2026 (Fases A/B/C). Rotas paralelas para validação.
+$router->get('/home-2026', 'Site\HomeController@index2026');
+$router->get('/servicos-2026', 'Site\ServicesController@index2026');
+$router->get('/servicos-2026/{slug}', 'Site\ServicesController@show2026');
+$router->get('/blog-2026', 'Site\BlogController@index2026');
+$router->get('/blog-2026/{slug}', 'Site\BlogController@show2026');
+$router->get('/quem-somos-2026', 'Site\AboutController@index2026');
+$router->get('/contato-2026', 'Site\ContactController@index2026');
+$router->get('/parceiros-2026', 'Site\PartnersController@index2026');
+$router->get('/consultores-2026', 'Site\PartnersController@consultants2026');
+$router->get('/politica-de-privacidade-2026', 'Site\LegalController@privacy2026');
+$router->get('/termos-de-uso-2026', 'Site\LegalController@terms2026');
+$router->get('/politica-de-cookies-2026', 'Site\LegalController@cookies2026');
+$router->get('/lgpd-2026', 'Site\LegalController@lgpd2026');
+
 // Páginas institucionais
 $router->get('/quem-somos', 'Site\AboutController@index');
 $router->get('/servicos', 'Site\ServicesController@index');

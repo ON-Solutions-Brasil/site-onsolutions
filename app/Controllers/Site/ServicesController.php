@@ -22,6 +22,36 @@ class ServicesController extends Controller
     }
 
     /**
+     * Índice de serviços — Tema 2026 (Fase B, pré-visualização em paralelo).
+     */
+    public function index2026(): void
+    {
+        $this->data['page_title'] = __('services.title') . ' - ' . SITE_NAME;
+        $this->data['meta_description'] = __('services.meta_description');
+        $this->data['body_class'] = 'services2026-page';
+        $this->data['services'] = $this->db->fetchAll(
+            "SELECT * FROM services WHERE is_active = 1 ORDER BY order_position ASC"
+        );
+        $this->applyWhatsappData();
+        $this->view('site/services-2026', $this->data, 'site-2026');
+    }
+
+    /**
+     * Prepara dados do WhatsApp (número via setting) para os CTAs do tema 2026.
+     */
+    private function applyWhatsappData(): void
+    {
+        $num = preg_replace('/\D/', '', (string) setting('whatsapp_number', ''));
+        $msg = (string) setting('whatsapp_message', __('home2026.wa_default'));
+        $hasNum = $num !== '';
+        $this->data['waMode'] = $hasNum ? 'whatsapp' : 'contact';
+        $this->data['waEndpoint'] = $hasNum ? ('https://wa.me/' . $num) : url('contato');
+        $this->data['waHref'] = $hasNum
+            ? ('https://wa.me/' . $num . '?text=' . rawurlencode($msg))
+            : (url('contato') . '?msg=' . rawurlencode($msg));
+    }
+
+    /**
      * Página individual do serviço.
      */
     public function show(string $slug): void
@@ -84,6 +114,62 @@ class ServicesController extends Controller
         );
 
         $this->view('site/service-detail', $this->data);
+    }
+
+    /**
+     * Detalhe do serviço — Tema 2026 (Fase B, pré-visualização em paralelo).
+     * Reaproveita exatamente a mesma preparação de dados do show(); só troca a view/layout.
+     */
+    public function show2026(string $slug): void
+    {
+        $lang = defined('CURRENT_LANG') ? CURRENT_LANG : 'pt';
+
+        $service = $this->db->fetch(
+            "SELECT * FROM services WHERE slug = ? AND is_active = 1",
+            [$slug]
+        );
+
+        if (!$service) {
+            http_response_code(404);
+            (new \App\Controllers\ErrorController())->notFound();
+            return;
+        }
+
+        $titleField = "title_{$lang}";
+        $descField = "meta_description_{$lang}";
+        $this->data['page_title'] = ($service[$titleField] ?? $service['title_pt']) . ' - ' . SITE_NAME;
+        $this->data['meta_description'] = $service[$descField] ?? $service['meta_description_pt'] ?? '';
+
+        if (empty($service['content_pt'])) {
+            $fallback = $this->getServiceFallbackContent($slug);
+            if ($fallback) {
+                $service = array_merge($service, $fallback);
+            }
+        }
+
+        if ($lang !== 'pt') {
+            $translationClass = \App\Services\ServiceContentTranslations::class;
+            $method = $lang === 'en' ? 'getEnglish' : 'getSpanish';
+            $translatedContent = $translationClass::$method($slug);
+            if ($translatedContent && empty($service["content_{$lang}"])) {
+                $service["content_{$lang}"] = $translatedContent;
+            }
+            $featuresMethod = $lang === 'en' ? 'getEnglishFeatures' : 'getSpanishFeatures';
+            $translatedFeatures = $translationClass::$featuresMethod($slug);
+            if ($translatedFeatures) {
+                $service['features'] = json_encode($translatedFeatures);
+            }
+        }
+
+        $this->data['service'] = $service;
+        $this->data['other_services'] = $this->db->fetchAll(
+            "SELECT id, slug, icon, title_pt, title_en, title_es, short_description_pt, short_description_en, short_description_es FROM services WHERE is_active = 1 AND slug != ? ORDER BY order_position ASC",
+            [$slug]
+        );
+        $this->data['body_class'] = 'service2026-page';
+        $this->applyWhatsappData();
+
+        $this->view('site/service-detail-2026', $this->data, 'site-2026');
     }
 
     /**

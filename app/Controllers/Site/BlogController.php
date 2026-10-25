@@ -55,6 +55,50 @@ class BlogController extends Controller
     }
 
     /**
+     * Lista de posts — Tema 2026 (Fase B, pré-visualização em paralelo).
+     */
+    public function index2026(): void
+    {
+        $page = (int) ($_GET['page'] ?? 1);
+        if ($page < 1) $page = 1;
+        $perPage = 9;
+        $offset = ($page - 1) * $perPage;
+
+        $total = $this->db->fetch("SELECT COUNT(*) as total FROM blog_posts WHERE status = 'published'");
+        $totalRecords = (int) ($total['total'] ?? 0);
+        $totalPages = (int) ceil($totalRecords / $perPage);
+
+        $this->data['posts'] = $this->db->fetchAll(
+            "SELECT bp.*, u.name as author_name, bc.name_pt as category_name, bc.slug as category_slug
+             FROM blog_posts bp
+             LEFT JOIN users u ON bp.author_id = u.id
+             LEFT JOIN blog_categories bc ON bp.category_id = bc.id
+             WHERE bp.status = 'published'
+             ORDER BY bp.published_at DESC
+             LIMIT ? OFFSET ?",
+            [$perPage, $offset]
+        );
+        $this->data['categories'] = $this->db->fetchAll(
+            "SELECT bc.*, COUNT(bp.id) as post_count
+             FROM blog_categories bc
+             LEFT JOIN blog_posts bp ON bc.id = bp.category_id AND bp.status = 'published'
+             WHERE bc.is_active = 1
+             GROUP BY bc.id
+             ORDER BY bc.name_pt ASC"
+        );
+        $this->data['page_title'] = __('blog.title') . ' - ' . SITE_NAME;
+        $this->data['meta_description'] = __('blog.meta_description');
+        $this->data['body_class'] = 'blog2026-page';
+        $this->data['pagination'] = [
+            'current_page' => $page,
+            'total_pages'  => $totalPages,
+            'total'        => $totalRecords,
+        ];
+
+        $this->view('site/blog-2026', $this->data, 'site-2026');
+    }
+
+    /**
      * Post individual.
      */
     public function show(string $slug): void
@@ -110,6 +154,60 @@ class BlogController extends Controller
         $this->data['og_image'] = $post['og_image'] ?? $post['featured_image'] ?? '';
 
         $this->view('site/blog-post', $this->data);
+    }
+
+    /**
+     * Post individual — Tema 2026 (Fase B, pré-visualização em paralelo).
+     * Mesma preparação de dados do show(); só troca a view/layout.
+     */
+    public function show2026(string $slug): void
+    {
+        $lang = defined('CURRENT_LANG') ? CURRENT_LANG : 'pt';
+
+        $post = $this->db->fetch(
+            "SELECT bp.*, u.name as author_name, u.avatar as author_avatar, bc.name_pt as category_name, bc.slug as category_slug
+             FROM blog_posts bp
+             LEFT JOIN users u ON bp.author_id = u.id
+             LEFT JOIN blog_categories bc ON bp.category_id = bc.id
+             WHERE bp.slug = ? AND bp.status = 'published'",
+            [$slug]
+        );
+
+        if (!$post) {
+            http_response_code(404);
+            (new \App\Controllers\ErrorController())->notFound();
+            return;
+        }
+
+        $this->db->query("UPDATE blog_posts SET views_count = views_count + 1 WHERE id = ?", [$post['id']]);
+
+        $tags = $this->db->fetchAll(
+            "SELECT bt.* FROM blog_tags bt
+             JOIN blog_post_tags bpt ON bt.id = bpt.tag_id
+             WHERE bpt.post_id = ?",
+            [$post['id']]
+        );
+        $related = $this->db->fetchAll(
+            "SELECT bp.*, bc.name_pt as category_name
+             FROM blog_posts bp
+             LEFT JOIN blog_categories bc ON bp.category_id = bc.id
+             WHERE bp.status = 'published' AND bp.id != ? AND bp.category_id = ?
+             ORDER BY bp.published_at DESC LIMIT 3",
+            [$post['id'], $post['category_id']]
+        );
+
+        $titleField = "title_{$lang}";
+        $metaTitleField = "meta_title_{$lang}";
+        $metaDescField = "meta_description_{$lang}";
+        $this->data['page_title'] = ($post[$metaTitleField] ?? $post[$titleField] ?? $post['title_pt']) . ' - ' . SITE_NAME;
+        $this->data['meta_description'] = $post[$metaDescField] ?? $post['meta_description_pt'] ?? '';
+        $this->data['post'] = $post;
+        $this->data['tags'] = $tags;
+        $this->data['related_posts'] = $related;
+        $this->data['og_image'] = $post['og_image'] ?? $post['featured_image'] ?? '';
+        $this->data['body_class'] = 'blogpost2026-page';
+
+        $this->view('site/blog-post-2026', $this->data, 'site-2026');
     }
 
     /**
