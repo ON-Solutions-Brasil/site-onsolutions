@@ -7,24 +7,31 @@ use App\Core\Controller;
 class ServicesController extends Controller
 {
     /**
-     * Lista todos os serviços.
+     * Lista todos os serviços — agora servida com o layout/tema 2026
+     * (referência /servicos-2026), reaproveitando os dados reais do banco.
      */
     public function index(): void
     {
-        $this->data['page_title'] = __('services.title') . ' - ' . SITE_NAME;
-        $this->data['meta_description'] = __('services.meta_description');
-
-        $this->data['services'] = $this->db->fetchAll(
-            "SELECT * FROM services WHERE is_active = 1 ORDER BY order_position ASC"
-        );
-
-        $this->view('site/services', $this->data);
+        $this->prepareServicesIndexData();
+        $this->view('site/services-2026', $this->data, 'site-2026');
     }
 
     /**
-     * Índice de serviços — Tema 2026 (Fase B, pré-visualização em paralelo).
+     * Rota de pré-visualização paralela (/servicos-2026). Mantida para validação;
+     * compartilha exatamente o mesmo preparo de dados da listagem principal.
      */
     public function index2026(): void
+    {
+        $this->prepareServicesIndexData();
+        $this->view('site/services-2026', $this->data, 'site-2026');
+    }
+
+    /**
+     * Monta os dados da listagem de serviços no tema 2026 (referência) com
+     * conteúdo real do banco. Compartilhado entre /servicos e /servicos-2026,
+     * evitando duplicação de lógica entre as duas rotas.
+     */
+    private function prepareServicesIndexData(): void
     {
         $this->data['page_title'] = __('services.title') . ' - ' . SITE_NAME;
         $this->data['meta_description'] = __('services.meta_description');
@@ -33,7 +40,6 @@ class ServicesController extends Controller
             "SELECT * FROM services WHERE is_active = 1 ORDER BY order_position ASC"
         );
         $this->applyWhatsappData();
-        $this->view('site/services-2026', $this->data, 'site-2026');
     }
 
     /**
@@ -52,9 +58,35 @@ class ServicesController extends Controller
     }
 
     /**
-     * Página individual do serviço.
+     * Página individual do serviço — agora servida com o layout/tema 2026
+     * (referência /servicos-2026/{slug}), reaproveitando os dados reais do banco.
      */
     public function show(string $slug): void
+    {
+        if (!$this->prepareServiceDetailData($slug)) {
+            return; // 404 já tratado
+        }
+        $this->view('site/service-detail-2026', $this->data, 'site-2026');
+    }
+
+    /**
+     * Rota de pré-visualização paralela (/servicos-2026/{slug}). Mantida para
+     * validação; compartilha o mesmo preparo de dados do detalhe principal.
+     */
+    public function show2026(string $slug): void
+    {
+        if (!$this->prepareServiceDetailData($slug)) {
+            return; // 404 já tratado
+        }
+        $this->view('site/service-detail-2026', $this->data, 'site-2026');
+    }
+
+    /**
+     * Monta os dados do detalhe de serviço (conteúdo real + fallback + i18n).
+     * Compartilhado entre /servicos/{slug} e /servicos-2026/{slug}.
+     * Retorna false quando o serviço não existe (resposta 404 já emitida).
+     */
+    private function prepareServiceDetailData(string $slug): bool
     {
         $lang = defined('CURRENT_LANG') ? CURRENT_LANG : 'pt';
 
@@ -65,14 +97,12 @@ class ServicesController extends Controller
 
         if (!$service) {
             http_response_code(404);
-            $errorController = new \App\Controllers\ErrorController();
-            $errorController->notFound();
-            return;
+            (new \App\Controllers\ErrorController())->notFound();
+            return false;
         }
 
         $titleField = "title_{$lang}";
         $descField = "meta_description_{$lang}";
-
         $this->data['page_title'] = ($service[$titleField] ?? $service['title_pt']) . ' - ' . SITE_NAME;
         $this->data['meta_description'] = $service[$descField] ?? $service['meta_description_pt'] ?? '';
 
@@ -108,68 +138,15 @@ class ServicesController extends Controller
             [$slug]
         );
 
-        // Portfólio relacionado
+        // Portfólio relacionado (preservado da versão anterior)
         $this->data['related_portfolio'] = $this->db->fetchAll(
             "SELECT * FROM portfolio_items WHERE is_active = 1 ORDER BY RAND() LIMIT 3"
         );
 
-        $this->view('site/service-detail', $this->data);
-    }
-
-    /**
-     * Detalhe do serviço — Tema 2026 (Fase B, pré-visualização em paralelo).
-     * Reaproveita exatamente a mesma preparação de dados do show(); só troca a view/layout.
-     */
-    public function show2026(string $slug): void
-    {
-        $lang = defined('CURRENT_LANG') ? CURRENT_LANG : 'pt';
-
-        $service = $this->db->fetch(
-            "SELECT * FROM services WHERE slug = ? AND is_active = 1",
-            [$slug]
-        );
-
-        if (!$service) {
-            http_response_code(404);
-            (new \App\Controllers\ErrorController())->notFound();
-            return;
-        }
-
-        $titleField = "title_{$lang}";
-        $descField = "meta_description_{$lang}";
-        $this->data['page_title'] = ($service[$titleField] ?? $service['title_pt']) . ' - ' . SITE_NAME;
-        $this->data['meta_description'] = $service[$descField] ?? $service['meta_description_pt'] ?? '';
-
-        if (empty($service['content_pt'])) {
-            $fallback = $this->getServiceFallbackContent($slug);
-            if ($fallback) {
-                $service = array_merge($service, $fallback);
-            }
-        }
-
-        if ($lang !== 'pt') {
-            $translationClass = \App\Services\ServiceContentTranslations::class;
-            $method = $lang === 'en' ? 'getEnglish' : 'getSpanish';
-            $translatedContent = $translationClass::$method($slug);
-            if ($translatedContent && empty($service["content_{$lang}"])) {
-                $service["content_{$lang}"] = $translatedContent;
-            }
-            $featuresMethod = $lang === 'en' ? 'getEnglishFeatures' : 'getSpanishFeatures';
-            $translatedFeatures = $translationClass::$featuresMethod($slug);
-            if ($translatedFeatures) {
-                $service['features'] = json_encode($translatedFeatures);
-            }
-        }
-
-        $this->data['service'] = $service;
-        $this->data['other_services'] = $this->db->fetchAll(
-            "SELECT id, slug, icon, title_pt, title_en, title_es, short_description_pt, short_description_en, short_description_es FROM services WHERE is_active = 1 AND slug != ? ORDER BY order_position ASC",
-            [$slug]
-        );
         $this->data['body_class'] = 'service2026-page';
         $this->applyWhatsappData();
 
-        $this->view('site/service-detail-2026', $this->data, 'site-2026');
+        return true;
     }
 
     /**

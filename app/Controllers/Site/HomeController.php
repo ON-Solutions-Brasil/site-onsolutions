@@ -7,57 +7,31 @@ use App\Core\Controller;
 class HomeController extends Controller
 {
     /**
-     * Homepage.
+     * Homepage — agora servida com o layout/tema 2026 (referência /home-2026),
+     * reaproveitando os dados reais do banco e todas as rotas existentes.
      */
     public function index(): void
     {
-        $this->data['page_title'] = SITE_NAME . ' - ' . __('home.meta_title');
-        $this->data['meta_description'] = __('home.meta_description');
-        $this->data['body_class'] = 'home-page';
-
-        // Serviços em destaque
-        $this->data['services'] = $this->db->fetchAll(
-            "SELECT * FROM services WHERE is_active = 1 AND is_featured = 1 ORDER BY order_position ASC LIMIT 6"
-        );
-
-        // Portfólio em destaque
-        $this->data['portfolio'] = $this->db->fetchAll(
-            "SELECT * FROM portfolio_items WHERE is_active = 1 AND is_featured = 1 ORDER BY order_position ASC LIMIT 6"
-        );
-
-        // Depoimentos
-        $this->data['testimonials'] = $this->db->fetchAll(
-            "SELECT * FROM testimonials WHERE is_active = 1 ORDER BY order_position ASC LIMIT 6"
-        );
-
-        // FAQs
-        $this->data['faqs'] = $this->db->fetchAll(
-            "SELECT * FROM faqs WHERE is_active = 1 ORDER BY order_position ASC LIMIT 8"
-        );
-
-        // Posts recentes
-        $this->data['recent_posts'] = $this->db->fetchAll(
-            "SELECT bp.*, u.name as author_name, bc.name_pt as category_name 
-             FROM blog_posts bp 
-             LEFT JOIN users u ON bp.author_id = u.id 
-             LEFT JOIN blog_categories bc ON bp.category_id = bc.id 
-             WHERE bp.status = 'published' 
-             ORDER BY bp.published_at DESC LIMIT 3"
-        );
-
-        // Parceiros
-        $this->data['partners'] = $this->db->fetchAll(
-            "SELECT * FROM partners WHERE is_active = 1 ORDER BY order_position ASC"
-        );
-
-        $this->view('site/home', $this->data);
+        $this->prepareHome2026Data();
+        $this->view('site/home-2026', $this->data, 'site-2026');
     }
 
     /**
-     * Homepage — Tema 2026 (Fase A, pré-visualização em paralelo).
-     * Reaproveita o layout/partials novos e dados dinâmicos existentes.
+     * Rota de pré-visualização paralela (/home-2026). Mantida para validação;
+     * compartilha exatamente o mesmo preparo de dados da home principal.
      */
     public function index2026(): void
+    {
+        $this->prepareHome2026Data();
+        $this->view('site/home-2026', $this->data, 'site-2026');
+    }
+
+    /**
+     * Monta os dados da home no tema 2026 (referência) com conteúdo real do banco.
+     * Usado tanto pela home principal (/) quanto pela pré-visualização (/home-2026),
+     * evitando duplicação de lógica entre as duas rotas.
+     */
+    private function prepareHome2026Data(): void
     {
         $this->data['page_title'] = __('home2026.meta_title') . ' | ' . SITE_NAME;
         $this->data['meta_description'] = __('home2026.meta_description');
@@ -66,6 +40,12 @@ class HomeController extends Controller
         // FAQs do banco (preservado); a view cai no fallback i18n se vier vazio.
         $this->data['faqs'] = $this->db->fetchAll(
             "SELECT * FROM faqs WHERE is_active = 1 ORDER BY order_position ASC LIMIT 8"
+        );
+
+        // Parceiros reais do banco (seção "Quem confia na ON"); quando vazio,
+        // a view cai nos placeholders i18n.
+        $this->data['partners'] = $this->db->fetchAll(
+            "SELECT * FROM partners WHERE is_active = 1 ORDER BY order_position ASC"
         );
 
         // Conteúdo das novas seções (base: referência) via i18n.
@@ -128,6 +108,5 @@ class HomeController extends Controller
             ['name' => 'Cliente D', 'segment' => $t('client_seg_4'), 'title' => $t('client_title_4'), 'desc' => $t('client_desc_4')],
         ];
 
-        $this->view('site/home-2026', $this->data, 'site-2026');
     }
 }

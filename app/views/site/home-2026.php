@@ -26,8 +26,27 @@ if (empty($faqItems)) {
     $faqItems = $home2026_faqs ?? [];
 }
 
-/** Clientes: placeholders temporários (logos oficiais serão definidas depois). */
-$clientPlaceholders = $home2026_clients ?? [];
+/**
+ * Clientes/parceiros da seção "Quem confia na ON".
+ * Usa parceiros reais do banco quando disponíveis; caso contrário, cai nos
+ * placeholders i18n (logos oficiais a confirmar).
+ */
+$clientCards = [];
+if (!empty($partners)) {
+    foreach ($partners as $p) {
+        $desc = $p["description_{$lang}"] ?? $p['description_pt'] ?? '';
+        $clientCards[] = [
+            'name'    => $p['name'] ?? '',
+            'logo'    => $p['logo'] ?? '',
+            'segment' => $p['segment'] ?? ($p['type'] ?? ''),
+            'title'   => $p['name'] ?? '',
+            'desc'    => $desc,
+        ];
+    }
+}
+if (empty($clientCards)) {
+    $clientCards = $home2026_clients ?? [];
+}
 ?>
 <!-- Hero -->
 <section class="hero">
@@ -160,12 +179,18 @@ $clientPlaceholders = $home2026_clients ?? [];
   </div>
   <div class="marq" data-marquee aria-label="<?= e(__('home2026.clients_label')) ?>">
     <div class="track" data-track>
-      <?php foreach ($clientPlaceholders as $cl): ?>
+      <?php foreach ($clientCards as $cl): ?>
       <div class="cs">
-        <div class="lp"><span class="wm"><?= e($cl['name']) ?></span></div>
-        <span class="tg"><?= e($cl['segment']) ?></span>
+        <div class="lp">
+          <?php if (!empty($cl['logo'])): ?>
+          <img src="<?= e($cl['logo']) ?>" alt="<?= e($cl['name']) ?>" loading="lazy">
+          <?php else: ?>
+          <span class="wm"><?= e($cl['name']) ?></span>
+          <?php endif; ?>
+        </div>
+        <?php if (!empty($cl['segment'])): ?><span class="tg"><?= e($cl['segment']) ?></span><?php endif; ?>
         <h3><?= e($cl['title']) ?></h3>
-        <p><?= e($cl['desc']) ?></p>
+        <?php if (!empty($cl['desc'])): ?><p><?= e($cl['desc']) ?></p><?php endif; ?>
       </div>
       <?php endforeach; ?>
     </div>

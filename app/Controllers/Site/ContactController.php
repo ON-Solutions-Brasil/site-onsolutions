@@ -8,25 +8,34 @@ use App\Services\EmailService;
 class ContactController extends Controller
 {
     /**
-     * Página de contato.
+     * Página de contato — agora servida com o layout/tema 2026 (referência /contato-2026).
+     * O envio continua usando a MESMA action POST /contato (send()), sem alterações.
      */
     public function index(): void
     {
-        $this->data['page_title'] = __('contact.title') . ' - ' . SITE_NAME;
-        $this->data['meta_description'] = __('contact.meta_description');
-        $this->view('site/contact', $this->data);
+        $this->prepareContactData();
+        $this->view('site/contact-2026', $this->data, 'site-2026');
     }
 
     /**
-     * Contato — Tema 2026 (Fase C, pré-visualização em paralelo).
-     * O envio continua usando a MESMA action POST /contato (send()), sem alterações.
+     * Rota de pré-visualização paralela (/contato-2026). Mantida para validação;
+     * compartilha exatamente o mesmo preparo de dados da página principal.
      */
     public function index2026(): void
+    {
+        $this->prepareContactData();
+        $this->view('site/contact-2026', $this->data, 'site-2026');
+    }
+
+    /**
+     * Monta os dados da página de contato no tema 2026 (conteúdo via i18n/settings).
+     * Compartilhado entre /contato e /contato-2026.
+     */
+    private function prepareContactData(): void
     {
         $this->data['page_title'] = __('contact.title') . ' - ' . SITE_NAME;
         $this->data['meta_description'] = __('contact.meta_description');
         $this->data['body_class'] = 'contact2026-page';
-        $this->view('site/contact-2026', $this->data, 'site-2026');
     }
 
     /**

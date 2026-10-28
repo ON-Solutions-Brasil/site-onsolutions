@@ -6,33 +6,41 @@ use App\Core\Controller;
 
 class PartnersController extends Controller
 {
+    /**
+     * Parceiros — agora servida com o layout/tema 2026 (referência /parceiros-2026),
+     * reaproveitando os dados reais do banco.
+     */
     public function index(): void
     {
-        $this->data['page_title'] = __('partners.title') . ' - ' . SITE_NAME;
-        $this->data['meta_description'] = __('partners.meta_description');
-
-        $this->data['partners'] = $this->db->fetchAll(
-            "SELECT * FROM partners WHERE is_active = 1 AND type IN ('technology', 'business') ORDER BY order_position ASC"
-        );
-
-        $this->view('site/partners', $this->data);
-    }
-
-    public function consultants(): void
-    {
-        $this->data['page_title'] = __('partners.consultants_title') . ' - ' . SITE_NAME;
-
-        $this->data['consultants'] = $this->db->fetchAll(
-            "SELECT * FROM partners WHERE is_active = 1 AND type IN ('consultant', 'reseller') ORDER BY order_position ASC"
-        );
-
-        $this->view('site/consultants', $this->data);
+        $this->preparePartnersData();
+        $this->view('site/partners-2026', $this->data, 'site-2026');
     }
 
     /**
-     * Parceiros — Tema 2026 (Fase C, pré-visualização em paralelo).
+     * Consultores — agora servida com o layout/tema 2026 (referência /consultores-2026),
+     * reaproveitando os dados reais do banco.
+     */
+    public function consultants(): void
+    {
+        $this->prepareConsultantsData();
+        $this->view('site/consultants-2026', $this->data, 'site-2026');
+    }
+
+    /**
+     * Rota de pré-visualização paralela (/parceiros-2026). Mantida para validação;
+     * compartilha exatamente o mesmo preparo de dados da página principal.
      */
     public function index2026(): void
+    {
+        $this->preparePartnersData();
+        $this->view('site/partners-2026', $this->data, 'site-2026');
+    }
+
+    /**
+     * Monta os dados da página de parceiros no tema 2026 com parceiros reais do banco.
+     * Compartilhado entre /parceiros e /parceiros-2026.
+     */
+    private function preparePartnersData(): void
     {
         $this->data['page_title'] = __('partners.title') . ' - ' . SITE_NAME;
         $this->data['meta_description'] = __('partners.meta_description');
@@ -40,19 +48,29 @@ class PartnersController extends Controller
         $this->data['partners'] = $this->db->fetchAll(
             "SELECT * FROM partners WHERE is_active = 1 AND type IN ('technology', 'business') ORDER BY order_position ASC"
         );
-        $this->view('site/partners-2026', $this->data, 'site-2026');
     }
 
     /**
-     * Consultores — Tema 2026 (Fase C, pré-visualização em paralelo).
+     * Rota de pré-visualização paralela (/consultores-2026). Mantida para validação;
+     * compartilha exatamente o mesmo preparo de dados da página principal.
      */
     public function consultants2026(): void
+    {
+        $this->prepareConsultantsData();
+        $this->view('site/consultants-2026', $this->data, 'site-2026');
+    }
+
+    /**
+     * Monta os dados da página de consultores no tema 2026 com dados reais do banco
+     * (parceiros do tipo consultant/reseller). Compartilhado entre /consultores e
+     * /consultores-2026.
+     */
+    private function prepareConsultantsData(): void
     {
         $this->data['page_title'] = __('partners.consultants_title') . ' - ' . SITE_NAME;
         $this->data['body_class'] = 'consultants2026-page';
         $this->data['consultants'] = $this->db->fetchAll(
             "SELECT * FROM partners WHERE is_active = 1 AND type IN ('consultant', 'reseller') ORDER BY order_position ASC"
         );
-        $this->view('site/consultants-2026', $this->data, 'site-2026');
     }
 }
