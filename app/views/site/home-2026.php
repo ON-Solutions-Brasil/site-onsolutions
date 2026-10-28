@@ -31,9 +31,15 @@ if (empty($faqItems)) {
  * Usa parceiros reais do banco quando disponíveis; caso contrário, cai nos
  * placeholders i18n (logos oficiais a confirmar).
  */
+/**
+ * Cards da seção "Quem confia na ON". Fonte de verdade: os clientes da
+ * referência ($home2026_clients, preparados no controller com logos reais).
+ * Caso um dia a seção precise vir do banco, basta popular 'home_clients' —
+ * mantemos o fallback para os clientes da referência quando vazio.
+ */
 $clientCards = [];
-if (!empty($partners)) {
-    foreach ($partners as $p) {
+if (!empty($home_clients)) {
+    foreach ($home_clients as $p) {
         $desc = $p["description_{$lang}"] ?? $p['description_pt'] ?? '';
         $clientCards[] = [
             'name'    => $p['name'] ?? '',
@@ -188,8 +194,8 @@ if (empty($clientCards)) {
           <span class="wm"><?= e($cl['name']) ?></span>
           <?php endif; ?>
         </div>
-        <?php if (!empty($cl['segment'])): ?><span class="tg"><?= e($cl['segment']) ?></span><?php endif; ?>
         <h3><?= e($cl['title']) ?></h3>
+        <?php if (!empty($cl['segment'])): ?><span class="tg"><?= e($cl['segment']) ?></span><?php endif; ?>
         <?php if (!empty($cl['desc'])): ?><p><?= e($cl['desc']) ?></p><?php endif; ?>
       </div>
       <?php endforeach; ?>

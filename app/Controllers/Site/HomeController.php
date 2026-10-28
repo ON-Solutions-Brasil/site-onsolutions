@@ -88,13 +88,9 @@ class HomeController extends Controller
             ['q' => $t('faq_7_q'), 'a' => $t('faq_7_a')],
         ];
 
-        // Clientes: PLACEHOLDERS temporários (logos oficiais a confirmar).
-        $this->data['home2026_clients'] = [
-            ['name' => 'Cliente A', 'segment' => $t('client_seg_1'), 'title' => $t('client_title_1'), 'desc' => $t('client_desc_1')],
-            ['name' => 'Cliente B', 'segment' => $t('client_seg_2'), 'title' => $t('client_title_2'), 'desc' => $t('client_desc_2')],
-            ['name' => 'Cliente C', 'segment' => $t('client_seg_3'), 'title' => $t('client_title_3'), 'desc' => $t('client_desc_3')],
-            ['name' => 'Cliente D', 'segment' => $t('client_seg_4'), 'title' => $t('client_title_4'), 'desc' => $t('client_desc_4')],
-        ];
+        // Clientes da seção "Quem confia na ON" — portados FIELMENTE da referência
+        // (fonte única em App\Services\HomeClients2026, com logos reais).
+        $this->data['home2026_clients'] = \App\Services\HomeClients2026::cards($t, 'asset');
 
     }
 }

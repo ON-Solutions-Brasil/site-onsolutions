@@ -185,11 +185,10 @@ class ServicesController extends Controller
         }
         $this->data['related_services'] = $relatedServices;
 
-        // Parceiros reais do banco para o marquee "Quem confia na ON"
-        // (mesma fonte da home). A view cai em estado vazio se não houver.
-        $this->data['partners'] = $this->db->fetchAll(
-            "SELECT * FROM partners WHERE is_active = 1 ORDER BY order_position ASC"
-        );
+        // Clientes do marquee "Quem confia na ON" — mesma fonte de verdade da
+        // home (referência), para a seção ficar idêntica nas páginas de serviço.
+        $tt = fn(string $k) => __('home2026.' . $k);
+        $this->data['home2026_clients'] = \App\Services\HomeClients2026::cards($tt, 'asset');
 
         // Portfólio relacionado (preservado da versão anterior)
         $this->data['related_portfolio'] = $this->db->fetchAll(

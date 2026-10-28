@@ -133,19 +133,18 @@ $check = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L1
   </div>
   <div class="marq" data-marquee aria-label="<?= e(__('home2026.clients_label')) ?>">
     <div class="track" data-track>
-      <?php foreach (($partners ?? []) as $p):
-        $pdesc = $p["description_{$lang}"] ?? $p['description_pt'] ?? ''; ?>
+      <?php foreach (($home2026_clients ?? []) as $cl): ?>
       <div class="cs">
         <div class="lp">
-          <?php if (!empty($p['logo'])): ?>
-          <img src="<?= e($p['logo']) ?>" alt="<?= e($p['name'] ?? '') ?>" loading="lazy">
+          <?php if (!empty($cl['logo'])): ?>
+          <img src="<?= e($cl['logo']) ?>" alt="<?= e($cl['name']) ?>" loading="lazy">
           <?php else: ?>
-          <span class="wm"><?= e($p['name'] ?? '') ?></span>
+          <span class="wm"><?= e($cl['name']) ?></span>
           <?php endif; ?>
         </div>
-        <h3><?= e($p['name'] ?? '') ?></h3>
-        <?php if (!empty($p['segment'] ?? ($p['type'] ?? ''))): ?><span class="tg"><?= e($p['segment'] ?? $p['type']) ?></span><?php endif; ?>
-        <?php if ($pdesc): ?><p><?= e($pdesc) ?></p><?php endif; ?>
+        <h3><?= e($cl['title']) ?></h3>
+        <?php if (!empty($cl['segment'])): ?><span class="tg"><?= e($cl['segment']) ?></span><?php endif; ?>
+        <?php if (!empty($cl['desc'])): ?><p><?= e($cl['desc']) ?></p><?php endif; ?>
       </div>
       <?php endforeach; ?>
     </div>

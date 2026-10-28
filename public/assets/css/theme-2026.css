@@ -516,6 +516,28 @@ body.theme-2026 .art a { color: var(--tealD); }
 body.theme-2026 .art-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 20px; color: #A9BAC9; font-size: 14px; }
 body.theme-2026 .art-meta .ct { color: #0B1220; background: var(--mint); font-weight: 600; padding: 3px 12px; border-radius: 999px; font-size: 12.5px; }
 
+/* "O que você ganha" — grade de benefícios (detalhe do serviço).
+   Portado da referência (docs/referencia/home-ref.html: .bens/.ben/.bi).
+   O ícone é um SVG inline dentro da caixinha .ben .bi; as regras abaixo
+   limitam o tamanho e aplicam o traço menta, evitando o SVG "gigante/preto". */
+body.theme-2026 .bens { display: grid; gap: 14px; margin-top: 26px; }
+body.theme-2026 .ben { background: var(--bg); border: 1px solid var(--line); border-radius: 20px; padding: 20px; }
+body.theme-2026 .sec:not(.sec-w) .ben { background: #fff; }
+body.theme-2026 .ben .bi {
+  width: 46px; height: 46px; border-radius: 14px;
+  background: linear-gradient(135deg, #0F2D3A, #134E4A);
+  display: grid; place-items: center; margin-bottom: 14px;
+}
+body.theme-2026 .ben .bi svg {
+  width: 24px; height: 24px; flex: none;
+  stroke: var(--mint); fill: none; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+body.theme-2026 .ben h3 { font-size: 18px; font-weight: 700; letter-spacing: -.02em; line-height: 1.25; }
+body.theme-2026 .ben p { margin-top: 6px; color: var(--soft); font-size: 15px; }
+@media (min-width: 640px) { body.theme-2026 .bens { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 860px) { body.theme-2026 .bens { grid-template-columns: repeat(3, 1fr); } }
+
 /* Funcionalidades e tecnologias (detalhe do serviço) */
 body.theme-2026 .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
 body.theme-2026 .chip { font-size: 13.5px; font-weight: 500; color: var(--tealX); background: var(--mintw); border: 1px solid rgba(13,148,136,.2); padding: 7px 14px; border-radius: 999px; }
