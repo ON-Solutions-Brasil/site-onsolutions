@@ -19,18 +19,7 @@ $pg = $pagination ?? ['current_page' => 1, 'total_pages' => 1];
 <?php if (!empty($posts)): ?>
 <section class="sec">
   <div class="w">
-    <?php if (!empty($categories)): ?>
-    <div class="cat-bar">
-      <a class="cat-pill active" href="<?= url('blog') ?>"><?= __('blog.filter_all') ?></a>
-      <?php foreach ($categories as $cat): ?>
-        <?php if (($cat['post_count'] ?? 0) > 0): $catName = $cat["name_{$lang}"] ?? $cat['name_pt']; ?>
-        <a class="cat-pill" href="<?= url('blog/categoria/' . $cat['slug']) ?>"><?= e($catName) ?> <span><?= (int)$cat['post_count'] ?></span></a>
-        <?php endif; ?>
-      <?php endforeach; ?>
-    </div>
-    <?php endif; ?>
-
-    <div class="bl-grid">
+    <div class="bl-grid" style="margin-top:0">
       <?php foreach ($posts as $post):
         $postTitle = $post["title_{$lang}"] ?? $post['title_pt'];
         $postExcerpt = $post["excerpt_{$lang}"] ?? $post['excerpt_pt'] ?? strip_tags($post["content_{$lang}"] ?? $post['content_pt'] ?? '');
