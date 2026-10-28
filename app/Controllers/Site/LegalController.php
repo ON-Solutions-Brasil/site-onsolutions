@@ -49,41 +49,4 @@ class LegalController extends Controller
         $this->view('site/legal/lgpd-2026', $this->data, 'site-2026');
     }
 
-    // ----- Tema 2026 (Fase C, pré-visualização em paralelo) -----
-
-    /**
-     * Rota de pré-visualização paralela (/politica-de-privacidade-2026).
-     * Idêntica à rota principal; mantida para validação.
-     */
-    public function privacy2026(): void
-    {
-        $this->privacy();
-    }
-
-    /**
-     * Rota de pré-visualização paralela (/termos-de-uso-2026).
-     * Idêntica à rota principal; mantida para validação.
-     */
-    public function terms2026(): void
-    {
-        $this->terms();
-    }
-
-    /**
-     * Rota de pré-visualização paralela (/politica-de-cookies-2026).
-     * Idêntica à rota principal; mantida para validação.
-     */
-    public function cookies2026(): void
-    {
-        $this->cookies();
-    }
-
-    /**
-     * Rota de pré-visualização paralela (/lgpd-2026).
-     * Idêntica à rota principal; mantida para validação.
-     */
-    public function lgpd2026(): void
-    {
-        $this->lgpd();
-    }
 }

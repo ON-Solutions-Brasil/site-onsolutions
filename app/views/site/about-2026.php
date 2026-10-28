@@ -8,7 +8,6 @@
     <nav class="crumb" aria-label="breadcrumb">
       <a href="<?= url('/') ?>"><?= __('menu.home') ?></a><i>/</i><span><?= __('about.tag') ?></span>
     </nav>
-    <span class="badge"><i></i><?= e(__('about.tag')) ?></span>
     <h1 class="h"><?= __('about.hero_title_prefix') ?> <?= e(SITE_NAME) ?></h1>
     <p class="sub"><?= e(__('about.hero_subtitle')) ?></p>
   </div>

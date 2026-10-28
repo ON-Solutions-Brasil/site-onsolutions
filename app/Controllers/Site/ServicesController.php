@@ -17,29 +17,63 @@ class ServicesController extends Controller
     }
 
     /**
-     * Rota de pré-visualização paralela (/servicos-2026). Mantida para validação;
-     * compartilha exatamente o mesmo preparo de dados da listagem principal.
-     */
-    public function index2026(): void
-    {
-        $this->prepareServicesIndexData();
-        $this->view('site/services-2026', $this->data, 'site-2026');
-    }
-
-    /**
      * Monta os dados da listagem de serviços no tema 2026 (referência) com
-     * conteúdo real do banco. Compartilhado entre /servicos e /servicos-2026,
-     * evitando duplicação de lógica entre as duas rotas.
+     * conteúdo real do banco.
      */
     private function prepareServicesIndexData(): void
     {
         $this->data['page_title'] = __('services.title') . ' - ' . SITE_NAME;
         $this->data['meta_description'] = __('services.meta_description');
         $this->data['body_class'] = 'services2026-page';
-        $this->data['services'] = $this->db->fetchAll(
+
+        $services = $this->db->fetchAll(
             "SELECT * FROM services WHERE is_active = 1 ORDER BY order_position ASC"
         );
+        $this->data['services'] = $services;
+
+        // Agrupa os serviços em 4 categorias (referência), indexando por slug.
+        // A ordem dentro de cada grupo segue a referência; serviços fora do mapa
+        // (slugs não previstos) caem num grupo final para não sumirem.
+        $this->data['service_groups'] = $this->groupServicesByCategory($services);
+
         $this->applyWhatsappData();
+    }
+
+    /**
+     * Mapa slug => categoria (referência) e montagem dos grupos preservando a
+     * ordem da referência. Serviços do banco sem slug mapeado vão para o grupo
+     * "organize" (fallback), garantindo que nada seja ocultado.
+     */
+    private function groupServicesByCategory(array $services): array
+    {
+        $order = [
+            'organize' => ['erp-personalizado', 'sistemas-web', 'dashboards-bi', 'consultoria'],
+            'sell'     => ['crm', 'chatbots', 'inteligencia-artificial', 'machine-learning'],
+            'automate' => ['automacoes', 'integracoes-apis', 'performance', 'infraestrutura'],
+            'products' => ['aplicativos-mobile', 'saas'],
+        ];
+        $bySlug = [];
+        foreach ($services as $s) {
+            $bySlug[$s['slug']] = $s;
+        }
+
+        $groups = ['organize' => [], 'sell' => [], 'automate' => [], 'products' => []];
+        $used = [];
+        foreach ($order as $cat => $slugs) {
+            foreach ($slugs as $slug) {
+                if (isset($bySlug[$slug])) {
+                    $groups[$cat][] = $bySlug[$slug];
+                    $used[$slug] = true;
+                }
+            }
+        }
+        // Qualquer serviço do banco não mapeado entra em "organize" ao final.
+        foreach ($services as $s) {
+            if (empty($used[$s['slug']])) {
+                $groups['organize'][] = $s;
+            }
+        }
+        return $groups;
     }
 
     /**
@@ -70,20 +104,7 @@ class ServicesController extends Controller
     }
 
     /**
-     * Rota de pré-visualização paralela (/servicos-2026/{slug}). Mantida para
-     * validação; compartilha o mesmo preparo de dados do detalhe principal.
-     */
-    public function show2026(string $slug): void
-    {
-        if (!$this->prepareServiceDetailData($slug)) {
-            return; // 404 já tratado
-        }
-        $this->view('site/service-detail-2026', $this->data, 'site-2026');
-    }
-
-    /**
      * Monta os dados do detalhe de serviço (conteúdo real + fallback + i18n).
-     * Compartilhado entre /servicos/{slug} e /servicos-2026/{slug}.
      * Retorna false quando o serviço não existe (resposta 404 já emitida).
      */
     private function prepareServiceDetailData(string $slug): bool
@@ -132,10 +153,42 @@ class ServicesController extends Controller
 
         $this->data['service'] = $service;
 
-        // Outros serviços (exclui o serviço atual)
-        $this->data['other_services'] = $this->db->fetchAll(
+        // Conteúdo estruturado da referência (fonte de verdade visual/textual
+        // da página de serviço no tema 2026). A view usa estes blocos fixos
+        // (antes/depois, dores, benefícios, FAQ) exatamente como na referência.
+        $this->data['sc2026'] = \App\Services\ServiceContent2026::get($slug);
+
+        // Outros serviços (exclui o serviço atual) — usado como fallback.
+        $allOthers = $this->db->fetchAll(
             "SELECT id, slug, icon, title_pt, title_en, title_es, short_description_pt, short_description_en, short_description_es FROM services WHERE is_active = 1 AND slug != ? ORDER BY order_position ASC",
             [$slug]
+        );
+        $this->data['other_services'] = $allOthers;
+
+        // "Veja também": resolve os 3 serviços relacionados da referência para os
+        // registros reais do banco (título + descrição). Mantém a ordem/escolha
+        // da referência; se algum slug não existir no banco, é ignorado.
+        $relatedSlugs = $this->data['sc2026']['related'] ?? [];
+        $bySlug = [];
+        foreach ($allOthers as $o) {
+            $bySlug[$o['slug']] = $o;
+        }
+        $relatedServices = [];
+        foreach ($relatedSlugs as $rs) {
+            if (isset($bySlug[$rs])) {
+                $relatedServices[] = $bySlug[$rs];
+            }
+        }
+        // Fallback: se nada resolveu, usa os primeiros "outros serviços".
+        if (empty($relatedServices)) {
+            $relatedServices = array_slice($allOthers, 0, 3);
+        }
+        $this->data['related_services'] = $relatedServices;
+
+        // Parceiros reais do banco para o marquee "Quem confia na ON"
+        // (mesma fonte da home). A view cai em estado vazio se não houver.
+        $this->data['partners'] = $this->db->fetchAll(
+            "SELECT * FROM partners WHERE is_active = 1 ORDER BY order_position ASC"
         );
 
         // Portfólio relacionado (preservado da versão anterior)

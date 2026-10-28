@@ -8,7 +8,6 @@
     <nav class="crumb" aria-label="breadcrumb">
       <a href="<?= url('/') ?>"><?= __('menu.home') ?></a><i>/</i><span>LGPD</span>
     </nav>
-    <span class="badge"><i></i>Legal</span>
     <h1 class="h">LGPD</h1>
     <p class="sub">Nosso compromisso com a Lei Geral de Proteção de Dados.</p>
   </div>

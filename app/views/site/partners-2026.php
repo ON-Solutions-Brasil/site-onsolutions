@@ -8,7 +8,6 @@
     <nav class="crumb" aria-label="breadcrumb">
       <a href="<?= url('/') ?>"><?= __('menu.home') ?></a><i>/</i><span><?= __('partners.title') ?></span>
     </nav>
-    <span class="badge"><i></i>Parcerias Estratégicas</span>
     <h1 class="h"><?= __('partners.title') ?></h1>
     <p class="sub">Alianças com empresas que compartilham nossa busca por excelência tecnológica e resultados extraordinários.</p>
   </div>

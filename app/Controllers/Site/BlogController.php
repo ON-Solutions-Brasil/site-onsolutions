@@ -17,16 +17,6 @@ class BlogController extends Controller
     }
 
     /**
-     * Rota de pré-visualização paralela (/blog-2026). Mantida para validação;
-     * compartilha exatamente o mesmo preparo de dados da listagem principal.
-     */
-    public function index2026(): void
-    {
-        $this->prepareBlogIndexData();
-        $this->view('site/blog-2026', $this->data, 'site-2026');
-    }
-
-    /**
      * Monta os dados da listagem do blog (posts, categorias, paginação) com
      * conteúdo real do banco. Compartilhado entre /blog e /blog-2026,
      * evitando duplicação de lógica entre as duas rotas.
@@ -75,18 +65,6 @@ class BlogController extends Controller
      * (referência /blog-2026/{slug}), reaproveitando os dados reais do banco.
      */
     public function show(string $slug): void
-    {
-        if (!$this->prepareBlogPostData($slug)) {
-            return; // 404 já tratado
-        }
-        $this->view('site/blog-post-2026', $this->data, 'site-2026');
-    }
-
-    /**
-     * Rota de pré-visualização paralela (/blog-2026/{slug}). Mantida para
-     * validação; compartilha o mesmo preparo de dados do post principal.
-     */
-    public function show2026(string $slug): void
     {
         if (!$this->prepareBlogPostData($slug)) {
             return; // 404 já tratado

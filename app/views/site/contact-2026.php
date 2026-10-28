@@ -9,7 +9,6 @@
     <nav class="crumb" aria-label="breadcrumb">
       <a href="<?= url('/') ?>"><?= __('menu.home') ?></a><i>/</i><span><?= __('contact.title') ?></span>
     </nav>
-    <span class="badge"><i></i><?= __('contact.title') ?></span>
     <h1 class="h"><?= e(__('contact.hero_title')) ?></h1>
     <p class="sub"><?= e(__('contact.hero_subtitle')) ?></p>
   </div>

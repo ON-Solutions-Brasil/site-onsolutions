@@ -8,7 +8,6 @@
     <nav class="crumb" aria-label="breadcrumb">
       <a href="<?= url('/') ?>"><?= __('menu.home') ?></a><i>/</i><span><?= __('legal.terms_title') ?></span>
     </nav>
-    <span class="badge"><i></i>Legal</span>
     <h1 class="h"><?= __('legal.terms_title') ?></h1>
     <p class="sub">Condições de uso do site e serviços da <?= e(SITE_NAME) ?>.</p>
   </div>

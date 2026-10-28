@@ -17,19 +17,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Rota de pré-visualização paralela (/home-2026). Mantida para validação;
-     * compartilha exatamente o mesmo preparo de dados da home principal.
-     */
-    public function index2026(): void
-    {
-        $this->prepareHome2026Data();
-        $this->view('site/home-2026', $this->data, 'site-2026');
-    }
-
-    /**
      * Monta os dados da home no tema 2026 (referência) com conteúdo real do banco.
-     * Usado tanto pela home principal (/) quanto pela pré-visualização (/home-2026),
-     * evitando duplicação de lógica entre as duas rotas.
      */
     private function prepareHome2026Data(): void
     {

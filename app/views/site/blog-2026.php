@@ -11,7 +11,6 @@ $pg = $pagination ?? ['current_page' => 1, 'total_pages' => 1];
     <nav class="crumb" aria-label="breadcrumb">
       <a href="<?= url('/') ?>"><?= __('menu.home') ?></a><i>/</i><span><?= __('blog.title') ?></span>
     </nav>
-    <span class="badge"><i></i><?= __('blog.title') ?></span>
     <h1 class="h"><?= e(__('blog.hero_title')) ?></h1>
     <p class="sub"><?= e(__('blog.hero_subtitle')) ?></p>
   </div>
@@ -45,8 +44,7 @@ $pg = $pagination ?? ['current_page' => 1, 'total_pages' => 1];
         <div class="pb">
           <?php if (!empty($post['category_name'])): ?><span class="ct"><?= e($post['category_name']) ?></span><?php endif; ?>
           <h2><?= e($postTitle) ?></h2>
-          <p class="ml"><?= e(truncate($postExcerpt, 120)) ?></p>
-          <span class="ml"><i class="bi bi-calendar3"></i> <?= $post['published_at'] ? e(formatDate($post['published_at'])) : '' ?></span>
+          <?php if ($post['published_at']): ?><span class="ml"><?= e(formatDate($post['published_at'])) ?></span><?php endif; ?>
         </div>
       </a>
       <?php endforeach; ?>

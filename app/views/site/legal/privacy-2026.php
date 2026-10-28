@@ -8,7 +8,6 @@
     <nav class="crumb" aria-label="breadcrumb">
       <a href="<?= url('/') ?>"><?= __('menu.home') ?></a><i>/</i><span><?= __('legal.privacy_title') ?></span>
     </nav>
-    <span class="badge"><i></i>Legal</span>
     <h1 class="h"><?= __('legal.privacy_title') ?></h1>
     <p class="sub">Transparência sobre como tratamos seus dados.</p>
   </div>

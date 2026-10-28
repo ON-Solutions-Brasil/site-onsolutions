@@ -10,7 +10,6 @@
     <nav class="crumb" aria-label="breadcrumb">
       <a href="<?= url('/') ?>"><?= __('menu.home') ?></a><i>/</i><span><?= __('partners.consultants_title') ?></span>
     </nav>
-    <span class="badge"><i></i><?= __('partners.consultants_title') ?></span>
     <h1 class="h"><?= __('partners.consultants_title') ?></h1>
     <p class="sub">Profissionais e revendas que levam as soluções da ON Solutions a mais empresas.</p>
   </div>

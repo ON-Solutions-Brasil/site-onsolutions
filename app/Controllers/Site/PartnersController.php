@@ -27,18 +27,7 @@ class PartnersController extends Controller
     }
 
     /**
-     * Rota de pré-visualização paralela (/parceiros-2026). Mantida para validação;
-     * compartilha exatamente o mesmo preparo de dados da página principal.
-     */
-    public function index2026(): void
-    {
-        $this->preparePartnersData();
-        $this->view('site/partners-2026', $this->data, 'site-2026');
-    }
-
-    /**
      * Monta os dados da página de parceiros no tema 2026 com parceiros reais do banco.
-     * Compartilhado entre /parceiros e /parceiros-2026.
      */
     private function preparePartnersData(): void
     {
@@ -51,19 +40,8 @@ class PartnersController extends Controller
     }
 
     /**
-     * Rota de pré-visualização paralela (/consultores-2026). Mantida para validação;
-     * compartilha exatamente o mesmo preparo de dados da página principal.
-     */
-    public function consultants2026(): void
-    {
-        $this->prepareConsultantsData();
-        $this->view('site/consultants-2026', $this->data, 'site-2026');
-    }
-
-    /**
      * Monta os dados da página de consultores no tema 2026 com dados reais do banco
-     * (parceiros do tipo consultant/reseller). Compartilhado entre /consultores e
-     * /consultores-2026.
+     * (parceiros do tipo consultant/reseller).
      */
     private function prepareConsultantsData(): void
     {

@@ -16,16 +16,6 @@ class AboutController extends Controller
     }
 
     /**
-     * Rota de pré-visualização paralela (/quem-somos-2026). Mantida para validação;
-     * compartilha exatamente o mesmo preparo de dados da página principal.
-     */
-    public function index2026(): void
-    {
-        $this->prepareAboutData();
-        $this->view('site/about-2026', $this->data, 'site-2026');
-    }
-
-    /**
      * Monta os dados da página Quem Somos no tema 2026 (conteúdo via i18n).
      * Compartilhado entre /quem-somos e /quem-somos-2026.
      */

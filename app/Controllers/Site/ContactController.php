@@ -18,16 +18,6 @@ class ContactController extends Controller
     }
 
     /**
-     * Rota de pré-visualização paralela (/contato-2026). Mantida para validação;
-     * compartilha exatamente o mesmo preparo de dados da página principal.
-     */
-    public function index2026(): void
-    {
-        $this->prepareContactData();
-        $this->view('site/contact-2026', $this->data, 'site-2026');
-    }
-
-    /**
      * Monta os dados da página de contato no tema 2026 (conteúdo via i18n/settings).
      * Compartilhado entre /contato e /contato-2026.
      */
