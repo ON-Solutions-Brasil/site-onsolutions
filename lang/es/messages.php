@@ -140,8 +140,8 @@ return [
     'blog' => [
         'title'            => 'Blog',
         'meta_description' => 'Artículos sobre tecnología, desarrollo, inteligencia artificial e innovación.',
-        'hero_title'       => 'Insights sobre tecnología y negocios',
-        'hero_subtitle'    => 'Artículos sobre desarrollo, integraciones, IA y cómo escalar su negocio con tecnología.',
+        'hero_title'       => 'Blog de ON Solutions',
+        'hero_subtitle'    => 'Guías cortas y directas sobre organización, sistemas, automatización y datos para que tu empresa crezca con claridad.',
         'read_more'        => 'Leer más',
         'read_article'     => 'Leer artículo',
         'published_at'     => 'Publicado el',

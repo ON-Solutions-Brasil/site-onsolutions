@@ -140,8 +140,8 @@ return [
     'blog' => [
         'title'            => 'Blog',
         'meta_description' => 'Articles about technology, development, artificial intelligence and innovation.',
-        'hero_title'       => 'Insights on technology and business',
-        'hero_subtitle'    => 'Articles on development, integrations, AI and how to scale your business with technology.',
+        'hero_title'       => 'ON Solutions Blog',
+        'hero_subtitle'    => 'Short, straight-to-the-point guides on organization, systems, automation and data to help your company grow with clarity.',
         'read_more'        => 'Read more',
         'read_article'     => 'Read article',
         'published_at'     => 'Published on',
