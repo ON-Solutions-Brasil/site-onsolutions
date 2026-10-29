@@ -91,6 +91,33 @@
   }
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") { if (dd) ddClose(); if (bg && mn) mClose(); } });
 
+  // ---------- rolagem suave para âncoras internas ----------
+  // Os links do nav (Resultados/Calculadora/Como funciona/Dúvidas) apontam para
+  // URLs absolutas com hash (ex.: https://site/#resultados). Quando já estamos
+  // na mesma página, interceptamos o clique e rolamos suavemente até a seção,
+  // em vez de deixar o navegador "pular" (salto seco). Se o alvo for outra
+  // página, deixamos a navegação normal acontecer.
+  function samePagePath(href) {
+    try {
+      var u = new URL(href, window.location.href);
+      return u.pathname === window.location.pathname && u.search === window.location.search && u.hash;
+    } catch (e) { return false; }
+  }
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var href = a.getAttribute("href");
+    if (!href || href.indexOf("#") === -1) return;
+    var hash = samePagePath(href);
+    if (!hash) return; // âncora de outra página: navegação normal
+    var target = document.getElementById(hash.slice(1));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: reduce.matches ? "auto" : "smooth", block: "start" });
+    // atualiza a URL sem recarregar, para refletir a seção atual
+    if (history.pushState) history.pushState(null, "", hash);
+  });
+
   // ---------- topbar: esconde ao rolar para baixo ----------
   var topBar = $(".top");
   if (topBar) {

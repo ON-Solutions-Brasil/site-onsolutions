@@ -4,6 +4,15 @@
    ESCOPADO sob body.theme-2026 para não conflitar com style.css / Bootstrap.
    ===================================================================== */
 
+/* Rolagem suave ao navegar por âncoras (#secao). O scroll-padding-top evita
+   que a seção fique escondida atrás do header fixo (~68px no desktop).
+   Como este CSS só é carregado no layout do tema 2026, aplicar em <html> aqui
+   não afeta admin/auth. O :has mantém a regra restrita a páginas do tema. */
+html:has(body.theme-2026) {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
 body.theme-2026 {
   --ink: #0B1220;
   --navy: #0F172A;
